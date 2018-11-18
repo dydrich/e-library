@@ -1,0 +1,52 @@
+#header, #main, #navigation, #footer {
+    width: 100%;
+    margin: 0;
+    display: block;
+}
+
+#footer {
+    font-size: .6em;
+    margin: 30px auto 0 auto;
+}
+
+#header {
+    min-height: 90px;
+}
+
+#sc_firstrow {
+    width: 100%;
+}
+
+#sc_secondrow {
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
+    font-size: .75em;
+    position: relative;
+    left: -5%;
+    top: 5%;
+}
+
+#sc_secondrow i.material-icons {
+    font-size: 18px;
+}
+
+#soft_desc {
+    display: none;
+}
+
+#navigation {
+
+}
+
+#screenlab::after {
+    content: " - small";
+}
+
+#menu {
+    width: 100%;
+}
+
+div.menu {
+    width: 100%;
+}

@@ -1,0 +1,57 @@
+#header, #main, #navigation, #footer {
+    width: 100%;
+}
+
+#main {
+    display: block;
+}
+
+#footer {
+    font-size: 1em;
+    height: 15px;
+    margin: 10px auto 0 auto;
+}
+
+#header {
+    min-height: 75px;
+}
+
+#sc_firstrow {
+    width: 100%;
+}
+
+#sc_secondrow {
+    width: 100%;
+    text-align: right;
+    padding-right: 5%;
+    font-size: .75em;
+    position: relative;
+    left: -5%;
+    top: 5%;
+}
+
+#sc_secondrow i.material-icons {
+    font-size: 18px;
+}
+
+#soft_desc {
+    display: none;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+#screenlab::after {
+    content: " - normal";
+}
+
+#menu {
+    width: 100%;
+}
+
+div.menu {
+    width: 100%;
+}
+

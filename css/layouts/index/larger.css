@@ -1,0 +1,15 @@
+#header, #main, #navigation, #footer, #page {
+    width: 100%;
+}
+
+#header {
+    height: 40px;
+}
+
+#sc_firstrow {
+    width: 50%;
+}
+
+#screenlab::after {
+    content: " - larger";
+}

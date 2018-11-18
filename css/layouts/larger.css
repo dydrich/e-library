@@ -1,0 +1,115 @@
+#header, #main, #navigation, #footer {
+    width: 1600px;
+}
+
+body {
+    background: rgb(30, 67, 137);
+    background: -moz-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
+    background: -webkit-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
+    background: -o-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
+    background: -ms-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
+    background: linear-gradient(180deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#footer {
+    font-size: 1em;
+    height: 15px;
+    margin: 10px auto 0 auto;
+}
+
+/*index*/
+#login_form {
+    width: 600px;
+    height: 330px;
+}
+
+#_header {
+    width: 400px;
+    margin: 100px auto 30px auto;
+    border-bottom: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+#_header p {
+    font-size: 0.7em;
+}
+
+html, body {
+    font-size: 13px;
+}
+
+.area {
+    margin-top: 100px;
+}
+
+.area i {
+    font-size: 8em;
+}
+
+.area div {
+    font-size: 1.3em;
+}
+/* index end */
+/*login start */
+.rb-login-container {
+    display: block;
+    width: 350px
+}
+
+#pwdreq_info {
+    display: block;
+    width: 500px;
+    padding: 20px;
+    margin-bottom: 20px
+}
+
+#header {
+    height: 40px;
+}
+
+#right_col {
+    width: 270px;
+    float: right;
+}
+
+#left_col {
+    margin-right: 270px;
+}
+
+#left_col, #right_col {
+    padding-bottom: 9999px;
+    margin-bottom: -9999px;
+}
+
+.dashboard_card {
+    width: 250px;
+    height: 120px;
+}
+
+.demo-card {
+    width: 380px;
+    height: 150px;
+}
+
+.dashboard_longcard {
+    width: 330px;
+    height: 360px;
+}
+
+.dashboard_longcard_body {
+    padding: 10px;
+}
+
+#sc_firstrow {
+    width: 50%;
+}
+
+div.menu {
+    width: 270px;
+}
+
+.info_back_card {
+    width: 550px;
+}

@@ -1,0 +1,248 @@
+html {
+    height: 100%
+}
+
+:root {
+    --mdc-theme-primary: #00838F !important;
+    --mdc-theme-secondary: #e040fb !important;
+    --accent-color: #e040fb !important;
+    --main-500: #00BCD4;
+    --main-700: #0097A7;
+}
+
+body {
+    background: rgb(224, 247, 250);
+    background: -moz-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -webkit-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -o-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -ms-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: linear-gradient(180deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#header {
+    background-color: var(--main-700);
+}
+
+#header a {
+    color: #FFFFFF;
+}
+
+#sc_firstrow {
+    color: rgb(255, 255, 255);
+}
+
+#sc_secondrow {
+    width: 40%;
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+}
+
+#main {
+    padding: 0;
+}
+
+#right_col a {
+    color: rgba(0, 0, 0, .87);
+}
+
+#navigation {
+    color: #FFFFFF;
+    background-color: var(--main-500);
+}
+
+#navigation a {
+    color: white;
+}
+
+.nav_div {
+    color: white;
+}
+
+.card a {
+    color: #0097A7 !important;
+}
+
+.card_title a {
+    color: #0097A7 !important;
+}
+
+div.card_title {
+    color: #0097A7;
+}
+
+div.navigate {
+    border: 1px solid rgba(215, 215, 215, 1);
+    background-color: #FFFFFF;
+}
+
+div.navigate a {
+    color: #003366;
+}
+
+fieldset {
+    border: 1px solid #0097A7;
+}
+
+div.mdtabs {
+    background-color: #00BCD4;
+    top: -20px;
+}
+
+div.mdtab a > span {
+    color: #DDDDDD;
+}
+
+div.mdselected_tab {
+    color: #ffd740;
+    border-bottom: 2px solid #000000;
+}
+
+div.mdselected_tab a > span {
+    color: #000000 !important;
+}
+
+.rb_button, .mdc-fab, #newuser {
+    background-color: var(--mdc-theme-secondary);
+}
+
+.rb_bg {
+    background-color: #FFF3E0;
+}
+
+.conf_frame {
+    border: 1px solid #0097A7;
+}
+
+.accent_button a, a.material_link, .material_label {
+    color: var(--accent-color) !important;
+}
+
+.accent_decoration {
+    border-bottom: 1px solid var(--mdc-theme-secondary) !important;
+}
+
+.hover_row:hover {
+    background-color: #0097A7;
+    color: white;
+    border-radius: 4px;
+}
+
+.accent_color, div.accent_color {
+    color: var(--accent-color);
+}
+
+.accent_color a {
+    color: var(--accent-color) !important;
+}
+
+#ticker li, #tr_ticker li {
+    color:#fff;
+    border-bottom:1px solid #e040fb;;
+    background-color: white;
+}
+
+#ticker li a, #tr_ticker li a {
+    color: #1E4389 !important;
+}
+
+.icon_card {
+    background-color: #e040fb;
+    color: #202020;
+}
+
+.icon_card_accent {
+    background-color: #0097A7;
+    color: white;
+}
+
+.text_card {
+    color: #0097A7 !important;
+    font-weight: 600;
+}
+
+.text_card a {
+    color: #0097A7 !important;
+    font-weight: 600;
+}
+
+input.android:focus, select.android:focus, textarea.android:focus {
+    border-color: #00BCD4;
+}
+
+.main_700, .main_700 a {
+    color: #0097A7 !important;
+}
+
+.main_500, .main_500 a {
+    color: #00BCD4 !important;
+}
+
+.alert_msg, .error_msg, .confirm_msg {
+    background-color: #FFFFFF;
+    border: 1px solid #006064;
+}
+
+.alert_title, .confirm_title {
+    border-bottom: 1px solid #0097A7;
+    color: #006064;
+}
+
+.error_title {
+    color: rgba(200, 6, 6, 1);
+    border-bottom: 1px solid #00BCD4;
+}
+
+.alert_title span, .error_title span, .confirm_title span {
+    padding-left: 10px;
+    font-size: 1em
+}
+
+.material_dark_bg {
+    background-color: #0097A7;
+    color: white;
+}
+
+.material_light_bg {
+    background-color: #4dd0e1;
+    color: #222222;
+}
+
+.float_button {
+    background-color: #0097A7 !important;
+    color: #ffffff;
+}
+
+.float_button:hover {
+    background-color: #e040fb !important;
+    color: #000000;
+}
+
+.selected_tag, .selected_element {
+    background-color: var(--mdc-theme-primary);
+    color: white!important;
+}
+
+.selected_tag span, .selected_element span {
+    color: white;
+}
+
+.selected_doc {
+    background-color: var(--mdc-theme-primary);
+    color: white!important;
+}
+
+.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i {
+    color: white!important;
+}
+
+.form_input {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .76)!important;
+    font-size: 1rem;
+}
+
+select.form_input {
+    border-radius: 4px;
+}

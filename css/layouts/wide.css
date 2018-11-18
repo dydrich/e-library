@@ -1,0 +1,108 @@
+#header, #main, #navigation, #footer, #page {
+    width: 1280px;
+}
+
+#footer {
+    font-size: 1em;
+    height: 15px;
+    margin: 10px auto 0 auto;
+}
+
+/*index*/
+#login_form {
+    width: 600px;
+    height: 330px;
+}
+
+#_header {
+    width: 400px;
+    margin: 100px auto 30px auto;
+}
+
+#_header p {
+    font-size: 0.7em;
+}
+
+.area {
+    margin-top: 80px;
+}
+
+.area i {
+    font-size: 8em;
+}
+
+.area div {
+    font-size: 1.3em;
+}
+/* index end */
+/*login start */
+.rb-login-container {
+    display: block;
+    width: 350px
+}
+
+#pwdreq_info {
+    display: block;
+    width: 500px;
+    padding: 20px;
+    margin-bottom: 20px
+}
+
+
+html, body {
+    font-size: 13px;
+}
+
+#header {
+    height: 40px;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+#right_col {
+    width: 270px;
+    float: right;
+}
+
+#left_col {
+    margin-right: 270px;
+}
+
+#left_col, #right_col {
+    padding-bottom: 9999px;
+    margin-bottom: -9999px;
+}
+
+.dashboard_card {
+    width: 250px;
+    height: 120px;
+}
+
+.demo-card {
+    width: 300px;
+    height: 100px;
+}
+
+.dashboard_longcard {
+    width: 280px;
+    height: 300px;
+}
+
+.dashboard_longcard_body {
+    padding: 10px;
+}
+
+#sc_firstrow {
+    width: 50%;
+}
+
+div.menu {
+    width: 270px;
+}
+
+.info_back_card {
+    width: 550px;
+}

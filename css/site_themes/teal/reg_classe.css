@@ -1,0 +1,301 @@
+@CHARSET "UTF-8";
+
+html {
+    height: 100%
+}
+
+body {
+    background: rgb(224, 247, 250);
+    background: -moz-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -webkit-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -o-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -ms-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: linear-gradient(180deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+form {
+    padding: 0;
+}
+
+input, select, textarea {
+    background-color: rgba(224, 242, 241, .5);
+    border: 1px solid rgba(30, 67, 137, .6);
+}
+
+input.student_enter, input.student_exit {
+    background-color: white;
+}
+
+#header {
+    background-color: #00796B;
+}
+
+#header a {
+	color: #FFFFFF;
+}
+
+#sc_firstrow {
+    color: rgb(255, 255, 255);
+}
+
+#sc_secondrow {
+    width: 40%;
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+}
+
+#main {
+	padding: 30px 0 30px 0;
+}
+
+#main a {
+    color: #1a237e;
+}
+
+#navigation {
+    color: #DDDDDD;
+    background-color: #009688;
+}
+
+#navigation a {
+	color: #DDDDDD;
+}
+
+#head_label {
+    width: 550px;
+    margin-left: 20px;
+    color: #FFFFFF;
+}
+
+div.mdtabs {
+    background-color: #009688;
+    top: -30px;
+}
+
+div.mdtab a > span {
+    color: #DDDDDD;
+}
+
+div.mdselected_tab {
+    color: #FFFFFF;
+    border-bottom: 2px solid #000000;
+}
+
+div.mdselected_tab a > span {
+    color: #000000 !important;
+}
+
+div.navigate {
+    background-color: rgb(239, 248, 248);
+}
+
+div.navigate span {
+    top: 3px
+}
+
+div.navigate a {
+    position: relative;
+    top: 0;
+    color: #000000 !important;
+}
+
+div.card_title {
+    color: #009688;
+}
+
+#tipinota {
+    position: absolute;
+    width: 300px;
+    height: 160px;
+    border: 1px solid rgba(30, 67, 137, .6);
+    background-color: #FFFFFF;
+    padding: 10px 0 0 10px;
+    border-radius: 0;
+}
+
+#tipinota a {
+    color: #1E4389;
+    text-decoration: none
+}
+.rb_button {
+    background-color: #18FFFF;
+}
+
+.rb_bg {
+    background-color: #FFF3E0;
+}
+
+.tooltip { 
+    position: absolute;
+    top: 1em; 
+    left: 1em; 
+    width: 15em;
+    border: 1px solid #AAAAAA; 
+    background-color: rgb(211, 222, 199);
+    border-radius: 8px 8px 8px 8px;
+    padding: 10px;
+    color: #373946;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none
+}
+
+table.registro tr.nav_tr td > a {
+    color: #FAFAFA ;
+}
+
+table.registro tr.head_tr_no_bg {
+    color: #000000;
+}
+
+table.registro tr.title_tr {
+	color: #030303;
+}
+
+table.registro tr.head_tr a, div.group_head a {
+	font-weight: normal !important;
+	color: rgb(13, 9, 171) !important
+}
+
+table.registro td {
+	border: 1px solid rgba(30, 67, 137, .3);
+}
+
+table.registro tbody tr:hover {
+	background-color: #EFF8F8;
+}
+
+.riepilogo {
+    color: #111111;
+}
+
+table.registro tr.riepilogo {
+    border: 1px solid rgba(30, 67, 137, .8);
+}
+
+
+.nav_div {
+    color: #EEEEEE;
+}
+
+.page_menu{
+	background-color: #C5CAE9;
+	padding: 10px; 
+	border: 1px solid rgba(30, 67, 137, .6);
+	border-radius: 10px 10px 10px 10px;
+	color: #222222;
+	box-shadow:  0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 100
+}
+
+#context_menu, #pop, #hid {
+	/*background-color: #e8eaf6;*/
+    background-color: #EFF8F8;
+	padding: 10px;
+	border: 1px solid #009688;
+	border-radius: 0px 0px 0px 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	color: #222222;
+	z-index: 100
+}
+#context_menu a, #pop a, #hid a, .page_menu a {
+	text-decoration: none;
+    color: #222222;
+}
+
+.high_contrast_row td {
+    border: 0 !important;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+.high_contrast_row {
+    height: 25px;
+    border-bottom: 1px solid #009688!important;
+    vertical-align: bottom;
+    font-weight: 600;
+}
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+.outline_line_wrapper {
+    background-color: #009688;
+    top: -30px
+}
+
+#gotoday, #newweek {
+    background-color: #00796B;
+    border-color: #00796B;
+    color: white;
+    font-weight: bold;
+}
+
+.accent_button a, a.material_link, .material_label {
+    color: #009688 !important;
+}
+
+input.android:focus, select.android:focus, textarea.android:focus {
+    border-color: #009688;
+}
+
+.main_700, .main_700 a {
+    color: #00796B !important;
+}
+
+.main_500, .main_500 a {
+    color: #009688 !important;
+}
+
+.accent_decoration {
+    border-bottom: 1px solid #009688 !important;
+}
+
+.accent_color {
+    color: #009688;
+}
+
+.accent_color a {
+    color: #009688 !important;
+}
+
+.alert_msg, .error_msg, .confirm_msg {
+    background-color: #FFFFFF;
+    border: 1px solid #00796B;
+}
+
+.alert_title, .confirm_title {
+    border-bottom: 1px solid #009688;
+    color: #00796B;
+}
+
+.error_title {
+    color: rgba(200, 6, 6, 1);
+    border-bottom: 1px solid #18FFFF;
+}
+
+.alert_title span, .error_title span, .confirm_title span {
+    padding-left: 10px;
+    font-size: 1em
+}
+
+.material_dark_bg {
+    background-color: #00695c;
+}
+
+.material_light_bg {
+    background-color: #4db6ac;
+    color: #222222;
+}

@@ -1,0 +1,236 @@
+html {
+    height: 100%
+}
+
+:root {
+    --mdc-theme-primary: #01579B !important;
+    --mdc-theme-secondary: #FF1744 !important;
+    --accent-color: #01579B !important;
+    --main-500: #b71c1c;
+    --main-700: #7F0000;
+}
+
+body {
+    background: rgb(189, 189, 189);
+    background: -moz-linear-gradient(90deg, rgb(189, 189, 189) 30%, rgb(224, 224, 224) 69%);
+    background: -webkit-linear-gradient(90deg, rgb(189, 189, 189) 30%, rgb(224, 224, 224) 69%);
+    background: -o-linear-gradient(90deg, rgb(189, 189, 189) 30%, rgb(224, 224, 224) 69%);
+    background: -ms-linear-gradient(90deg, rgb(189, 189, 189) 30%, rgb(224, 224, 224) 69%);
+    background: linear-gradient(180deg, rgb(189, 189, 189) 30%, rgb(224, 224, 224) 69%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+#header {
+	background-color: var(--main-700);
+}
+
+#header a {
+    color: #FFFFFF;
+}
+
+#sc_firstrow {
+    color: rgb(255, 255, 255);
+}
+
+#sc_secondrow {
+    width: 40%;
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+}
+
+#main {
+    padding: 0;
+}
+
+#right_col a {
+    color: rgba(0, 0, 0, .87);
+}
+
+#navigation {
+    color: #FFFFFF;
+    background-color: var(--main-500);
+}
+
+#navigation a {
+    color: white;
+}
+
+.nav_div {
+    color: white;
+}
+
+.card a {
+    color: #b71c1c !important;
+}
+
+.card_title a {
+    color: #b71c1c !important;
+}
+
+div.card_title {
+    color: #b71c1c;
+}
+
+div.navigate a {
+    color: #003366;
+}
+
+fieldset {
+    border: 1px solid #E51C23;
+}
+
+div.mdtabs {
+    background-color: #E51C23;
+    top: -20px;
+}
+
+div.mdtab a > span {
+    color: #DDDDDD;
+}
+
+div.mdselected_tab {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+}
+
+div.mdselected_tab a > span {
+    color: #FFFFFF !important;
+}
+
+.rb_button, .mdc-fab, #newuser {
+    background-color: var(--mdc-theme-secondary);
+}
+
+.rb_bg {
+    background-color: #FFF3E0;
+}
+
+.conf_frame {
+    border: 1px solid rgba(30, 67, 137, .6);
+}
+
+.accent_button a, a.material_link, .material_label {
+    color: var(--accent-color) !important;
+}
+
+.accent_decoration {
+    border-bottom: 1px solid var(--mdc-theme-secondary) !important;
+}
+
+.accent_color {
+    color: var(--accent-color);
+}
+
+.accent_color a {
+    color: var(--accent-color) !important;
+}
+
+#ticker li, #tr_ticker li {
+    color:#fff;
+    border-bottom:1px solid #E51C23;;
+    background-color: white;
+}
+
+#ticker li a, #tr_ticker li a {
+    color: #1E4389 !important;
+}
+
+.icon_card {
+    background-color: #4d73ff;
+    color: #202020;
+}
+
+.icon_card_accent {
+    background-color: #b71c1c;
+    color: white;
+}
+
+.text_card {
+    color: #b71c1c !important;
+	font-weight: 600;
+}
+
+.text_card a {
+    color: #b71c1c !important;
+	font-weight: 600;
+}
+
+input.android:focus, select.android:focus, textarea.android:focus {
+    border-color: #b71c1c;
+}
+
+.main_700, .main_700 a {
+    color: #7F0000 !important;
+}
+
+.main_500, .main_500 a {
+    color: #b71c1c !important;
+}
+
+.alert_msg, .error_msg, .confirm_msg {
+    background-color: #FFFFFF;
+    border: 1px solid #b71c1c;
+}
+
+.alert_title, .confirm_title {
+    border-bottom: 1px solid #b71c1c;
+    color: #b71c1c;
+}
+
+.error_title {
+    color: rgba(200, 6, 6, 1);
+    border-bottom: 1px solid #b71c1c;
+}
+
+.alert_title span, .error_title span, .confirm_title span {
+    padding-left: 10px;
+    font-size: 1em
+}
+
+.material_dark_bg {
+    background-color: #b71c1c;
+}
+
+.material_light_bg {
+    background-color: #2979ff;
+    color: #ffffff;
+}
+
+.float_button {
+    background-color: #b71c1c !important;
+    color: #ffffff;
+}
+
+.float_button:hover {
+    background-color: #4d73ff !important;
+    color: #000000;
+}
+
+.selected_tag, .selected_element {
+    background-color: var(--mdc-theme-primary);
+    color: white!important;
+}
+
+.selected_tag span, .selected_element span {
+    color: white;
+}
+
+.selected_doc {
+    background-color: var(--mdc-theme-primary);
+    color: white!important;
+}
+
+.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i {
+    color: white!important;
+}
+
+.form_input {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .76)!important;
+    font-size: 1rem;
+}
+
+select.form_input {
+    border-radius: 4px;
+}

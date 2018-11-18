@@ -1,0 +1,316 @@
+@CHARSET "UTF-8";
+
+html {
+    height: 100%
+}
+
+body {
+    background: rgb(224, 247, 250);
+    background: -moz-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -webkit-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -o-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: -ms-linear-gradient(90deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background: linear-gradient(180deg, rgb(224, 247, 250) 30%, rgb(178, 235, 242) 90%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+form {
+    padding: 0;
+}
+
+input, select, textarea {
+    background-color: rgba(239, 251, 252, .8);
+    border: 1px solid rgba(30, 67, 137, .6);
+}
+
+input.student_enter, input.student_exit {
+    background-color: white;
+}
+
+#header {
+    background-color: #0097A7;
+}
+
+#header a {
+	color: #FFFFFF;
+}
+
+#sc_firstrow {
+    color: rgb(255, 255, 255);
+}
+
+#sc_secondrow {
+    width: 40%;
+    font-size: 1.2em;
+    color: rgb(255, 255, 255);
+}
+
+#main {
+	padding: 30px 0 30px 0;
+}
+
+#main a {
+    color: #1a237e;
+    text-decoration: none;
+}
+
+#navigation {
+    color: #DDDDDD;
+    background-color: #00BCD4;
+}
+
+#navigation a {
+	color: #DDDDDD;
+}
+
+#head_label {
+    width: 550px;
+    margin-left: 20px;
+}
+
+div.mdtabs {
+    background-color: #00BCD4;
+    top: -30px;
+}
+
+div.mdtab a > span {
+    color: #DDDDDD;
+}
+
+div.mdselected_tab {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+}
+
+div.mdselected_tab a > span {
+    color: #000000 !important;
+}
+
+div.navigate {
+    border: 1px solid rgba(215, 215, 215, 1);
+    background-color: rgba(242, 252, 253, .7);
+}
+
+div.navigate span {
+    top: 3px
+}
+
+div.navigate a {
+    position: relative;
+    top: 0;
+    color: #000000 !important;
+}
+
+div.card_title {
+    color: #0097A7;
+}
+
+#tipinota {
+    position: absolute;
+    width: 300px;
+    height: 160px;
+    border: 1px solid rgba(30, 67, 137, .6);
+    background-color: #FFFFFF;
+    padding: 10px 0 0 10px;
+    border-radius: 0;
+}
+
+#tipinota a {
+    color: #1E4389;
+    text-decoration: none
+}
+
+.rb_button {
+    background-color: #ea80fc;
+}
+
+.rb_bg {
+    background-color: #FFF3E0;
+}
+
+.tooltip { 
+    position: absolute;
+    top: 1em; 
+    left: 1em; 
+    width: 15em;
+    border: 1px solid #AAAAAA; 
+    background-color: rgb(211, 222, 199);
+    border-radius: 8px 8px 8px 8px;
+    padding: 10px;
+    color: #373946;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none
+}
+
+table.registro tr.nav_tr td > a {
+    color: #FAFAFA ;
+}
+
+table.registro tr.head_tr_no_bg {
+    color: #000000;
+}
+
+table.registro tr.title_tr {
+	color: #030303;
+}
+
+table.registro tr.head_tr a, div.group_head a {
+	font-weight: normal !important;
+	color: rgb(13, 9, 171) !important
+}
+
+table.registro td {
+	border: 1px solid rgba(30, 67, 137, .3);
+}
+
+table.registro tbody tr:hover {
+	background-color: rgba(239, 251, 252, .8);
+}
+
+.riepilogo {
+    color: #111111;
+}
+
+table.registro tr.riepilogo {
+    border: 1px solid rgba(30, 67, 137, .8);
+}
+
+.nav_div {
+    color: white
+}
+
+.nav_div a {
+    color: white
+}
+
+.page_menu{
+	background-color: #C5CAE9;
+	padding: 10px; 
+	border: 1px solid rgba(30, 67, 137, .6);
+	border-radius: 10px 10px 10px 10px;
+	color: #222222;
+	box-shadow:  0 2px 4px rgba(0, 0, 0, 0.2);
+	z-index: 100
+}
+
+#context_menu, #pop, #hid {
+	/*background-color: #e8eaf6;*/
+    background-color: #E0F7FA;
+	padding: 10px;
+	border: 1px solid rgba(30, 67, 137, .6);
+	border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	color: #222222;
+	z-index: 100
+}
+#context_menu a, #pop a, #hid a, .page_menu a {
+	text-decoration: none;
+    color: #1a237e;
+}
+
+.high_contrast_row td {
+    border: 0 !important
+}
+
+.high_contrast_row {
+    height: 25px;
+    border-bottom: 1px solid #e040fb!important;
+    vertical-align: bottom;
+    font-weight: 600;
+}
+
+.high_contrast_row a {
+    color: white;
+}
+
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+.outline_line_wrapper {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    height: 40px;
+    text-align: left;
+    font-weight: bold;
+    background-color: #e040fb;
+    position: relative;
+    top: -30px
+}
+
+#gotoday, #newweek {
+    background-color: #0097A7;
+    border-color: #0097A7;
+    color: white;
+    font-weight: bold;
+}
+
+.accent_button a, a.material_link, .material_label {
+    color: #0097A7 !important;
+}
+
+.accent_decoration {
+    border-bottom: 1px solid #e040fb !important;
+}
+
+.accent_color {
+    color: #e040fb;
+}
+
+.accent_color a {
+    color: #e040fb !important;
+}
+
+input.android:focus, select.android:focus, textarea.android:focus {
+    border-color: #00BCD4;
+}
+
+.main_700, .main_700 a {
+    color: #0097A7 !important;
+}
+
+.main_500, .main_500 a {
+    color: #00BCD4 !important;
+}
+
+.alert_msg, .error_msg, .confirm_msg {
+    background-color: #FFFFFF;
+    border: 1px solid #006064;
+}
+
+.alert_title, .confirm_title {
+    border-bottom: 1px solid #0097A7;
+    color: #006064;
+}
+
+.error_title {
+    color: rgba(200, 6, 6, 1);
+    border-bottom: 1px solid #00BCD4;
+}
+
+.alert_title span, .error_title span, .confirm_title span {
+    padding-left: 10px;
+    font-size: 1em
+}
+
+.material_dark_bg {
+    background-color: #0097A7;
+    color: white;
+}
+
+.material_light_bg {
+    background-color: #4dd0e1;
+    color: #222222;
+}
