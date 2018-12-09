@@ -7,8 +7,12 @@
  */
 
 require_once "lib/start.php";
-//require_once "lib/load_env.php";
+require_once "lib/load_env.php";
 require_once "lib/Mobile_Detect.php";
+
+if(isset($_SESSION['__user__'])) {
+	header("Location: welcome.php");
+}
 
 ini_set('display_errors', 1);
 

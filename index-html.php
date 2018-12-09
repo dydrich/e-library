@@ -24,7 +24,7 @@
             <div id="login" class="mdc-elevation--z2">
                 <div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 10px; width: 75%">
                     <div style="width: 100%; height: 70px; background-color: var(--main-700); display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
-                        <p class="material_label _bold" style="color: white; font-size: 1.5em; width: 100%; text-align: center">Welcome back</p>
+                        <p class="material_label _bold" style="color: white; font-size: 1.5em; width: 100%; text-align: center">Accedi al sito</p>
                     </div>
                     <form id="signinform" action="do_login.php" method="post" style="width: 100%; margin: auto">
                         <div class="rb-login-container">
