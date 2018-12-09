@@ -45,6 +45,7 @@ foreach($rows as $row){
 		$ok++;
 	} catch (MySQLException $ex) {
 		$ko++;
+		fwrite($log, "Failure: ".$ex->getQuery()." --- ".$ex->getMessage()."\n");
 		$response['status'] = "kosql";
 		$response['message'] = "Operazione non completata a causa di un errore";
 		$response['dbg_message'] = $ex->getMessage();

@@ -33,7 +33,7 @@
                     <em>Questa funzione ti permette di importare tutti gli alunni, associandoli alla classe, con un solo comando, usando un file che contenga i dati nel formato richiesto.<br />
                         Tale formato DEVE essere preciso ed &egrave; facilmente ottenibile, se si hanno i dati in un file excel: basta esportare il file in formato
                         CSV, rispettando le indicazioni di sotto riportate. Ecco le caratteristiche:<br /></em>
-                    <ul style="list-style-type: disc; margin-left: 20px">
+                    <ul style="list-style-type: disc; margin-left: 0">
                         <li>Ogni riga deve contenere le informazioni di un alunno</li>
                         <li>I campi devono essere separati tra loro con un carattere di punto e virgola (;)</li>
                         <li>I campi NON devono essere racchiusi da virgolette</li>
