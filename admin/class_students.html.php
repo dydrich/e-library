@@ -24,33 +24,25 @@
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
-    <div class="mdtabs">
-        <div class="mdtab <?php if (!isset($_GET['active'])) echo "mdselected_tab" ?>">
-            <a href="classes.php"><span>Tutte</span></a>
-        </div>
-        <div class="mdtab <?php if ($_GET['active'] == 1) echo "mdselected_tab" ?>">
-            <a href="classes.php?active=1"><span>Attive</span></a>
-        </div>
-        <div class="mdtab <?php if (isset($_GET['active']) && $_GET['active'] == 0) echo "mdselected_tab" ?>">
-            <a href="classes.php?active=0"><span>Non attive</span></a>
-        </div>
-    </div>
 	<div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
 	<div id="left_col">
-
 		<div id="content" style="width: 90%; margin: auto;">
+			<div class="normal _bold" style="font-size: 2em; margin-left: 10px">
+				<?php echo $class->toString(SchoolClass::$FIRST_UPPER) ?>
+			</div>
 			<div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
 				<?php
-				while ($row = $res_classes->fetch_assoc()) {
+				while ($row = $res_students->fetch_assoc()) {
+					$url = urlencode('class_students.php?cid='.$_REQUEST['cid']);
 					?>
-					<a href="class.php?cid=<?php echo $row['cid'] ?>&back=classes.php" data-id="<?php echo $row['cid'] ?>" id="item<?php echo $row['cid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
+					<a href="user.php?uid=<?php echo $row['uid'] ?>&back=<?php echo $url ?>" data-id="<?php echo $row['uid'] ?>" id="item<?php echo $row['uid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
 						<span class="mdc-list-item__start-detail _bold" role="presentation">
-							<i class="material-icons">people</i>
+							<i class="material-icons accent_color">person</i>
 						</span>
 						<span class="mdc-list-item__text">
-						  <?php echo $row['year'].$row['section'] ?>
+						  <?php echo $row['lastname']." ".$row['firstname'] ?>
 						</span>
 					</a>
 					<?php
@@ -59,11 +51,6 @@
 			</div>
 		</div>
 	</div>
-	<button id="newcls" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuova classe">
-        <span class="mdc-fab__icon">
-            create
-        </span>
-	</button>
 	<p class="spacer"></p>
 </div>
 <?php include_once "../share/footer.php" ?>
