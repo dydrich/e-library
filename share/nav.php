@@ -9,7 +9,7 @@
         <?php endif; ?>
 		<p id="drawer_label" style="margin-left: 10px; float: left; color: white"><?php echo $drawer_label ?></p>
         <div class="nav_div" style="text-align: right; font-weight: normal">
-            <span style="position: relative; top: 10px">Area amministrazione</span>
+            <span style="position: relative; top: 5px">Area amministrazione</span>
         </div>
 	</div>
 </nav>
