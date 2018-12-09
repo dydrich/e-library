@@ -16,6 +16,10 @@ class SchoolClass
 
 	private $datasource;
 
+	public static $FIRST_UPPER = 1;
+	public static $FIRST_LOWER = 2;
+	public static $NO_INTRO = 3;
+
 	/**
 	 * SchoolClass constructor.
 	 * @param $classID
@@ -139,5 +143,16 @@ class SchoolClass
 	public function delete() {
 		$this->datasource->executeUpdate("DELETE FROM rb_classes WHERE cid = {$this->classID}");
 		$this->datasource->executeUpdate("DELETE FROM rb_users WHERE class = {$this->classID}");
+	}
+
+	public function toString($style) {
+		$intro = '';
+		if ($style == self::$FIRST_LOWER) {
+			$intro = 'classe ';
+		}
+		else if ($style == self::$FIRST_UPPER) {
+			$intro = 'Classe ';
+		}
+		return $intro.$this->grade.$this->section;
 	}
 }
