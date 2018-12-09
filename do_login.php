@@ -21,7 +21,7 @@ $pwd = md5($pass);
 $authenticator = new Authenticator(new MySQLDataLoader($db));
 try {
 	$user = $authenticator->login($nick, $pwd);
-} catch (\edocs\MySQLException $ex){
+} catch (MySQLException $ex){
 	$response['status'] = "kosql";
 	$response['query'] = $ex->getQuery();
 	$response['message'] = $ex->getMessage();
@@ -29,7 +29,7 @@ try {
 	$res = json_encode($response);
 	echo $res;
 	exit;
-} catch (\edocs\CustomException $e){
+} catch (CustomException $e){
 	$response['status'] = "ko";
 	$response['message'] = $e->getMessage();
 	$response['code'] = $e->getCode();
@@ -51,10 +51,10 @@ if ($user == null) {
 	exit;
 }
 
-$_SESSION['__user__'] = $user;
+$_SESSION['__user__'] = $user->getUid();
 $response = $authenticator->getResponse();
 $response["status"] = "ok";
-$response['role'] = $user->getRole();
+$response['role'] = $user->getCurrentRole();
 $res = json_encode($response);
 echo $res;
 exit;

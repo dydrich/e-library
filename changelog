@@ -1,226 +1,27 @@
-0.8.3
-attivazione temi aree back e admin
-
-0.8.2
-revisione grafica DocumentInfo
-
-0.8.1-89
-resi dinamici anche in front la versione del software e il nome
-
-0.8.1-88
-menu Apri area pubblica
-bug fix per getFileName: inserimento del path come parametro
-
-0.8
-classe DocumentInfo per info e statistiche documento
-
-0.7.7-86
-pagina statistiche area privata
-
-0.7.7
-pagina Info area privata
-
-0.7.6-84
-gestione risorse esterne area back
-issue #71
-issue #72
-
-0.7.6-83
-controllo visualizzazione spacer in menu
-
-0.7.6-82
-menu 100%
-normal_ext per dimensioni superiori a 1024
-
-0.7.6-81
-bug fix database.lib
-
-0.7.6-80
-pulizia codice no_file
-
-0.7.6
-gestione drawer mobile
-revisione layout e media access
-
-0.7.5
-signup
-
-0.7.4-77
-sfondo bianco aree protette
-
-0.7.4
-responsive layout front page
-
-0.7.3-75
-area back:
-ritocchi grafici
-bug fix
-impostazione gestione risorse esterne
-
-0.7.3-74
-bug fix
-
-0.7.3
-gestione signin e signup da tutte le pagine pubbliche
-
-0.7.2-72
-bug fix
-
-0.7.2-71
-bug fixes
-
-0.7.2
-revisione grafica home page
-pagina riepilogo canali
-pagina canale
-
-0.7.1-69
-modifica per restituire il corretto nome del file in download in Document
-
-0.7.1-68
-gestione registrazione download, per evitare errati conteggi
-
-0.7.1-67
-rinominate le materie in Aree disciplinari, per includere settori (come la valutazione) non compresi dalle materie
-
-0.7.1-66
-bug fix per errata gestione tag in doc.php (issue #60)
-
-0.7.1-65
-nuova gestione login
-nuova richiesta password
-inizio nuova home front
-
-0.7
-issue #49
-
-0.6.3
-modifica documento
-apertura documento in browser
-download documento
-issue #48
-issue #52
-
-0.6.2-62
-menu ordinamento documenti
-
-0.6.2-61
-share/no_file.php: gestione errore download file
-
-0.6.2-60
-bug fix (Document)
-
-0.6.2-59
-page.js:
-parametrizzazione funzioni di gestione menu contestuale
-funzione getFileName
-
-0.6.2-58
-get_file_name.php: web service che restituisce il file dall'id documento
-
-0.6.2-57
-download manager
-
-0.6.2-56
-footer.php
-generic.css
-- menu contestuale documenti
-- modifiche card documenti
-
-0.6.2-55
-Document.php: semplificata la gestione del download per il proprietario (area privata)
-
-0.6.2-54
-document.php
-issue #47
-issue #50
-issue #51
-
-0.6.2-53
-parametrizzate funzioni di gestione context menu in admin
-
-0.6.2-52
-modifica password utente (issue #37)
-
-0.6.2-51
-validazione form inserimento e modifica utente (issue #33)
-
-0.6.2
-modifiche grafiche e funzionali per gestione card in admin
-
-0.6.1-49
-page.js: aggiunte funzioni di gestione context menu per le card in admin
-footer.php: aggiunto context menu
-
-0.6.1-48
-aggiunta data di registrazione utente, necessaria per le statistiche, in User
-
-0.6.1-47
-front.php sostituisce front.html
-
-0.6.1-46
-dati traffico reali in dashboard
-
-0.6.1
-bug fix
-
-0.6
-file manager
-
-0.5.1-43
-Fix for Google renaming MDCTextField
-
-0.5
-Amministrazione documenti: discipline, categorie e tag
-Riorganizzazione css
-Layout css per dispositivo
-
-0.4
-Access management:
-login errors
-logout
-password recovery
-
-0.3-20
-Bug fix (email e web) in User.php
-
-0.3-19
-bug fix per load_env in index.php
-
-0.3
-gestione errori di autenticazione e accesso
-gestione errori sql e di permesso
-invio mail a utente in fase di registrazione
-
-0.2-17
-session check
-role check
-
-0.2-16
-material graphic
-j_alert
-
-0.2-15
-logout
-
 0.2
-gestione accessi
-gestione utente (admin)
+modifica gestione dati in sessione
+gestione logout
+menu interattivi per elementi in admin
+User: gestione ruoli
+RBUtilties: gestione ruoli
+AccountManager: generateLogin
+functions.php: modifica check_role
+upload file per inserimento utenti
+admin: gestione classi
+admin: gestione anni
+admin: utilities
+admin: inserimento utenti da file
+admin: gestione utenti
+admin: modifica impostazioni sito
+define: nuove funzioni
+gestione dinamica della posizione del fab button
+modifiche alla grafica
+pulizia codice
+pulizia namespace
 
-0.1a-13
-gestione duplicazione username in inserimento
+0.1.2
+gestione accesso con ruoli diversi
 
-0.1a-12
-inserimento nuovo utente
-
-0.1a-11
-home amministrazione
-
-0.1a-10
-autenticazione utente e gestione ruolo
-
-0.1a-9
-Login
-Controllo iniziale ruolo di accesso
-Grafica pagina iniziale
-bug fix
+0.1.1
+gestione anni scolastici
+inserimento utenti

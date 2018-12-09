@@ -9,7 +9,7 @@
     <link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
     <link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
     <link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
-	<link rel="stylesheet" href="../css/site_themes/<?php echo getTheme() ?>/reg.css" type="text/css" media="screen,projection" />
+	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,600,600italic,700,700italic,900,200' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -41,35 +41,35 @@
 	</div>
 	<div id="left_col">
         <div style="margin: auto">
-        <form method="post" id="userform"  class="mdc-elevation--z5" style="width: 50%; text-align: center; margin: auto" onsubmit="submit_data()">
-            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                <input type="email" required <?php if (isset($user)) echo 'disabled' ?> id="username" name="username" class="mdc-text-field__input <?php if (isset($user)) echo 'disabled_link' ?>" value="<?php if (isset($user)) echo $user->getUsername() ?>">
+        <form method="post" id="userform"  class="mdc-elevation--z5" style="width: 50%; text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="margin-top: 20px">
+                <input type="email" required <?php if (isset($_user)) echo 'disabled' ?> id="username" name="username" class="mdc-text-field__input <?php if (isset($_user)) echo 'disabled_link' ?>" value="<?php if (isset($_user)) echo $_user->getUsername() ?>">
                 <label class="mdc-floating-label" for="username">Username</label>
-                <?php if (isset($user)): ?>
-                <a href="#" id="unlock" style="float: right">
+                <?php if (isset($_user)): ?>
+                <a href="#" id="unlock" style="float: right; border-bottom: 1px solid rgba(0,0,0,.42);">
                     <i class="material-icons accent_color" id="ulk_i">edit</i>
                 </a>
                 <?php endif; ?>
             </div>
             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                <input type="text" required id="firstname" name="firstname" class="mdc-text-field__input" value="<?php if (isset($user)) echo $user->getFirstName() ?>">
+                <input type="text" required id="firstname" name="firstname" class="mdc-text-field__input" value="<?php if (isset($_user)) echo $_user->getFirstName() ?>">
                 <label class="mdc-floating-label" for="firstname">Nome</label>
             </div>
             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-                <input type="text" required id="lastname" name="lastname" class="mdc-text-field__input" value="<?php if (isset($user)) echo $user->getLastName() ?>">
+                <input type="text" required id="lastname" name="lastname" class="mdc-text-field__input" value="<?php if (isset($_user)) echo $_user->getLastName() ?>">
                 <label class="mdc-floating-label" for="lastname">Cognome</label>
             </div>
             <select class="mdc-select" name="role">
                 <?php
                 while ($row = $res_roles->fetch_assoc()) {
                     $selected = '';
-					if (!isset($user)) {
-						if ($row['rid'] == \edocs\User::$GUEST) {
+					if (!isset($_user)) {
+						if ($row['rid'] == User::$STUDENT) {
 							$selected = "default selected";
                         }
                     }
                     else {
-					    if ($user->getRole() == $row['rid']) {
+					    if ($_user->getCurrentRole() == $row['rid']) {
 							$selected = "default selected";
                         }
                     }
@@ -80,7 +80,7 @@
                 ?>
             </select>
             <section class="mdc-card__actions">
-                <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-card__action">Registra</button>
+                <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--raised mdc-card__action" style="margin-left: 16px">Registra</button>
             </section>
         </form>
         </div>

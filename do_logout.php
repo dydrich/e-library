@@ -6,11 +6,11 @@
  * Time: 16.44
  */
 
-include_once 'lib/start.php';
-//session_start();
+//include_once 'lib/start.php';
+session_start();
 if ($_SESSION){
 	session_destroy();
 	unset($_SESSION);
 }
-header("Location: ".ROOT_SITE);
+header("Location: https://e-library.rbachis.net");
 exit;

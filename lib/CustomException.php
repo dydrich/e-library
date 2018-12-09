@@ -6,9 +6,6 @@
  * Time: 16.11
  */
 
-namespace edocs;
-
-
 class CustomException extends \Exception {
     protected $message = 'Unknown exception';     // Exception message
     protected $code = 0;                          // User-defined exception code

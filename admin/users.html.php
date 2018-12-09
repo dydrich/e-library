@@ -9,7 +9,7 @@
     <link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
     <link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
     <link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
-	<link rel="stylesheet" href="../css/site_themes/<?php echo getTheme() ?>/reg.css" type="text/css" media="screen,projection" />
+	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <script type="application/javascript" src="../js/page.js"></script>
@@ -48,47 +48,50 @@
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
+    <div class="mdtabs">
+        <div class="mdtab <?php if (!isset($_GET['active'])) echo "mdselected_tab" ?>">
+            <a href="users.php"><span>Tutti</span></a>
+        </div>
+        <div class="mdtab <?php if ($_GET['active'] == 1) echo "mdselected_tab" ?>">
+            <a href="users.php?active=1"><span>Attivi</span></a>
+        </div>
+        <div class="mdtab <?php if (isset($_GET['active']) && $_GET['active'] == 0) echo "mdselected_tab" ?>">
+            <a href="users.php?active=0"><span>Non attivi</span></a>
+        </div>
+    </div>
 	<div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
 	<div id="left_col">
-        <div class="mdtabs">
-            <div class="mdtab <?php if (!isset($_GET['active'])) echo "mdselected_tab" ?>">
-                <a href="users.php"><span>Tutti</span></a>
-            </div>
-            <div class="mdtab <?php if ($_GET['active'] == 1) echo "mdselected_tab" ?>">
-                <a href="users.php?active=1"><span>Attivi</span></a>
-            </div>
-            <div class="mdtab <?php if (isset($_GET['active']) && $_GET['active'] == 0) echo "mdselected_tab" ?>">
-                <a href="users.php?active=0"><span>Non attivi</span></a>
-            </div>
-        </div>
         <div style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center">
             <?php
-			foreach ($users as $user) {
-                if ($user['role'] == \edocs\User::$USER) {
-					$color = "#1565c0";
+			foreach ($users as $_user) {
+			    if ($_user['person_in_charge'] == 1) {
+					$color = "#EF6C00";
                 }
-                else if ($user['role'] == \edocs\User::$ADMIN) {
+                else if ($_user['role'] == User::$ADMIN) {
+					$color = "#1E4389";
+                }
+				else if ($_user['role'] == User::$LIBRARIAN) {
 					$color = "#c2185b";
-                }
+				}
                 else {
-					$color = "rgba(0, 0, 0, .45)";
+					$color = "#7E57C2";
                 }
             ?>
-                <div id="user<?php echo $user['uid'] ?>" class="mdc-card demo-card">
+                <div id="user<?php echo $_user['uid'] ?>" class="mdc-card demo-card">
                     <div class="mdc-card__horizontal-block" style="display: flex; flex-flow: row wrap">
                         <section class="mdc-card__primary" style="order: 1; flex: 4 85%">
-                            <h1 class="mdc-card__title"><?php echo $user['lastname']." ".$user['firstname'] ?></h1>
-                            <h2 class="mdc-card__subtitle"><?php echo \edocs\User::getHumanReadableRole($user['role']) ?></h2>
+                            <h1 class="mdc-card__title"><?php echo $_user['lastname']." ".$_user['firstname'] ?></h1>
+                            <h2 class="mdc-card__subtitle"><?php echo User::getHumanReadableRole($_user['role']) ?></h2>
                         </section>
                         <i class="material-icons" style="font-size: 2.5em; color: <?php echo $color ?>; order: 2; flex: 1 15%; margin-top: 10px">people</i>
                         <section class="" style="order: 3; flex: 1 100%; padding-left: 10px">
-                            <button type="submit" class="mdc-button mdc-button--compact mdc-card__action upd" data-uid="<?php echo $user['uid'] ?>">Modifica</button>
-							<?php if ($user['active'] == 1): ?>
-                                <button class="mdc-button mdc-button--compact mdc-card__action del" data-uid="<?php echo $user['uid'] ?>">Elimina</button>
+                            <button type="submit" class="mdc-button mdc-button--compact mdc-card__action upd" data-uid="<?php echo $_user['uid'] ?>">Modifica</button>
+							<?php if ($_user['active'] == 1): ?>
+                                <button class="mdc-button mdc-button--compact mdc-card__action del" data-uid="<?php echo $_user['uid'] ?>">Elimina</button>
 							<?php else: ?>
-                                <button class="mdc-button mdc-button--compact mdc-card__action res" data-uid="<?php echo $user['uid'] ?>">Ripristina</button>
+                                <button class="mdc-button mdc-button--compact mdc-card__action res" data-uid="<?php echo $_user['uid'] ?>">Ripristina</button>
 							<?php endif; ?>
                         </section>
                     </div>
@@ -109,18 +112,11 @@
 <?php include_once "../share/footer.php" ?>
 <script type="application/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var heightMain = document.getElementById('main').clientHeight;
-        var heightScreen = document.body.clientHeight;
-        var usedHeight = heightMain > heightScreen ? heightScreen : heightMain;
         var btn = document.getElementById('newuser');
-        btn.style.top = (usedHeight)+"px";
-        //btn.style.top = '700px';
-
-        var screenW = screen.width;
-        var bodyW = document.body.clientWidth;
-        var right_offset = (bodyW - document.getElementById('main').clientWidth) / 2;
-        right_offset += document.getElementById('right_col').clientWidth;
-        btn.style.right = (right_offset - 18)+"px";
+        var pos = scroll_button(btn);
+        btn.style.top = (pos[0])+"px";
+        btn.style.right = (pos[1])+"px";
+        btn.style.position = 'fixed';
 
         document.body.addEventListener('click', function (event) {
             if (event.target.classList.contains('upd')) {

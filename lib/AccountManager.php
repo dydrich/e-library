@@ -1,13 +1,11 @@
 <?php
 
-namespace edocs;
-
 class AccountManager{
 
 	private $user_;
 	private $datasource_;
 
-	public function __construct(\edocs\User $u, \MySQLDataLoader $dl){
+	public function __construct(User $u, \MySQLDataLoader $dl){
 		$this->user_ = $u;
 		$this->datasource_ = $dl;
 	}
@@ -19,7 +17,7 @@ class AccountManager{
 		$uniqid = md5(uniqid(rand(), true));
 		$tm = new \DateTime();
 		$now = $tm->format("Y-m-d H:i:s");
-		$due = $tm->add(new \DateInterval('P1D'));
+		$due = $tm->add(new DateInterval('P1D'));
 		$area = null;
 
 		$smt = $this->datasource_->prepare("INSERT INTO rb_password_recovery (user, token, request_date, token_due_date) VALUES (?, ?, ?, ?)");
@@ -94,6 +92,37 @@ class AccountManager{
 		$pwd['c'] = $password;
 		$pwd['e'] = md5($password);
 		return $pwd;
+	}
+
+	public static function generateLogin($names, $nome, $cognome) {
+		if(preg_match("/ /", $nome)){
+			$nomi = explode(" ", $nome);
+		}
+		else{
+			$nomi[0] = $nome;
+			$nomi[1] = "";
+		}
+		// elimino eventuali accenti (apostrofi) e spazi (solo dal cognome)
+		$nm = strtolower(preg_replace("/'/", "", $nomi[0].$nomi[1]));
+		$cm = strtolower(preg_replace("/'/", "", trim($cognome)));
+		$cm = strtolower(preg_replace("/ /", "", $cm));
+		// creo la login e verifico
+		$login = $nm.".".$cm;
+		$base_login = $login;
+		$length = strlen($login);
+		$ok = false;
+		// valore numerico per la creazione di login univoche
+		$index = 1;
+		while(!$ok){
+			if(!in_array($login, $names)){
+				return $login;
+			}
+			else{
+				$login = $base_login.$index;
+				$index++;
+			}
+		}
+		return null;
 	}
 
 	public function checkUsername($uname) {

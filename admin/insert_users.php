@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: riccardo
- * Date: 09/10/17
- * Time: 21.37
+ * Date: 27/11/18
+ * Time: 20.19
  */
 require_once "../lib/start.php";
 
@@ -13,6 +13,6 @@ check_role($user, User::$ADMIN);
 
 $_SESSION['area'] = 'admin';
 
-$drawer_label = "Dashboard";
+$drawer_label = "Caricamento utenti";
 
-include "index.html.php";
+require_once "insert_users.html.php";

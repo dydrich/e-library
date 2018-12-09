@@ -14,6 +14,8 @@ define("ACTION_INSERT", 1);
 define("ACTION_DELETE", 2);
 define("ACTION_UPDATE", 3);
 define("ACTION_RESTORE", 4);
+define("ACTION_DEACTIVATE", 5);
+define("ACTION_SET_DEFAULT", 6);
 
 /*
  * tipologie di finestra per check_session
@@ -38,4 +40,4 @@ define("PREVIOUS", -1);
 define("NEXT", 1);
 define("INDEX_OUT_OF_BOUND", 0);
 
-define("ROOT_SITE", 'http://localhost/edocs');
+define("ROOT_SITE", 'https://e-library.rbachis.net');

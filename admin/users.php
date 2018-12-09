@@ -23,15 +23,25 @@ else {
 $r_users = null;
 try {
 	$r_users = $db->executeQuery("SELECT * FROM rb_users $active ORDER BY lastname, firstname");
-} catch (\edocs\MySQLException $ex) {
-	$ex->redirect();
-}
-
-$users = [];
-if ($r_users->num_rows > 0) {
-	while ($row = $r_users->fetch_assoc()) {
-		$users[] = $row;
+	$users = [];
+	if ($r_users->num_rows > 0) {
+		while ($row = $r_users->fetch_assoc()) {
+			$rs = $db->executeQuery("SELECT rid FROM rb_user_roles WHERE uid = ".$row['uid']);
+			$row['role'] = null;
+			$row['person_in_charge'] = null;
+			while ($r = $rs->fetch_assoc()) {
+				if ($r['rid'] != 3) {
+					$row['role'] = $r['rid'];
+				}
+				else {
+					$row['person_in_charge'] = 1;
+				}
+			}
+			$users[] = $row;
+		}
 	}
+} catch (MySQLException $ex) {
+	$ex->redirect();
 }
 
 $drawer_label = "Utenti";

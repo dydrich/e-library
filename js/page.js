@@ -474,3 +474,22 @@ var show_sign_menu = function (event, elem, right_offset) {
 var do_nothing = function () {
     return false;
 };
+
+var scroll_button = function (btn) {
+    var usedHeight = 0;
+    var heightMain = document.getElementById('main').clientHeight;
+    var heightScreen = window.screen.height;
+    if (heightMain > heightScreen) {
+        usedHeight = heightScreen - 200;
+    }
+    else {
+        usedHeight = heightMain - 50;
+    }
+    var screenW = screen.width;
+    var bodyW = document.body.clientWidth;
+    var right_offset = (bodyW - document.getElementById('main').clientWidth) / 2;
+    right_offset += document.getElementById('right_col').clientWidth;
+    right_offset -= 18;
+
+    return [usedHeight, right_offset];
+};

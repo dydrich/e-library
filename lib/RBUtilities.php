@@ -1,7 +1,6 @@
 <?php
 
 require_once "data_source.php";
-require_once "Authenticator.php";
 
 final class RBUtilities{
 	
@@ -32,15 +31,16 @@ final class RBUtilities{
 	/**
 	 * Load an instance of some User class
 	 * @param integer $uid - the user's id
-	 * @return \edocs\User $user
+	 * @return User $user
 	 */
 	public function loadUserFromUid($uid){
-			$sel_user = "SELECT firstname, lastname, username, accesses_count, role, active FROM rb_users WHERE rb_users.uid = {$uid} ";
-				$ut = $this->datasource->executeQuery($sel_user);
-				$utente = $ut;
+		$sel_user = "SELECT firstname, lastname, username, accesses_count, active FROM rb_users WHERE rb_users.uid = {$uid} ";
+		$ut = $this->datasource->executeQuery($sel_user);
+		$utente = $ut;
+		$roles = $this->datasource->executeQuery("SELECT rid FROM rb_user_roles WHERE uid = ".$uid);
 
-				$user = new \edocs\User($uid, $utente['firstname'], $utente['lastname'], $utente['username'], null, $utente['role'], $this->datasource);
-				$user->setActive($utente['active']);
+		$user = new User($uid, $utente['firstname'], $utente['lastname'], $utente['username'], null, $roles, $this->datasource);
+		$user->setActive($utente['active']);
 
 		return $user;
 	}

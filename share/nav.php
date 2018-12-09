@@ -8,13 +8,8 @@
         </a>
         <?php endif; ?>
 		<p id="drawer_label" style="margin-left: 10px; float: left; color: white"><?php echo $drawer_label ?></p>
+        <div class="nav_div" style="text-align: right; font-weight: normal">
+            <span style="position: relative; top: 10px">Area amministrazione</span>
+        </div>
 	</div>
-	<div class="nav_div" style="text-align: center">
-        <a href="">
-            <i class="material-icons" style="">account_box</i>
-        </a>
-        <a href="../do_logout.php">
-            <i class="material-icons" style="margin-left: 20px">cloud_off</i>
-        </a>
-    </div>
 </nav>

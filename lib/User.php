@@ -1,7 +1,5 @@
 <?php
 
-namespace edocs;
-
 require_once "AccountManager.php";
 
 class User {
@@ -9,7 +7,8 @@ class User {
 	protected $firstName;
 	protected $lastName;
 	protected $username;
-	protected $role;
+	protected $roles;
+	protected $currentRole;
 	protected $pwd;
 	protected $accesses;
 	protected $datasource;
@@ -21,20 +20,25 @@ class User {
      */
     protected $token;
 
-    public static $ADMIN = 3;
-    public static $USER = 1;
-    public static $GUEST = 2;
+    public static $ADMIN = 1;
+    public static $LIBRARIAN = 2;
+    public static $STUDENT = 3;
 
 	public static $NO_EMAIL = 0;
 	public static $ACTIVATION_EMAIL = 1;
 	public static $DATA_EMAIL = 2;
 
-	public function __construct($u, $fn, $ln, $un, $pwd = null, $rl, $dl){
+	public function __construct($u, $fn, $ln, $un, $pwd, $rl, $dl){
 		$this->uid = $u;
 		$this->firstName = $fn;
 		$this->lastName = $ln;
 		$this->username = $un;
-		$this->role = $rl;
+		$this->roles = $rl;
+
+		$this->currentRole = null;
+		if (count($this->roles) == 1) {
+			$this->currentRole = $this->roles[0];
+		}
 		if ($dl instanceof \MySQLDataLoader) {
 			$this->datasource = $dl;
 		}
@@ -79,6 +83,12 @@ class User {
 	 */
 	public function setActive($active) {
 		$this->active = $active;
+		if ($active == false) {
+			$this->delete(false);
+		}
+		else {
+			$this->restore();
+		}
 	}
 
 	/**
@@ -93,6 +103,20 @@ class User {
 	 */
 	public function getAccesses() {
 		return $this->accesses;
+	}
+
+	/**
+	 * @return null
+	 */
+	public function getCurrentRole() {
+		return $this->currentRole;
+	}
+
+	/**
+	 * @param null $currentRole
+	 */
+	public function setCurrentRole($currentRole) {
+		$this->currentRole = $currentRole;
 	}
 	
 	/**
@@ -137,8 +161,24 @@ class User {
 		return $ret;
 	}
 
-	public function getRole(){
-		return $this->role;
+	public function getRoles(){
+		return $this->roles;
+	}
+
+	public function setRoles($roles = null){
+		if ($roles == null) {
+			$this->roles = $this->datasource->executeQuery("SELECT rid FROM rb_user_roles WHERE uid = ".$this->uid);
+		}
+		else {
+			$this->roles = $roles;
+		}
+	}
+
+	protected function updateRoles() {
+		$this->datasource->executeUpdate('DELETE FROM rb_user_roles WHERE uid = '.$this->uid);
+		foreach ($this->roles as $role) {
+			$this->datasource->executeUpdate('INSERT INTO rb_user_roles (uid, rid) VALUES ('.$this->uid.', '.$role.')');
+		}
 	}
 
 	public function getUid(){
@@ -188,13 +228,14 @@ class User {
     public static function getHumanReadableRole($r) {
     	switch ($r) {
 			case 1:
-				return "User";
+				return "Amministratore";
 			case 2:
-				return "Guest";
+				return "Bibliotecario";
 			case 3:
-				return "Administrator";
+				return "Studente";
+			default:
+				return "Studente";
 		}
-		return "Guest";
 	}
 
 	public static function generatePassword() {
@@ -203,11 +244,8 @@ class User {
 
 	public function insert ($sendEmail) {
     	$active = 1;
-    	if($this->role == User::$GUEST) {
-    		$active = 0;
-		}
-    	$sql = "INSERT INTO rb_users (username, password, firstname, lastname, accesses_count, last_access, previous_access, active, files_count, downloads, role, registration_date)  
-				VALUES ('{$this->username}', '{$this->pwd['e']}', '{$this->firstName}', '{$this->lastName}', 0, NULL, NULL, $active, 0, 0, {$this->role}, NOW())";
+    	$sql = "INSERT INTO rb_users (username, password, firstname, lastname, accesses_count, last_access, previous_access, active, registration_date)  
+				VALUES ('{$this->username}', '{$this->pwd['e']}', '{$this->firstName}', '{$this->lastName}', 0, NULL, NULL, $active, NOW())";
     	$this->uid = $this->datasource->executeUpdate($sql);
     	if ($sendEmail === User::$ACTIVATION_EMAIL) {
 			$this->sendActivationEmail();
@@ -215,17 +253,19 @@ class User {
 		else if($sendEmail === User::$DATA_EMAIL) {
 			$this->sendEmailAccessData();
 		}
+		$this->updateRoles();
     	return ['login' => $this->username, 'password' => $this->pwd['c']];
 	}
 
 	public function update () {
     	if ($this->username == null) {
-			$sql = "UPDATE rb_users SET firstname = '{$this->firstName}', lastname = '{$this->lastName}', role = {$this->role} WHERE uid = ".$this->uid;
+			$sql = "UPDATE rb_users SET firstname = '{$this->firstName}', lastname = '{$this->lastName}' WHERE uid = ".$this->uid;
 		}
 		else {
-			$sql = "UPDATE rb_users SET username = '{$this->username}', firstname = '{$this->firstName}', lastname = '{$this->lastName}', role = {$this->role} WHERE uid = ".$this->uid;
+			$sql = "UPDATE rb_users SET username = '{$this->username}', firstname = '{$this->firstName}', lastname = '{$this->lastName}' WHERE uid = ".$this->uid;
 		}
 		$this->datasource->executeUpdate($sql);
+		$this->updateRoles();
 	}
 
 	public function delete ($deleteFromDB) {
@@ -242,13 +282,6 @@ class User {
 		$sql = "UPDATE rb_users SET active = 1 WHERE uid = ".$this->uid;
 
 		$this->datasource->executeUpdate($sql);
-	}
-
-	public function check_role($admitted) {
-    	if ($admitted != $this->role) {
-    		return false;
-		}
-		return true;
 	}
 
 	protected function sendEmailAccessData() {
@@ -280,7 +313,7 @@ class User {
 		}
 
 		$dt = $due->format("Y-m-d H:i:s");
-		$this->datasource->executeUpdate("UPDATE rb_users SET activation_code = '{$uniqid}', code_expire_time = '$dt' WHERE uid = ".$this->uid);
+		//$this->datasource->executeUpdate("UPDATE rb_users SET activation_code = '{$uniqid}', code_expire_time = '$dt' WHERE uid = ".$this->uid);
 
 		/*
 		 * send email
@@ -295,5 +328,24 @@ class User {
 		$message .= "Per qualunque problema, non esitare a contattarci.\n\n";
 		$message .= "Si prega di non rispondere a questa mail, in quanto inviata da un programma automatico.\n\n";
 		mail($to, $subject, $message, $headers);
+	}
+
+	/**
+	 * @param MySQLDataLoader $datasource
+	 */
+	public function setDatasource($datasource) {
+		if ($datasource instanceof \MySQLDataLoader) {
+			$this->datasource = $datasource;
+		}
+		else {
+			$this->datasource = new \MySQLDataLoader($datasource);
+		}
+	}
+
+	public function checkRole($admitted) {
+		if (in_array($admitted, $this->roles) && $admitted == $this->currentRole) {
+			return true;
+		}
+		return false;
 	}
 }

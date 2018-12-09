@@ -4,10 +4,12 @@ html {
 
 :root {
     --mdc-theme-primary: #01579B !important;
-    --mdc-theme-secondary: #FF528D !important;
-    --accent-color: #c51162 !important;
+    --mdc-theme-secondary: #d9473c !important;
+    --accent-color: #d9473c !important;
     --main-500: #03A9F4;
     --main-700: #0288D1;
+    --main-800: #0277BD;
+
 }
 
 body {
@@ -22,7 +24,7 @@ body {
 }
 
 #header {
-    background-color: var(--main-700);
+    background-color: var(--mdc-theme-primary);
 }
 
 #header a {
@@ -53,7 +55,8 @@ body {
 
 #navigation {
     color: #FFFFFF;
-    background-color: var(--main-500);
+    background-color: var(--main-700);
+    height: 50px!important;
 }
 
 #navigation a {
@@ -90,8 +93,8 @@ fieldset {
 }
 
 div.mdtabs {
-    background-color: #03A9F4;
-    top: -20px;
+    background-color: var(--main-700);
+    top: 0;
 }
 
 div.mdtab a > span {
@@ -248,4 +251,8 @@ input.android:focus, select.android:focus, textarea.android:focus {
 
 select.form_input {
     border-radius: 4px;
+}
+
+.mdc-button--raised {
+    background-color: var(--mdc-theme-secondary)!important;
 }

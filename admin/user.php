@@ -18,9 +18,14 @@ if ($_REQUEST['uid'] == 0) {
 else {
 	$drawer_label = "Modifica utente";
 	$r_us = $db->executeQuery("SELECT * FROM rb_users WHERE uid = ".$_REQUEST['uid']);
+	$r_rl = $db->executeQuery("SELECT rid FROM rb_user_roles WHERE uid = ".$_REQUEST['uid']);
+	$roles = [];
+	while ($r = $r_rl->fetch_assoc()) {
+		$roles[] = $r['rid'];
+	}
 	if ($r_us) {
 		$us = $r_us->fetch_assoc();
-		$user = new \edocs\User($_REQUEST['uid'], $us['firstname'], $us['lastname'], $us['username'], null, $us['role'], new MySQLDataLoader($db));
+		$_user = new User($_REQUEST['uid'], $us['firstname'], $us['lastname'], $us['username'], null, $roles, new MySQLDataLoader($db));
 	}
 }
 

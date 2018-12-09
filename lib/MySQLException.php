@@ -6,8 +6,6 @@
  * Time: 16.12
  */
 
-namespace edocs;
-
 require_once "CustomException.php";
 
 

@@ -73,10 +73,10 @@
 <?php
 $link = 'back/index.php';
 $lab = "Area privata";
-if (isset($_SESSION['__user__']) && $_SESSION['__user__']->getRole() == 3) {
+if (isset($user) && $user->getCurrentRole() == 3) {
     $link = 'admin/index.php';
 }
-else if (isset($_SESSION['__user__']) && $_SESSION['__user__']->getRole() == 2) {
+else if (isset($user) && $user->getCurrentRole() == 2) {
 	$link = 'request_update.php';
 	$lab = 'Richiedi accesso come utente contributore';
 }

@@ -6,6 +6,7 @@ require_once "database.lib.php";
 require_once "define.php";
 require_once "MySQLException.php";
 require_once "data_source.php";
+require_once "RBUtilities.php";
 
 session_start();
 
@@ -17,8 +18,8 @@ $uid = 0;
 $role = 0;
 $uri = $_SERVER['SCRIPT_NAME'];
 if(isset($_SESSION['__user__'])){
-	$uid = $_SESSION['__user__']->getUid();
-	$role = $_SESSION['__user__']->getRole();
+	$rb = RBUtilities::getInstance(new MySQLDataLoader($db));
+	$user = $rb->loadUserFromUid($_SESSION['__user__']);
 }
 
 //$ins = "INSERT INTO rb_visits (access_ts, ip_address, page, uid, uri) VALUES (NOW(), '{$ip}', '{$page}', {$uid}, '{$uri}')";

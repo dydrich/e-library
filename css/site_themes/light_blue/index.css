@@ -306,3 +306,51 @@ a {
 .accent_color a {
     color: var(--accent-color) !important;
 }
+
+.nowcard {
+    width: 450px;
+    height: 40px;
+    border: 1px solid rgba(215, 215, 215, 1);
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.icon_card {
+    position: relative;
+    font-size: 22px;
+    width: 60px;
+    float: left;
+    margin: 0;
+    text-align: center;
+    border-radius: 0 0 1px 1px;
+    height: 40px;
+}
+
+.icon_card > span {
+    padding: 10px 0 0 0;
+}
+
+.text_card {
+    float: left;
+    width: 380px;
+    text-align: center;
+    position: relative;
+    bottom: -10px;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.text_card a {
+    font-weight: 600;
+}
+
+.nowcard.logout {
+    position: relative;
+    margin-top: 20px;
+}
