@@ -71,6 +71,23 @@ switch($_POST['action']){
        	}
         $msg = "Utente ora inattivo";
 		break;
+	case ACTION_DESTROY:
+		try{
+			$begin = $db->executeUpdate("BEGIN");
+			$user = new User($_POST['uid'], "", "", "", null, null, new MySQLDataLoader($db));
+			$user->delete(true);
+			$begin = $db->executeUpdate("COMMIT");
+		} catch (MySQLException $ex){
+			$db->executeUpdate("ROLLBACK");
+			$response['status'] = "kosql";
+			$response['message'] = "Operazione non completata a causa di un errore";
+			$response['dbg_message'] = $ex->getMessage();
+			$response['query'] = $ex->getQuery();
+			echo json_encode($response);
+			exit;
+		}
+		$msg = "Utente eliminato in modo definitivo";
+		break;
 	case ACTION_UPDATE:
 		try{
 			$begin = $db->executeUpdate("BEGIN");
