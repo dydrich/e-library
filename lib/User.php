@@ -269,6 +269,7 @@ class User {
 	}
 
 	public function delete ($deleteFromDB) {
+    	/* TODO: check for books before delete */
     	if ($deleteFromDB) {
     		$sql = "DELETE FROM rb_users WHERE uid = ".$this->uid;
 		}

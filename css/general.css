@@ -940,7 +940,7 @@ div.dashboard_card_row i {
     min-height: 360px;
 }
 
-#class_context_menu, #yearcontext_menu, #context_menu, #field_order {
+#user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order {
     width: 250px;
     display: none;
     background-color: white;
@@ -1005,17 +1005,17 @@ div.dashboard_card_row i {
     text-decoration: none;
 }
 
-#class_context_menu .item a, #yearcontext_menu .item a, #context_menu .item a, #doc_context_menu .item a, #cat_menu .item a {
+#user_context_menu .item a, #class_context_menu .item a, #yearcontext_menu .item a, #context_menu .item a, #doc_context_menu .item a, #cat_menu .item a {
     text-decoration: none;
 }
 
-#class_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i {
+#user_context_menu .item a i, #class_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i {
       margin-left: 15px;
       color: rgba(0, 0, 0, .54);
       text-decoration: none;
 }
 
-#class_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span {
+#user_context_menu .item a span, #class_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span {
     margin-left: 15px;
     color: rgba(0, 0, 0, .87);
     text-decoration: none;

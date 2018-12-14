@@ -225,9 +225,13 @@ input.android:focus, select.android:focus, textarea.android:focus {
     color: #000000;
 }
 
-.selected_tag, .selected_element {
+.selected_tag, .selected_element, .selected_tag .mdc-card__subtitle {
     background-color: var(--mdc-theme-primary);
     color: white!important;
+}
+
+.selected_tag_parent {
+    background-color: var(--mdc-theme-primary) !important;
 }
 
 .selected_tag span, .selected_element span {
@@ -239,7 +243,7 @@ input.android:focus, select.android:focus, textarea.android:focus {
     color: white!important;
 }
 
-.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i {
+.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i, .selected_tag .mdc-card__horizontal-block .material-icons {
     color: white!important;
 }
 
@@ -255,4 +259,8 @@ select.form_input {
 
 .mdc-button--raised {
     background-color: var(--mdc-theme-secondary)!important;
+}
+
+.user_item {
+    border-radius: 4px 4px 0 0;
 }

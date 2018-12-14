@@ -1,3 +1,18 @@
+0.2-138
+lista studenti della classe (#34)
+
+0.2-137
+funzione toString in SchoolClass
+
+0.2-136
+admin: gestione errori in importazione utenti da file (#32)
+
+0.2-135
+modifica grafica in index.css per welcome.php
+
+0.2-134
+modifica grafica in share/nav.php
+
 0.2
 modifica gestione dati in sessione
 gestione logout

@@ -54,7 +54,7 @@ html, body {
 }
 
 #header {
-    height: 40px;
+    height: 45px;
 }
 
 #navigation {
@@ -82,8 +82,8 @@ html, body {
 }
 
 .demo-card {
-    width: 300px;
-    height: 100px;
+    width: 200px;
+    height: 70px;
 }
 
 .dashboard_longcard {

@@ -38,9 +38,15 @@
             height: 30px;
         }
 
+        .mdc-card__title {
+            margin-bottom: 10px;
+        }
+
         .mdc-card__subtitle {
             font-style: italic;
             color: rgba(0, 0, 0, .54);
+            margin-top: 0;
+            margin-bottom:0;
         }
     </style>
 </head>
@@ -63,7 +69,7 @@
 		<?php include_once "menu.php" ?>
 	</div>
 	<div id="left_col">
-        <div style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center">
+        <div id="content" style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center">
             <?php
 			foreach ($users as $_user) {
 			    if ($_user['person_in_charge'] == 1) {
@@ -79,22 +85,24 @@
 					$color = "#7E57C2";
                 }
             ?>
-                <div id="user<?php echo $_user['uid'] ?>" class="mdc-card demo-card">
-                    <div class="mdc-card__horizontal-block" style="display: flex; flex-flow: row wrap">
-                        <section class="mdc-card__primary" style="order: 1; flex: 4 85%">
-                            <h1 class="mdc-card__title"><?php echo $_user['lastname']." ".$_user['firstname'] ?></h1>
-                            <h2 class="mdc-card__subtitle"><?php echo User::getHumanReadableRole($_user['role']) ?></h2>
-                        </section>
-                        <i class="material-icons" style="font-size: 2.5em; color: <?php echo $color ?>; order: 2; flex: 1 15%; margin-top: 10px">people</i>
-                        <section class="" style="order: 3; flex: 1 100%; padding-left: 10px">
-                            <button type="submit" class="mdc-button mdc-button--compact mdc-card__action upd" data-uid="<?php echo $_user['uid'] ?>">Modifica</button>
-							<?php if ($_user['active'] == 1): ?>
-                                <button class="mdc-button mdc-button--compact mdc-card__action del" data-uid="<?php echo $_user['uid'] ?>">Elimina</button>
-							<?php else: ?>
-                                <button class="mdc-button mdc-button--compact mdc-card__action res" data-uid="<?php echo $_user['uid'] ?>">Ripristina</button>
-							<?php endif; ?>
-                        </section>
-                    </div>
+                <div id="user<?php echo $_user['uid'] ?>" data-id="user<?php echo $_user['uid'] ?>" class="mdc-card demo-card">
+                    <a href="user.php?uid=<?php echo $_user['uid'] ?>&back=users.php" style="color: #263238" data-id="<?php echo $_user['uid'] ?>" data-active="<?php echo $_user['active'] ?>" id="item<?php echo $_user['uid'] ?>" class="user_item">
+                        <div class="mdc-card__horizontal-block" style="display: flex; flex-flow: row wrap">
+                            <section class="mdc-card__primary" style="order: 1; flex: 3 75%">
+                                <h1 class="mdc-card__title"><?php echo $_user['lastname']." ".$_user['firstname'] ?></h1>
+                                <h2 class="mdc-card__subtitle"><?php echo User::getHumanReadableRole($_user['role']) ?></h2>
+                            </section>
+                            <i class="material-icons" style="font-size: 2.5em; color: <?php echo $color ?>; order: 2; flex: 1 25%; margin-top: 10px">people</i>
+                           <!-- <section class="" style="order: 3; flex: 1 100%; padding-left: 10px">
+                                <button type="submit" class="mdc-button mdc-button--compact mdc-card__action upd" data-uid="<?php echo $_user['uid'] ?>">Modifica</button>
+                                <?php if ($_user['active'] == 1): ?>
+                                    <button class="mdc-button mdc-button--compact mdc-card__action del" data-uid="<?php echo $_user['uid'] ?>">Elimina</button>
+                                <?php else: ?>
+                                    <button class="mdc-button mdc-button--compact mdc-card__action res" data-uid="<?php echo $_user['uid'] ?>">Ripristina</button>
+                                <?php endif; ?>
+                            </section>-->
+                        </div>
+                    </a>
 
                 </div>
             <?php
@@ -110,7 +118,35 @@
 	<p class="spacer"></p>
 </div>
 <?php include_once "../share/footer.php" ?>
+<div id="user_context_menu" class="mdc-elevation--z2">
+    <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" id="open_user">
+            <i class="material-icons">mode_edit</i>
+            <span>Modifica</span>
+        </a>
+    </div>
+    <div id="it_delete" class="item">
+        <a href="#" id="deactivate_user">
+            <i class="material-icons">sync_disabled</i>
+            <span>Disattiva</span>
+        </a>
+    </div>
+    <div id="it_restore" class="item">
+        <a href="#" id="activate_user">
+            <i class="material-icons">sync</i>
+            <span>Ripristina</span>
+        </a>
+    </div>
+    <div id="it_destroy" class="item" style="border-top: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" id="remove_user">
+            <i class="material-icons">delete</i>
+            <span>Elimina</span>
+        </a>
+    </div>
+</div>
 <script type="application/javascript">
+    var selected_tag = 0;
+    var is_active = 1;
     document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById('newuser');
         var pos = scroll_button(btn);
@@ -118,47 +154,128 @@
         btn.style.right = (pos[1])+"px";
         btn.style.position = 'fixed';
 
-        document.body.addEventListener('click', function (event) {
-            if (event.target.classList.contains('upd')) {
-                uid = event.target.getAttribute('data-uid');
-                window.location.href = 'user.php?uid='+uid+'&back=users.php';
+        document.getElementById('left_col').addEventListener('contextmenu', function (ev) {
+            ev.preventDefault();
+            clear_context_menu(ev, 'user_context_menu');
+            if (selected_tag !== 0) {
+                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
             }
-            if (event.target.classList.contains('del')) {
-                user_to_del = event.target.getAttribute('data-uid');
-                j_alert("confirm", "Eliminare l'utente?");
+            return false;
+        });
+        document.getElementById('content').addEventListener('click', function (ev) {
+            ev.preventDefault();
+            clear_context_menu(ev, 'user_context_menu');
+            if (selected_tag !== 0) {
+                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+            }
+            return false;
+        });
+
+        var ends = document.querySelectorAll('.user_item');
+        for (i = 0; i < ends.length; i++) {
+            document.getElementById('open_user').addEventListener('click', function (ev) {
+                open_in_browser();
+            });
+            document.getElementById('deactivate_user').addEventListener('click', function (event) {
+                j_alert("confirm", "Disattivare l'utente?");
                 document.getElementById('okbutton').addEventListener('click', function (event) {
                     event.preventDefault();
-                    del_user();
+                    deactivate_item(event);
                 });
-                document.getElementById('nobutton').addEventListener('click', function (event) {
+            });
+            document.getElementById('activate_user').addEventListener('click', function (event) {
+                event.preventDefault();
+                restore_user(event);
+            });
+            document.getElementById('remove_user').addEventListener('click', function (ev) {
+                j_alert("confirm", "Eliminare definitivamente l'utente?");
+                document.getElementById('okbutton').addEventListener('click', function (event) {
                     event.preventDefault();
-                    fade('overlay', 'out', .1, 0);
-                    fade('confirm', 'out', .3, 0);
-                    return false;
-                })
-            }
-            if (event.target.classList.contains('res')) {
-                uid = event.target.getAttribute('data-uid');
-                restore_user(uid);
-            }
-        });
+                    destroy_item(event);
+                });
+            });
+            document.getElementById('nobutton').addEventListener('click', function (event) {
+                event.preventDefault();
+                fade('overlay', 'out', .1, 0);
+                fade('confirm', 'out', .3, 0);
+                return false;
+            });
+            ends[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                if (selected_tag !== 0) {
+                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                    document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                }
+                selected_tag = event.currentTarget.getAttribute("data-id");
+                is_active = event.currentTarget.getAttribute("data-active");
+                event.currentTarget.classList.add('selected_tag');
+                document.getElementById('user'+selected_tag).classList.add('selected_tag_parent');
+            });
+            ends[i].addEventListener('contextmenu', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                if (selected_tag !== 0) {
+                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                    document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                }
+                selected_tag = event.currentTarget.getAttribute("data-id");
+                is_active = event.currentTarget.getAttribute("data-active");
+                event.currentTarget.classList.add('selected_tag');
+                document.getElementById('user'+selected_tag).classList.add('selected_tag_parent');
+                current_target_id = event.currentTarget.getAttribute("data-id");
+                //clear_context_menu(event);
+                show_context_menu(event, null, 150, 'user_context_menu');
+                if (is_active === '1') {
+                    document.getElementById('it_restore').style.display = 'none';
+                    document.getElementById('it_delete').style.display = '';
+                    document.getElementById('it_destroy').style.display = 'none';
+                }
+                else {
+                    document.getElementById('it_restore').style.display = '';
+                    document.getElementById('it_delete').style.display = 'none';
+                    document.getElementById('it_destroy').style.display = '';
+                }
+            });
+            ends[i].addEventListener('dblclick', function (event) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                selected_tag = event.currentTarget.getAttribute("data-id");
+                open_in_browser();
+            });
+        }
 
-        document.getElementById('okbutton').addEventListener('click', function (event) {
-            event.preventDefault();
-            del_user();
-        });
+       var open_in_browser = function () {
+            document.location.href = 'user.php?uid='+selected_tag+'&back=users.php';
+        };
 
-        var user_to_del = 0;
-        var del_user = function(){
+        var deactivate_item = function (event) {
+            del_user(event, false);
+        };
+
+        var destroy_item = function (event) {
+            del_user(event, true);
+        };
+
+        var del_user = function(event, delete_from_db){
             fade('confirm', 'out', .1, 0);
+            clear_context_menu(event, 'user_context_menu');
             var url = "users_manager.php";
 
             var xhr = new XMLHttpRequest();
             var formData = new FormData();
 
             xhr.open('post', 'user_manager.php');
-            var uid = user_to_del;
-            var action = <?php echo ACTION_DELETE ?>;
+            var uid = selected_tag;
+            var action = null;
+            if (delete_from_db) {
+                action = <?php echo ACTION_DESTROY ?>;
+            }
+            else {
+                action = <?php echo ACTION_DELETE ?>;
+            }
 
             formData.append('uid', uid);
             formData.append('action', action);
@@ -185,16 +302,16 @@
             }
         };
 
-        var restore_user = function(uid){
+        var restore_user = function(event){
             var url = "users_manager.php";
-
+            clear_context_menu(event, 'user_context_menu');
             var xhr = new XMLHttpRequest();
             var formData = new FormData();
 
             xhr.open('post', 'user_manager.php');
             var action = <?php echo ACTION_RESTORE ?>;
 
-            formData.append('uid', uid);
+            formData.append('uid', selected_tag);
             formData.append('action', action);
             xhr.responseType = 'json';
             xhr.send(formData);
