@@ -45,7 +45,7 @@
 				<?php
 				while ($row = $res_classes->fetch_assoc()) {
 					?>
-					<a href="class.php?cid=<?php echo $row['cid'] ?>&back=classes.php" data-id="<?php echo $row['cid'] ?>" id="item<?php echo $row['cid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
+					<a href="class.php?cid=<?php echo $row['cid'] ?>&back=classes.php" data-id="<?php echo $row['cid'] ?>" data-active="<?php echo $row['active'] ?>" id="item<?php echo $row['cid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
 						<span class="mdc-list-item__start-detail _bold" role="presentation">
 							<i class="material-icons">people</i>
 						</span>
@@ -67,8 +67,41 @@
 	<p class="spacer"></p>
 </div>
 <?php include_once "../share/footer.php" ?>
+<div id="class_context_menu" class="mdc-elevation--z2">
+    <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" id="open_cls">
+            <i class="material-icons">mode_edit</i>
+            <span>Modifica</span>
+        </a>
+    </div>
+    <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" id="students_cls">
+            <i class="material-icons">people</i>
+            <span>Alunni</span>
+        </a>
+    </div>
+    <div id="deactivate_cls_item" class="item">
+        <a href="#" id="inactive_cls">
+            <i class="material-icons">sync_disabled</i>
+            <span>Disattiva</span>
+        </a>
+    </div>
+    <div id="activate_cls_item" class="item">
+        <a href="#" id="active_cls">
+            <i class="material-icons">sync</i>
+            <span>Attiva</span>
+        </a>
+    </div>
+    <div id="destroy_cls" class="item" style="border-top: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" id="remove_cls">
+            <i class="material-icons">delete</i>
+            <span>Elimina</span>
+        </a>
+    </div>
+</div>
 <script>
     var selected_tag = 0;
+    var is_active = '1';
     document.addEventListener("DOMContentLoaded", function () {
         var heightMain = document.getElementById('main').clientHeight;
         var heightScreen = document.body.clientHeight;
@@ -141,6 +174,7 @@
                     document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                 }
                 event.currentTarget.classList.add('selected_tag');
+                is_active = event.currentTarget.getAttribute("data-active");
                 selected_tag = event.currentTarget.getAttribute("data-id")
             });
             ends[i].addEventListener('contextmenu', function (event) {
@@ -150,10 +184,22 @@
                     document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                 }
                 event.currentTarget.classList.add('selected_tag');
+                is_active = event.currentTarget.getAttribute("data-active");
+                selected_tag = event.currentTarget.getAttribute("data-id");
                 current_target_id = event.currentTarget.getAttribute("data-id");
                 //clear_context_menu(event);
                 show_context_menu(event, null, 150, 'class_context_menu');
-                selected_tag = event.currentTarget.getAttribute("data-id");
+                if (is_active === '1') {
+                    document.getElementById('activate_cls_item').style.display = 'none';
+                    document.getElementById('deactivate_cls_item').style.display = '';
+                    document.getElementById('destroy_cls').style.display = 'none';
+                }
+                else {
+                    document.getElementById('activate_cls_item').style.display = '';
+                    document.getElementById('deactivate_cls_item').style.display = 'none';
+                    document.getElementById('destroy_cls').style.display = '';
+                }
+
             });
             ends[i].addEventListener('dblclick', function (event) {
                 event.preventDefault();
@@ -244,7 +290,9 @@
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     j_alert("alert", xhr.response.message);
-                    document.location.href = 'classes.php?active=1';
+                    window.setTimeout(function(){
+                        document.location.href = 'classes.php?active=1';
+                    }, 2000);
                 }
             } else {
                 console.log('Error: ' + xhr.status);
