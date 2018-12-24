@@ -146,6 +146,9 @@ class SchoolClass
 	}
 
 	public function toString($style) {
+		if ($this->classID == 0) {
+			return 'Alunni senza classe';
+		}
 		$intro = '';
 		if ($style == self::$FIRST_LOWER) {
 			$intro = 'classe ';

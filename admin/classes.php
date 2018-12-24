@@ -20,8 +20,16 @@ if (!isset($_GET['active'])) {
 else {
 	$active = " WHERE active = {$_GET['active']}";
 }
+$sel_noclass_students = "SELECT COUNT(*) FROM rb_users JOIN rb_user_roles ON rb_users.uid=rb_user_roles.uid 
+						WHERE rid = 3 AND  class IS NULL AND active = 1";
 
-$res_classes = $db->executeQuery("SELECT * FROM rb_classes $active ORDER BY section, year");
+try {
+	$res_classes = $db->executeQuery("SELECT * FROM rb_classes $active ORDER BY section, year");
+	$noclass_students = $db->executeCount($sel_noclass_students);
+} catch (MySQLException $ex) {
+
+}
+
 
 $drawer_label = "Classi";
 

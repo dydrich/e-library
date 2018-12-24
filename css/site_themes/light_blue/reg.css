@@ -225,7 +225,7 @@ input.android:focus, select.android:focus, textarea.android:focus {
     color: #000000;
 }
 
-.selected_tag, .selected_element, .selected_tag .mdc-card__subtitle {
+.selected_tag, .selected_tag i, .selected_element, .selected_tag .mdc-card__subtitle {
     background-color: var(--mdc-theme-primary);
     color: white!important;
 }
@@ -263,4 +263,8 @@ select.form_input {
 
 .user_item {
     border-radius: 4px 4px 0 0;
+}
+
+.label_menu_item {
+    color: var(--mdc-theme-secondary);
 }

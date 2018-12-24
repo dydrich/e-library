@@ -14,10 +14,12 @@
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
 	<script type="application/javascript" src="../js/page.js"></script>
 	<style>
-		.app-fab--absolute.app-fab--absolute {
-			position: fixed;
-			/*right: 39rem;*/
-		}
+		div.item:first-of-type {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-top-color: var(--mdc-theme-secondary);
+            border-top: 1px solid var(--mdc-theme-secondary);
+        }
 	</style>
 </head>
 <body>
@@ -53,6 +55,29 @@
 	</div>
 	<p class="spacer"></p>
 </div>
+<div id="student_context_menu" class="mdc-elevation--z2">
+    <div class="label_menu_item" style="border-bottom: 1px solid var(--mdc-theme-secondary)">
+        <span>Assegna a...</span>
+    </div>
+	<?php
+	while ($row = $res_classes->fetch_assoc()) {
+		?>
+        <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+            <a href="#" data-id="<?php echo $row['cid'] ?>" class="destination">
+                <i class="material-icons">people</i>
+                <span><?php echo $row['year'].$row['section'] ?></span>
+            </a>
+        </div>
+		<?php
+	}
+	?>
+    <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+        <a href="#" data-id="0" class="destination">
+            <i class="material-icons">people</i>
+            <span>ASC</span>
+        </a>
+    </div>
+</div>
 <?php include_once "../share/footer.php" ?>
 <script>
     var selected_tag = 0;
@@ -60,23 +85,10 @@
         var heightMain = document.getElementById('main').clientHeight;
         var heightScreen = document.body.clientHeight;
         var usedHeight = heightMain > heightScreen ? heightScreen : heightMain;
-        var btn = document.getElementById('newcls');
-        btn.style.top = (usedHeight)+"px";
-        //btn.style.top = '700px';
-
-        var screenW = screen.width;
-        var bodyW = document.body.clientWidth;
-        var right_offset = (bodyW - document.getElementById('main').clientWidth) / 2;
-        right_offset += document.getElementById('right_col').clientWidth;
-        btn.style.right = (right_offset - 18)+"px";
-
-        btn.addEventListener('click', function () {
-            window.location = 'class.php?cid=0&back=classes.php';
-        });
 
         document.getElementById('left_col').addEventListener('contextmenu', function (ev) {
             ev.preventDefault();
-            clear_context_menu(ev, 'class_context_menu');
+            clear_context_menu(ev, 'student_context_menu');
             if (selected_tag !== 0) {
                 document.getElementById('item'+selected_tag).classList.remove('selected_tag');
             }
@@ -84,7 +96,7 @@
         });
         document.getElementById('content').addEventListener('click', function (ev) {
             ev.preventDefault();
-            clear_context_menu(ev, 'class_context_menu');
+            clear_context_menu(ev, 'student_context_menu');
             if (selected_tag !== 0) {
                 document.getElementById('item'+selected_tag).classList.remove('selected_tag');
             }
@@ -93,34 +105,6 @@
 
         var ends = document.querySelectorAll('.mdc-list-item');
         for (i = 0; i < ends.length; i++) {
-            document.getElementById('open_cls').addEventListener('click', function (ev) {
-                open_in_browser();
-            });
-            document.getElementById('students_cls').addEventListener('click', function (event) {
-                event.preventDefault();
-                list_students(event);
-            });
-            document.getElementById('inactive_cls').addEventListener('click', function (event) {
-                event.preventDefault();
-                deactivate_item(event);
-            });
-            document.getElementById('active_cls').addEventListener('click', function (event) {
-                event.preventDefault();
-                activate_item(event);
-            });
-            document.getElementById('remove_cls').addEventListener('click', function (ev) {
-                j_alert("confirm", "Eliminare la classe?");
-                document.getElementById('okbutton').addEventListener('click', function (event) {
-                    event.preventDefault();
-                    remove_item(ev);
-                });
-                document.getElementById('nobutton').addEventListener('click', function (event) {
-                    event.preventDefault();
-                    fade('overlay', 'out', .1, 0);
-                    fade('confirm', 'out', .3, 0);
-                    return false;
-                })
-            });
             ends[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
@@ -139,90 +123,33 @@
                 event.currentTarget.classList.add('selected_tag');
                 current_target_id = event.currentTarget.getAttribute("data-id");
                 //clear_context_menu(event);
-                show_context_menu(event, null, 150, 'class_context_menu');
+                show_context_menu(event, null, 150, 'student_context_menu');
                 selected_tag = event.currentTarget.getAttribute("data-id");
             });
-            ends[i].addEventListener('dblclick', function (event) {
+        }
+        var links = document.querySelectorAll('.destination');
+        for (i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
-                selected_tag = event.currentTarget.getAttribute("data-id");
-                open_in_browser();
+                cls = event.currentTarget.getAttribute("data-id");
+                move_student(event, selected_tag, cls);
             });
         }
-
-        var list_students = function (event) {
-            document.location.href = 'class_students.php?cid='+selected_tag+'&back=classes.php';
-        };
-
-        var open_in_browser = function () {
-            document.location.href = 'class.php?cid='+selected_tag+'&back=classes.php';
-        };
     });
 
-    var remove_item = function (ev) {
-        fade('confirm', 'out', .1, 0);
+    var move_student = function (ev, student, cls) {
+        clear_context_menu(ev, 'student_context_menu');
+
         var xhr = new XMLHttpRequest();
         var formData = new FormData();
 
-        xhr.open('post', 'class_manager.php');
-        var action = <?php echo ACTION_DELETE ?>;
-
-        formData.append('cid', selected_tag);
-        formData.append('action', action);
-        xhr.responseType = 'json';
-        xhr.send(formData);
-        xhr.onreadystatechange = function () {
-            var DONE = 4; // readyState 4 means the request is done.
-            var OK = 200; // status 200 is a successful return.
-            if (xhr.readyState === DONE) {
-                if (xhr.status === OK) {
-                    j_alert("alert", xhr.response.message);
-                    var item_to_del = document.getElementById('item'+selected_tag);
-                    item_to_del.style.display = 'none';
-                    clear_context_menu(ev, 'class_context_menu');
-                }
-            } else {
-                console.log('Error: ' + xhr.status);
-            }
-        }
-    };
-
-    var deactivate_item = function (ev) {
-        var xhr = new XMLHttpRequest();
-        var formData = new FormData();
-
-        xhr.open('post', 'class_manager.php');
-        var action = <?php echo ACTION_DEACTIVATE ?>;
-
-        formData.append('cid', selected_tag);
-        formData.append('action', action);
-        xhr.responseType = 'json';
-        xhr.send(formData);
-        xhr.onreadystatechange = function () {
-            var DONE = 4; // readyState 4 means the request is done.
-            var OK = 200; // status 200 is a successful return.
-            if (xhr.readyState === DONE) {
-                if (xhr.status === OK) {
-                    j_alert("alert", xhr.response.message);
-                    var item_to_del = document.getElementById('item'+selected_tag);
-                    item_to_del.style.display = 'none';
-                    clear_context_menu(ev, 'class_context_menu');
-                }
-            } else {
-                console.log('Error: ' + xhr.status);
-            }
-        }
-    };
-
-    var activate_item = function (ev) {
-        var xhr = new XMLHttpRequest();
-        var formData = new FormData();
-
-        xhr.open('post', 'class_manager.php');
+        xhr.open('post', 'student_manager.php');
         var action = <?php echo ACTION_RESTORE ?>;
 
-        formData.append('cid', selected_tag);
-        formData.append('action', action);
+        formData.append('cid', cls);
+        formData.append('student', student);
+        formData.append('action', 'move_student');
         xhr.responseType = 'json';
         xhr.send(formData);
         xhr.onreadystatechange = function () {
@@ -231,7 +158,7 @@
             if (xhr.readyState === DONE) {
                 if (xhr.status === OK) {
                     j_alert("alert", xhr.response.message);
-                    document.location.href = 'classes.php?active=1';
+                    document.getElementById('item'+selected_tag).style.display = 'none';
                 }
             } else {
                 console.log('Error: ' + xhr.status);

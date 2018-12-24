@@ -940,7 +940,7 @@ div.dashboard_card_row i {
     min-height: 360px;
 }
 
-#user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order {
+#student_context_menu, #user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order {
     width: 250px;
     display: none;
     background-color: white;
@@ -961,6 +961,19 @@ div.dashboard_card_row i {
     height: 50px;
     display: flex;
     align-items: center;
+    /*border-bottom: 1px solid #c0c0c0;*/
+}
+
+.label_menu_item {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     /*border-bottom: 1px solid #c0c0c0;*/
 }
 
@@ -991,7 +1004,6 @@ div.dashboard_card_row i {
 
 .sub_item {
     padding-left: 50px;
-
 }
 
 .item a {
@@ -1005,17 +1017,17 @@ div.dashboard_card_row i {
     text-decoration: none;
 }
 
-#user_context_menu .item a, #class_context_menu .item a, #yearcontext_menu .item a, #context_menu .item a, #doc_context_menu .item a, #cat_menu .item a {
+#student_context_menu .item a, #user_context_menu .item a, #class_context_menu .item a, #yearcontext_menu .item a, #context_menu .item a, #doc_context_menu .item a, #cat_menu .item a {
     text-decoration: none;
 }
 
-#user_context_menu .item a i, #class_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i {
+#student_context_menu .item a i, #user_context_menu .item a i, #class_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i {
       margin-left: 15px;
       color: rgba(0, 0, 0, .54);
       text-decoration: none;
 }
 
-#user_context_menu .item a span, #class_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span {
+#student_context_menu .item a span, #user_context_menu .item a span, #class_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span {
     margin-left: 15px;
     color: rgba(0, 0, 0, .87);
     text-decoration: none;

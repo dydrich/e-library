@@ -39,7 +39,6 @@
 		<?php include_once "menu.php" ?>
 	</div>
 	<div id="left_col">
-
 		<div id="content" style="width: 90%; margin: auto;">
 			<div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
 				<?php
@@ -55,7 +54,20 @@
 					</a>
 					<?php
 				}
+				if ($noclass_students > 0) {
+				    ?>
+                    <a href="class.php?cid=0&back=classes.php" data-id="0" data-active="1" id="item0" class="mdc-list-item mdc-elevation--z3 tag">
+						<span class="mdc-list-item__start-detail _bold" role="presentation">
+							<i class="material-icons">people</i>
+						</span>
+                        <span class="mdc-list-item__text">
+						  ASC
+						</span>
+                    </a>
+                <?php
+                }
 				?>
+
 			</div>
 		</div>
 	</div>
@@ -68,7 +80,7 @@
 </div>
 <?php include_once "../share/footer.php" ?>
 <div id="class_context_menu" class="mdc-elevation--z2">
-    <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+    <div id="open_cls_item" class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
         <a href="#" id="open_cls">
             <i class="material-icons">mode_edit</i>
             <span>Modifica</span>
@@ -189,17 +201,25 @@
                 current_target_id = event.currentTarget.getAttribute("data-id");
                 //clear_context_menu(event);
                 show_context_menu(event, null, 150, 'class_context_menu');
-                if (is_active === '1') {
+                if (current_target_id === '0') {
                     document.getElementById('activate_cls_item').style.display = 'none';
-                    document.getElementById('deactivate_cls_item').style.display = '';
                     document.getElementById('destroy_cls').style.display = 'none';
+                    document.getElementById('deactivate_cls_item').style.display = 'none';
+                    document.getElementById('open_cls_item').style.display = 'none';
                 }
                 else {
-                    document.getElementById('activate_cls_item').style.display = '';
-                    document.getElementById('deactivate_cls_item').style.display = 'none';
-                    document.getElementById('destroy_cls').style.display = '';
+                    document.getElementById('open_cls_item').style.display = '';
+                    if (is_active === '1') {
+                        document.getElementById('activate_cls_item').style.display = 'none';
+                        document.getElementById('deactivate_cls_item').style.display = '';
+                        document.getElementById('destroy_cls').style.display = 'none';
+                    }
+                    else {
+                        document.getElementById('activate_cls_item').style.display = '';
+                        document.getElementById('deactivate_cls_item').style.display = 'none';
+                        document.getElementById('destroy_cls').style.display = '';
+                    }
                 }
-
             });
             ends[i].addEventListener('dblclick', function (event) {
                 event.preventDefault();
