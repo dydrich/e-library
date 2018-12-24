@@ -32,7 +32,7 @@ class Authenticator {
 		$user = $rb->loadUserFromUid($res_user);
 
 		if (!$user->isActive()) {
-			throw new CustomException("Utente non più attivo", CustomException::$USER_NOT_ACTIVE_CODE);
+			throw new CustomException("Utente non attivo", CustomException::$USER_NOT_ACTIVE_CODE);
 		}
 
 		$update = "UPDATE rb_users SET accesses_count = (rb_users.accesses_count + 1), previous_access = last_access, last_access = NOW() WHERE uid = ".$res_user;
