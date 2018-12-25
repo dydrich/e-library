@@ -13,6 +13,7 @@ class SchoolClass
 	private $section;
 	private $firstYear;
 	private $active;
+	private $personInCharge;
 
 	private $datasource;
 
@@ -122,12 +123,32 @@ class SchoolClass
 		$this->datasource = $datasource;
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getPersonInCharge() {
+		return $this->personInCharge;
+	}
+
+	/**
+	 * @param mixed $personInCharge
+	 */
+	public function setPersonInCharge($personInCharge) {
+		$this->personInCharge = $personInCharge;
+		$this->updatePersonInCharge();
+
+	}
+
 	public function insert() {
 		$this->classID = $this->datasource->executeUpdate("INSERT INTO rb_classes (year, section, start, active) VALUES({$this->grade}, '{$this->section}', $this->firstYear, 1)");
 	}
 
 	public function update() {
 		$this->datasource->executeUpdate("UPDATE rb_classes SET year = {$this->grade}, section = '{$this->section}', start = {$this->firstYear} WHERE cid = {$this->classID}");
+	}
+
+	public function updatePersonInCharge() {
+		$this->datasource->executeUpdate("UPDATE rb_classes SET charged = {$this->personInCharge} WHERE cid = {$this->classID}");
 	}
 
 	public function deactivate() {

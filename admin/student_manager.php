@@ -6,6 +6,7 @@
  * Time: 10.18
  */
 require_once "../lib/start.php";
+require_once "../lib/SchoolClass.php";
 
 check_session(AJAX_CALL);
 
@@ -25,6 +26,23 @@ switch($_POST['action']){
 			else {
 				$db->executeUpdate("UPDATE rb_users SET class = NULL WHERE uid = {$student}");
 			}
+			$commit = $db->executeUpdate("COMMIT");
+		} catch (MySQLException $ex){
+			$db->executeUpdate("ROLLBACK");
+			$response['status'] = "kosql";
+			$response['message'] = "Operazione non completata a causa di un errore SQL";
+			$response['dbg_message'] = $ex->getMessage();
+			$response['query'] = $ex->getQuery();
+			echo json_encode($response);
+			exit;
+		}
+		$msg = "Operazione eseguita";
+		break;
+	case 'charge_student':
+		$class = new SchoolClass($_POST['cid'], null, null, new MySQLDataLoader($db), null, null);
+		try{
+			$begin = $db->executeUpdate("BEGIN");
+			$class->setPersonInCharge($student);
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex){
 			$db->executeUpdate("ROLLBACK");

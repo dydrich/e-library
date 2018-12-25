@@ -3,7 +3,7 @@ html {
 }
 
 :root {
-    --mdc-theme-primary: #303F9F !important;
+    --mdc-theme-primary: #1A237E !important;
     --mdc-theme-secondary: #FF4081 !important;
     --accent-color: #FF4081 !important;
     --main-500: #3F51B5;
@@ -22,7 +22,7 @@ body {
 }
 
 #header {
-    background-color: var(--main-700);
+    background-color: var(--mdc-theme-primary);
 }
 
 #header a {
@@ -53,7 +53,8 @@ body {
 
 #navigation {
     color: #FFFFFF;
-    background-color: var(--main-500);
+    background-color: var(--main-700);
+    height: 50px!important;
 }
 
 #navigation a {
@@ -222,13 +223,17 @@ input.android:focus, select.android:focus, textarea.android:focus {
     color: #000000;
 }
 
-.selected_tag, .selected_element {
+.selected_tag, .selected_tag i, .selected_element, .selected_tag .mdc-card__subtitle {
     background-color: var(--mdc-theme-primary);
     color: white!important;
 }
 
+.selected_tag_parent {
+    background-color: var(--mdc-theme-primary) !important;
+}
+
 .selected_tag span, .selected_element span {
-    color: white;
+    color: white!important;
 }
 
 .selected_doc {
@@ -236,7 +241,7 @@ input.android:focus, select.android:focus, textarea.android:focus {
     color: white!important;
 }
 
-.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i {
+.selected_doc span, .selected_doc section, .selected_doc h1, .selected_doc section.file-subject p, .selected_doc .file-ext i, .selected_tag .mdc-card__horizontal-block .material-icons {
     color: white!important;
 }
 
@@ -248,4 +253,29 @@ input.android:focus, select.android:focus, textarea.android:focus {
 
 select.form_input {
     border-radius: 4px;
+}
+
+.mdc-button--raised {
+    background-color: var(--mdc-theme-secondary)!important;
+}
+
+.user_item {
+    border-radius: 4px 4px 0 0;
+}
+
+.label_menu_item {
+    color: var(--mdc-theme-secondary);
+}
+
+.charged {
+    color: #1E4389!important;
+}
+
+.charged span.mdc-list-item__start-detail i.material-icons {
+    color: #1E4389!important;
+}
+
+.charged span.mdc-list-item__text {
+    color: #1E4389!important;
+    font-weight: bold;
 }
