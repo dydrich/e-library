@@ -24,6 +24,12 @@
         </a>
     </div>
     <div class="menu_link">
+        <a href="<?php echo ROOT_SITE."/admin/" ?>libraries.php">
+            <i class="material-icons" style="">local_library</i>
+            <span>Librerie</span>
+        </a>
+    </div>
+    <div class="menu_link">
         <a href="<?php echo ROOT_SITE."/admin/" ?>utilities.php">
             <i class="material-icons" style="">build</i>
             <span>Utility</span>
