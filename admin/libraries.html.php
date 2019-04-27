@@ -70,7 +70,7 @@
 			<div class="dashboard_card accesses_card_light mdc-elevation--z3 mdc-elevation-transition" style="order: 3">
 				<div class="dashboard_card_body">
 					<div class="dashboard_body_left">
-						<span style="font-size: 1.2em">Armadi</span>
+						<span style="font-size: 1.2em">armadi</span>
 					</div>
 					<div class="dashboard_body_right">
 						<i class="material-icons" style="color: #e57373; font-size: 3.5em">work</i>
@@ -78,7 +78,7 @@
 				</div>
 				<div class="dashboard_card_row accesses_card_dark">
 					<div>
-						<a href="">
+						<a href="bookcases.php">
                             <span>Gestisci </span>
                             <i class="material-icons" style="font-size: 1.2em; position: relative; top: 4px">forward</i>
 						</a>

@@ -18,6 +18,10 @@
 			position: fixed;
 			/*right: 39rem;*/
 		}
+        
+        .mdc-list-item {
+            width: 160px
+        }
 	</style>
 </head>
 <body>
@@ -31,18 +35,52 @@
 		<div id="content" style="width: 90%; margin: auto;">
 			<div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
 				<?php
-				foreach ($bookcases as $idb => $bookcase) {
+				$idx = 0;
+				foreach ($venues as $idv => $venue) {
+					$order = 1;
 					?>
-					<a href="bookcase.php?bid=<?php echo $idb ?>&back=rooms.php" data-id="<?php echo $idb ?>" id="item<?php echo $idb ?>" class="mdc-list-item tag" style="border: 1px solid <?php echo $_SESSION['venues'][$idv]['color'] ?>; border-radius: 4px; margin-left: auto; margin-right: auto; margin-bottom: 20px; margin-top: 0; order: <?php echo $order ?>">
-						<span class="mdc-list-item__start-detail _bold" role="presentation">
-							<i class="material-icons">room</i>
-						</span>
-						<span class="mdc-list-item__text">Armadio <?php echo $idb ?></span>
-					</a>
+                    <div class="venue_container mdc-elevation--z2" style="border: 1px solid <?php echo $_SESSION['venues'][$idv]['color'] ?>">
+                        <div class="venue_container_label" style="background-color: <?php echo $_SESSION['venues'][$idv]['color'] ?>">
+                            <span><?php echo $venue['venue'] ?></span>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; padding-bottom: 15px; padding-top: 35px">
+							<?php
+							foreach ($venue['rooms'] as $room) {
+								?>
+                                <div class="room_container" style="margin-bottom: 10px; border: 1px solid <?php echo $_SESSION['venues'][$idv]['color'] ?>">
+                                    <div class="room_container_label" style="border-bottom: 1px solid <?php echo $_SESSION['venues'][$idv]['color'] ?>">
+                                        <span><?php echo $room['name'] ?></span>
+                                    </div>
+                                    <div>
+                                        <?php
+										foreach ($room['bookcases'] as $k => $bookcase) {
+                                        ?>
+                                        <a href="bookcase.php?bid=<?php echo $k ?>&back=bookcases.php" data-id="<?php echo $k ?>" id="item<?php echo $k ?>" class="mdc-list-item tag" style="margin-left: auto; margin-right: auto; margin-bottom: -10px; margin-top: 0; order: <?php echo $order ?>">
+								            <span class="mdc-list-item__start-detail _bold" role="presentation">
+									        <i class="material-icons">dashboard</i>
+								            </span>
+                                            <span class="mdc-list-item__text">
+                                              <?php echo $bookcase['description'] ?>
+                                            </span>
+                                        </a>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+								<?php
+								$order++;
+							}
+							?>
+                        </div>
+                    </div>
 					<?php
+					$idx++;
+					if ($idx == count($colors)) {
+						$idx = 0;
+					}
 				}
 				?>
-
 			</div>
 		</div>
 	</div>
@@ -54,21 +92,15 @@
 	<p class="spacer"></p>
 </div>
 <?php include_once "../share/footer.php" ?>
-<div id="class_context_menu" class="mdc-elevation--z2">
-	<div id="open_room_item" class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
-		<a href="#" id="open_room">
+<div id="bookcase_context_menu" class="mdc-elevation--z2">
+	<div id="open_item" class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+		<a href="#" id="open_bookcase">
 			<i class="material-icons">mode_edit</i>
 			<span>Modifica</span>
 		</a>
 	</div>
-	<div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
-		<a href="#" id="bookcases_room">
-			<i class="material-icons">work</i>
-			<span>Armadi</span>
-		</a>
-	</div>
-	<div id="destroy_room" class="item" style="">
-		<a href="#" id="remove_room">
+	<div id="destroy_bookcase" class="item" style="">
+		<a href="#" id="remove_bookcase">
 			<i class="material-icons">delete</i>
 			<span>Elimina</span>
 		</a>
@@ -92,7 +124,7 @@
         btn.style.right = (right_offset - 18)+"px";
 
         btn.addEventListener('click', function () {
-            window.location = 'room.php?rid=0&back=rooms.php';
+            window.location = 'bookcase.php?bid=0<?php if(isset($_GET['rid'])) echo "&rid=".$_GET['rid']; ?>&back=bookcases.php';
         });
 
         document.getElementById('left_col').addEventListener('contextmenu', function (ev) {
@@ -103,26 +135,15 @@
             }
             return false;
         });
-        document.getElementById('content').addEventListener('click', function (ev) {
-            ev.preventDefault();
-            clear_context_menu(ev, 'class_context_menu');
-            if (selected_tag !== 0) {
-                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-            }
-            return false;
-        });
-
+        
         var ends = document.querySelectorAll('.mdc-list-item');
         for (i = 0; i < ends.length; i++) {
-            document.getElementById('open_room').addEventListener('click', function (ev) {
+            document.getElementById('open_bookcase').addEventListener('click', function (ev) {
                 open_in_browser();
             });
-            document.getElementById('bookcases_room').addEventListener('click', function (event) {
-                event.preventDefault();
-                list_bookcases(event);
-            });
-            document.getElementById('remove_room').addEventListener('click', function (ev) {
-                j_alert("confirm", "Eliminare la sede?");
+            document.getElementById('remove_bookcase').addEventListener('click', function (ev) {
+                j_alert("confirm", "Eliminare l'armadio?");
+                clear_context_menu(ev, 'bookcase_context_menu');
                 document.getElementById('okbutton').addEventListener('click', function (event) {
                     event.preventDefault();
                     remove_item(ev);
@@ -132,56 +153,34 @@
                     fade('overlay', 'out', .1, 0);
                     fade('confirm', 'out', .3, 0);
                     return false;
-                })
-            });
-            ends[i].addEventListener('click', function (event) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                if (selected_tag !== 0) {
-                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                }
-                event.currentTarget.classList.add('selected_tag');
-                selected_tag = event.currentTarget.getAttribute("data-id")
+                });
             });
             ends[i].addEventListener('contextmenu', function (event) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
-                if (selected_tag !== 0) {
-                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                }
-                event.currentTarget.classList.add('selected_tag');
                 selected_tag = event.currentTarget.getAttribute("data-id");
                 current_target_id = event.currentTarget.getAttribute("data-id");
                 //clear_context_menu(event);
-                show_context_menu(event, null, 150, 'class_context_menu');
+                show_context_menu(event, null, 150, 'bookcase_context_menu');
 
-            });
-            ends[i].addEventListener('dblclick', function (event) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                selected_tag = event.currentTarget.getAttribute("data-id");
-                open_in_browser();
             });
         }
 
-        var list_bookcases = function (event) {
-            document.location.href = 'bookcases.php?bid='+selected_tag+'&back=rooms.php';
-        };
-
         var open_in_browser = function () {
-            document.location.href = 'room.php?rid='+selected_tag+'&back=rooms.php';
+            document.location.href = 'bookcase.php?bid='+selected_tag+'&back=bookcases.php';
         };
     });
 
     var remove_item = function (ev) {
         fade('confirm', 'out', .1, 0);
+        clear_context_menu(ev, 'bookcase_context_menu');
         var xhr = new XMLHttpRequest();
         var formData = new FormData();
 
-        xhr.open('post', 'venue_manager.php');
+        xhr.open('post', 'bookcase_manager.php');
         var action = <?php echo ACTION_DELETE ?>;
 
-        formData.append('vid', selected_tag);
+        formData.append('bid', selected_tag);
         formData.append('action', action);
         xhr.responseType = 'json';
         xhr.send(formData);
@@ -193,7 +192,6 @@
                     j_alert("alert", xhr.response.message);
                     var item_to_del = document.getElementById('item'+selected_tag);
                     item_to_del.style.display = 'none';
-                    clear_context_menu(ev, 'class_context_menu');
                 }
             } else {
                 console.log('Error: ' + xhr.status);
