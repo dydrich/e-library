@@ -15,32 +15,31 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="application/javascript" src="js/page.js"></script>
 </head>
-<body>
-<div id="page" class="" style="margin: auto">
+<body style="display: flex; min-height: 100%; flex-direction: column">
+<div id="page" class="" style="margin: 0">
     <?php include "header.php" ?>
     <section id="main">
         <div id="content" style="order: 2">
             <div id="login" class="mdc-elevation--z2">
-                <div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 10px; width: 75%">
-                    <div style="width: 100%; height: 70px; background-color: var(--main-700); display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
-                        <p class="material_label _bold" style="color: white; font-size: 1.5em; width: 100%; text-align: center">Accedi al sito</p>
+                <div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 60px; width: 75%">
+                    <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
+                        <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Accedi al sito</p>
                     </div>
-                    <form id="signinform" action="do_login.php" method="post" style="width: 100%; margin: auto">
+                    <form id="signinform" action="do_login.php" method="post" style="width: 100%; margin: 10px auto 0 auto">
                         <div class="rb-login-container">
-                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="width: 100%">
-                                <input required autocomplete="off" type="text" id="my-username" name="my-username" class="mdc-text-field__input" style="width: 100%">
-                                <label class="mdc-floating-label" for="my-username">Username</label>
+                            <div style="width: 100%">
+                                <p>Username</p>
+                                <input required autocomplete="off" type="text" id="my-username" name="my-username" class="android" style="width: 100%">
                             </div>
                         </div>
-                        <div class="rb-login-container">
-                            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="width: 100%">
-                                <input required type="password" class="mdc-text-field__input" id="pw" name="pw"
+                        <div class="rb-login-container" style="margin-top: 30px">
+                            <div style="width: 100%">
+                                <p>Password</p>
+                                <input required type="password" class="android" id="pw" name="pw"
                                        autocomplete="current-password" style="width: 100%">
-                                <label for="pw" class="mdc-floating-label">Password</label>
-                                <div class="mdc-text-field__bottom-line"></div>
                             </div>
                         </div>
-                        <button type="button" class="mdc-button mdc-button--raised" id="login_button">
+                        <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 10px">
                             Login
                         </button>
                         <p style="margin-top: 30px; width: 100%; text-align: center" id="pwd_req">

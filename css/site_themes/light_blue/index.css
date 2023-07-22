@@ -7,8 +7,8 @@
 #footer {
     font-size: 1em;
     height: 15px;
-    margin: 10px auto 0 auto;
-    padding-right: 10px;
+    margin: 0;
+    padding-right: 0;
 }
 
 #_header {
@@ -72,10 +72,12 @@ html, body {
     background-color: var(--main-900);
     color: white
     */
-    background-color: white;
-    color: var(--main-900);
-    border-bottom: 1px solid rgba(0, 0, 0, .08);
-    border-top: 1px solid rgba(0, 0, 0, .08);
+    /*background-color: white;
+
+    //border-bottom: 1px solid rgba(0, 0, 0, .08);
+    //border-top: 1px solid rgba(0, 0, 0, .08);
+    */
+    color: white;
 }
 
 #navigation a {
@@ -152,8 +154,6 @@ html {
 body {
     height: 100%;
     margin: 0;
-
-    background-color: rgba(0, 0, 0, .10);
 }
 
 #login_form {
@@ -353,4 +353,49 @@ a {
 .nowcard.logout {
     position: relative;
     margin-top: 40px;
+}
+
+.main_menu_item {
+    width: 60px; text-align: center;
+}
+
+.main_menu_item a {
+    color: rgb(120, 120, 120)!important;
+    font-size: 0.9em;
+    transition: all 0.5s ease-out;
+}
+
+.main_menu_item a:hover {
+    color: rgb(250, 250, 250) !important;
+    font-size: 2em;
+}
+
+.main_menu_item a i{
+    transition: all 0.2s ease-out;
+}
+
+.main_menu_item a i:hover{
+    font-size: 2.1em;
+}
+
+#sc_firstrow {
+    font-size: 1.4em!important;
+    font-family: 'Roboto', sans-serif!important;
+    font-weight: 200;
+
+}
+
+#sc_secondrow {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif!important;
+    font-weight: 200;
+}
+
+#sc_secondrow a {
+    font-size: .9em;
+}
+
+input.android {
+    border-bottom: 1px solid rgb(224, 214, 214);
+    margin-top: 5px;
 }

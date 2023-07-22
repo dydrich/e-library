@@ -18,7 +18,6 @@
 <body>
 <div id="page" class="" style="margin: auto">
 	<?php include "header.php" ?>
-	<?php include "nav.php" ?>
 	<section id="main">
 		<div id="content" style="order: 2">
 			<div id="login" class="mdc-elevation--z2">

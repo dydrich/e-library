@@ -25,6 +25,11 @@
                 <i class="material-icons">cloud_off</i>
             </a>
         </div>
+		<div style="" class="main_menu_item">
+            <a href="do_logout.php">
+                <i class="material-icons">info</i>
+            </a>
+        </div>
 	</div>
     <nav id="navigation">
         <div id="head_label" style="text-align: center">

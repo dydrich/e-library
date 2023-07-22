@@ -3,13 +3,36 @@
 }
 
 #header {
-    height: 40px;
+    height: 360px;
 }
 
 #sc_firstrow {
     width: 50%;
+    height: 250px;
+    margin-top: 20px;
+}
+
+#sc_secondrow {
+    width: 48%;
+    height: 250px;
+    margin-top: 20px;
+}
+
+#login {
+    width: 30%
 }
 
 #screenlab::after {
     content: " - larger";
+}
+
+div.footer_info {
+    width: 30%;
+
+}
+
+
+div.copyright p {
+    width: 30%;
+
 }

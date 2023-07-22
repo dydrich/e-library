@@ -7,7 +7,7 @@
 }
 
 #header {
-    height: 60px;
+    height: 360px;
 }
 
 #navigation {
@@ -16,6 +16,14 @@
 
 #sc_firstrow {
     width: 50%;
+    height: 250px;
+    margin-top: 20px;
+}
+
+#sc_secondrow {
+    width: 46%;
+    height: 250px;
+    margin-top: 20px;
 }
 
 #screenlab::after {
