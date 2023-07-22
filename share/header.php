@@ -1,4 +1,4 @@
-<div id="page" class="" style="margin: auto">
+<div id="page" class="" style="margin: 0">
 <header id="header">
 	<div id="sc_firstrow">
 		<i class="material-icons" style="font-size: 1.6em; position: relative; bottom: 2px">school</i>

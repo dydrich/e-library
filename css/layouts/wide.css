@@ -1,5 +1,10 @@
-#header, #main, #navigation, #footer, #page {
-    width: 1280px;
+#header, #navigation, #footer, #page {
+    width: 100%;
+}
+
+#main {
+    width: 75%;
+    margin: auto;
 }
 
 #footer {
@@ -20,7 +25,7 @@
 }
 
 #_header p {
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 .area {
@@ -50,30 +55,27 @@
 
 
 html, body {
-    font-size: 13px;
+    font-size: 15px;
 }
 
 #header {
-    height: 45px;
+    height: 100px;
 }
 
 #navigation {
     display: flex;
     justify-content: space-between;
+    height: 50px!important;
 }
 
 #right_col {
-    width: 270px;
+    width: 25%;
     float: right;
 }
 
 #left_col {
-    margin-right: 270px;
-}
-
-#left_col, #right_col {
-    padding-bottom: 9999px;
-    margin-bottom: -9999px;
+    width: 75%;
+    float: left;
 }
 
 .dashboard_card {
@@ -96,13 +98,24 @@ html, body {
 }
 
 #sc_firstrow {
-    width: 50%;
+    width: 70%;
+    margin-top: 25px;
+}
+
+#sc_secondrow {
+    margin-top: 25px;
 }
 
 div.menu {
-    width: 270px;
+    width: 100%;
 }
 
 .info_back_card {
     width: 550px;
+}
+
+button.new_user {
+    top: 344px;
+    right: 550px;
+    position: fixed
 }

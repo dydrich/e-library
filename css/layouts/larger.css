@@ -1,22 +1,20 @@
-#header, #main, #navigation, #footer {
-    width: 1600px;
+#header, #navigation, #footer {
+    width: 100%;
+}
+
+#main {
+    width: 50%;
 }
 
 body {
-    background: rgb(30, 67, 137);
-    background: -moz-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -webkit-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -o-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -ms-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: linear-gradient(180deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    
 }
 
 #footer {
     font-size: 1em;
-    height: 15px;
-    margin: 10px auto 0 auto;
+    height: 75px;
+    margin: 0 auto 0 auto;
+    padding-top: 10px;
 }
 
 /*index*/
@@ -37,7 +35,7 @@ body {
 }
 
 html, body {
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .area {
@@ -66,21 +64,23 @@ html, body {
 }
 
 #header {
-    height: 40px;
+    height: 150px;
+}
+
+#navigation {
+    display: flex;
+    justify-content: space-between;
+    height: 75px!important;
 }
 
 #right_col {
-    width: 270px;
+    width: 25%;
     float: right;
 }
 
 #left_col {
-    margin-right: 270px;
-}
-
-#left_col, #right_col {
-    padding-bottom: 9999px;
-    margin-bottom: -9999px;
+    width: 75%;
+    float: left;
 }
 
 .dashboard_card {
@@ -103,17 +103,22 @@ html, body {
 }
 
 #sc_firstrow {
-    width: 50%;
+    width: 70%;
+    margin-top: 40px;
+}
+
+#sc_secondrow {
+    margin-top: 40px;
 }
 
 div.menu {
-    width: 270px;
+    width: 100%x;
+}
+
+div.menu_link {
+    border: 0
 }
 
 .info_back_card {
     width: 550px;
-}
-
-div.content {
-    width: 35%
 }

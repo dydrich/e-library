@@ -53,18 +53,19 @@
 <body>
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
-<div id="main">
-    <div class="mdtabs">
+<div class="mdtabs">
         <div class="mdtab <?php if (!isset($_GET['active'])) echo "mdselected_tab" ?>">
             <a href="users.php"><span>Tutti</span></a>
         </div>
-        <div class="mdtab <?php if ($_GET['active'] == 1) echo "mdselected_tab" ?>">
+        <div class="mdtab <?php if ((isset($_GET['active']) && $_GET['active'] == 1)) echo "mdselected_tab" ?>">
             <a href="users.php?active=1"><span>Attivi</span></a>
         </div>
         <div class="mdtab <?php if (isset($_GET['active']) && $_GET['active'] == 0) echo "mdselected_tab" ?>">
             <a href="users.php?active=0"><span>Non attivi</span></a>
         </div>
     </div>
+<div id="main">
+    
 	<div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
@@ -150,7 +151,9 @@
     document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById('newuser');
         var pos = scroll_button(btn);
-        btn.style.top = (pos[0])+"px";
+        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height;
+        console.log("top="+top);
+        btn.style.top = top+"px";
         btn.style.right = (pos[1])+"px";
         btn.style.position = 'fixed';
 

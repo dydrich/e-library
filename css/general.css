@@ -53,7 +53,6 @@ table {
     font-family: Georgia, serif;
     font-weight: bold;
     text-align: right;
-    margin-top: 10px;
     margin-left: 35px;
     height: 30px
 }
@@ -65,7 +64,6 @@ table {
 #main {
     margin: 0 auto 0 auto;
     overflow: hidden;
-     background-color: #f3f5fa;
 }
 
 #main a {
@@ -74,19 +72,13 @@ table {
 
 #left_col {
     padding-top: 20px;
-    /*background-color: #f3f5fa;*/
     background-color: #FFFFFF;
     min-height: 150px;
 }
 
 #right_col {
     height: 100%;
-    border-radius: 0 0 0 0;
-    /*background-color: #FBFBFB;*/
     background-color: #FFFFFF;
-    -webkit-box-shadow: -1px 1px 2px 0 rgba(50, 50, 50, 0.38);
-    -moz-box-shadow:    -1px 1px 2px 0 rgba(50, 50, 50, 0.38);
-    box-shadow:         -1px 1px 2px 0 rgba(50, 50, 50, 0.38);
 }
 
 div.page {
@@ -335,30 +327,6 @@ fieldset {
     margin: 30px 20px 20px 20px;
     padding-bottom: 5px;
     border-bottom: 1px solid #FFFFFF
-}
-
-/* tabs */
-div.mdtabs {
-    width: 100%;
-    height: 25px;
-    font-size: 12px;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -30px;
-    text-align: center;
-}
-
-div.mdtab {
-    width: 120px;
-    float: left;
-    text-align: center;
-    height: 20px;
-    margin-top: 5px;
-}
-
-div.mdtab a > span {
-    color: #CCCCCC;
 }
 
 .bottom_decoration {
@@ -728,7 +696,6 @@ div.menu {
 div.menu_link {
     width: 100%;
     height: 45px;
-    border: 1px solid rgba(30, 67, 137, .1);
     margin-top: 2px;
     border-radius: 4px;
     position: relative;
