@@ -309,10 +309,8 @@ a {
 
 .nowcard {
     width: 450px;
-    height: 40px;
-    border: 1px solid rgba(215, 215, 215, 1);
+    height: 60px;
     background-color: #FFFFFF;
-    border-radius: 3px;
     padding: 0;
     overflow: hidden;
     margin-bottom: 10px;
@@ -323,13 +321,13 @@ a {
 
 .icon_card {
     position: relative;
-    font-size: 22px;
-    width: 60px;
+    font-size: 25px;
+    width: 50px;
     float: left;
     margin: 0;
     text-align: center;
     border-radius: 0 0 1px 1px;
-    height: 40px;
+    height: 50px;
 }
 
 .icon_card > span {
@@ -339,11 +337,12 @@ a {
 .text_card {
     float: left;
     width: 380px;
-    text-align: center;
+    text-align: left;
     position: relative;
-    bottom: -10px;
+    bottom: -15px;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.4em;
+    padding-left: 15px;
 }
 
 .text_card a {

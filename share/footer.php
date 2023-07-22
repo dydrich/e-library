@@ -1,6 +1,11 @@
 </div>
-<footer id="footer">
-	<span>Copyright <?php echo date("Y") ?> Riccardo Bachis </span>
+<footer id="footer" class="homepage" style="margin-top: auto;">
+	<div class="footer_info">
+		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> - Iglesias | <span style="color: #909090"> Scuola secondaria di primo grado</span>
+	</div>
+	<div class="copyright">
+		<p>Copyright <?php echo date("Y") ?> Riccardo Bachis </p>
+	</div>
 </footer>
 <div id="alert" class="alert_msg" style="display: none">
     <div class="alert_title">
