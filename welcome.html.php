@@ -14,12 +14,12 @@
 	<script type="application/javascript" src="js/page.js"></script>
 </head>
 <body style="display: flex; min-height: 100%; flex-direction: column">
-<div id="page" class="" style="">
+<div id="page" class="hp" style="">
 	<?php include "header.php" ?>
 	<section id="main">
 		<div id="content" style="order: 2">
 			<div id="login" class="mdc-elevation--z2">
-				<div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 60px; width: 75%">
+				<div id="login_form" style="width: 75%">
 					<div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px; margin-bottom: 25px; border-bottom: 1px solid #dddddd">
 						<p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.9em; width: 100%; text-align: center">Welcome back, <?php echo $user->getFullName() ?></p>
 					</div>
@@ -32,7 +32,9 @@
                                     <div class='icon_card' style='background-color: #<?php echo $colors[$role -1] ?>; border-radius: 50%'>
                                         <i class='material-icons' style='color: white; position: relative; top: 9px; left: 2px; font-size: 28px'><?php echo $icons[$role -1] ?></i>
                                     </div>
-                                    <p class='text_card'>Accedi come <?php echo $labels[$role -1] ?></p></div></a>
+                                    <p class='text_card'>Accedi come <?php echo $labels[$role -1] ?></p>
+								</div>
+							</a>
                             <?php
                         }
                         ?>
@@ -42,15 +44,13 @@
                                     <i class='material-icons' style='color: #FFFFFF; position: relative; top: 11px; left: 1px; font-size: 28px'>exit_to_app</i>
                                 </div>
                                 <p class='text_card'>Logout</p></div></a>
-					</div>
+							</div>
 				</div>
 			</div>
-			<p class="spacer"></p>
-			<p class="spacer"></p>
 		</div>
 	</section>
+	<?php include "footer.php" ?>
 </div>
-<?php include "footer.php" ?>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script type="application/javascript">
     (function() {

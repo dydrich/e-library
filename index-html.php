@@ -19,7 +19,7 @@
     <section id="main">
         <div id="content" style="order: 2">
             <div id="login" class="mdc-elevation--z2">
-                <div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 60px; width: 75%">
+                <div id="login_form" style="align-items: center; width: 75%">
                     <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
                         <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Accedi al sito</p>
                     </div>
@@ -40,14 +40,12 @@
                         <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 10px">
                             Login
                         </button>
-                        <p style="margin-top: 30px; width: 100%; text-align: center" id="pwd_req">
+                        <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 10px" id="pwd_req">
                             <a href="#" id="newpwd" class="normal material_link">Password dimenticata?</a>
                         </p>
                     </form>
                 </div>
             </div>
-            <p class="spacer"></p>
-            <p class="spacer"></p>
         </div>
     </section>
     <?php include "footer.php" ?>

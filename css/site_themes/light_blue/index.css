@@ -399,8 +399,8 @@ a {
     margin-top: 40px;
 }
 
-.main_menu_item {
-    width: 60px; text-align: center;
+.main_menu_item { 
+    text-align: center;
 }
 
 .main_menu_item a {

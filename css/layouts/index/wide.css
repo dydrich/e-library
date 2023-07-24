@@ -31,5 +31,14 @@
 }
 
 #login {
-    width: 40%
+    width: 40%;
+    min-height: 340px;
+}
+
+#login_form {
+    margin-top: 50px;
+}
+
+.main_menu_item {
+    width: 60px;
 }

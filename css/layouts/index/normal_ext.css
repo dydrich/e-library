@@ -2,52 +2,54 @@
     width: 100%;
 }
 
-#footer {
+#hfooter {
     font-size: 1em;
-    height: 15px;
-    margin: 10px auto 0 auto;
+    grid-template-rows: 60px 40px;
+    grid-template-columns: 30% 40% 30%;
 }
 
 #header {
-    min-height: 75px;
+    height: 100px;
 }
 
 #sc_firstrow {
-    width: 100%;
+    width: 50%;
+    height: 70px;
+    margin-top: 0;
+    padding-top: 20px
 }
 
 #sc_secondrow {
-    width: 100%;
-    text-align: right;
-    padding-right: 5%;
-    font-size: .75em;
-    position: relative;
-    left: -5%;
-    top: 5%;
+    width: 48%;
+    height: 70px;
+    margin-top: 0;
+    padding-top: 20px
 }
 
 #sc_secondrow i.material-icons {
-    font-size: 18px;
+    font-size: 15px;
 }
 
-#soft_desc {
-    display: none;
-}
-
-#navigation {
-    display: flex;
-    justify-content: space-between;
-}
 
 #screenlab::after {
     content: " - normal-ext";
 }
 
-#menu {
-    width: 100%;
+#navigation {
+    font-size: 15px;
+    height: 30px
 }
 
-div.menu {
-    width: 100%;
+#login {
+    width: 40%;
+    min-height: 280px;
+    font-size: 0.9em;
 }
 
+#login_form {
+    margin-top: 20px;
+}
+
+.main_menu_item {
+    width: 30px;
+}

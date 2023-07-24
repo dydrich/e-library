@@ -25,7 +25,16 @@
 }
 
 #login {
-    width: 30%
+    width: 30%;
+    min-height: 340px;
+}
+
+#login_form {
+    margin-top: 60px;
+}
+
+.main_menu_item {
+    width: 60px;
 }
 
 #screenlab::after {
