@@ -4,11 +4,76 @@
     width: 100%;
 }
 
-#footer {
+/* page grid */
+.hp {
+    display: grid; 
+    grid-template-columns: auto; 
+    grid-template-rows: auto 1fr auto;
+    min-height: 100%;
+}
+
+#header {
+    margin: 0!important;
+    grid-row: 1;
+    grid-column: 1/2;
+    color: white
+}
+
+section#main {
+    display: flex;
+    background-color: #FFFFFF;
+    grid-row: 2;
+    grid-column: 1/2
+}
+
+#hfooter {
     font-size: 1em;
-    height: 15px;
     margin: 0;
     padding-right: 0;
+    grid-row: 3;
+    grid-column: 1/2; 
+    display: grid;
+    grid-template-areas: 
+    "leftspaceInfo info rightspaceInfo"
+    "leftspaceCopy copyright rightspaceCopy";
+}
+
+#leftFspaceI {
+    grid-area: leftspaceInfo;
+}
+
+#rightFspaceI {
+    grid-area: rightspaceInfo;
+}
+
+#leftFspaceC {
+    grid-area: leftspaceCopy;
+    background-color: #1a1a1a;
+}
+
+#rightFspaceC {
+    grid-area: rightspaceCopy;
+    background-color: #1a1a1a;
+}
+
+.footer_info {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: col3-start;
+    grid-area: info;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.copyright {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: col3-start;
+    grid-area: copyright;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 #_header {
@@ -47,19 +112,8 @@
 
 html, body {
     font-size: 13px;
-}
-
-#header {
-    height: 60px;
-    margin: 0!important;
-
-    background-color: var(--main-900);
-    color: white
-
-    /*
-    background-color: white;
-    color: var(--main-900)
-    */
+    height: 100%;
+    margin: 0;
 }
 
 #header a {
@@ -84,14 +138,6 @@ html, body {
     color: var(--main-900);
 }
 
-#main {
-    display: flex;
-    background-color: #FFFFFF;
-}
-
-#page {
-    background-color: #f3f5fa;
-}
 
 #menu {
     width: 0;
@@ -152,8 +198,7 @@ html {
 }
 
 body {
-    height: 100%;
-    margin: 0;
+    
 }
 
 #login_form {

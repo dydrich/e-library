@@ -15,8 +15,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="application/javascript" src="js/page.js"></script>
 </head>
-<body style="display: flex; min-height: 100%; flex-direction: column">
-<div id="page" class="" style="margin: 0">
+<body style="">
+<div id="page" class="hp" style="margin: 0">
     <?php include "header.php" ?>
     <section id="main">
         <div id="content" style="order: 2">
@@ -52,8 +52,8 @@
             <p class="spacer"></p>
         </div>
     </section>
+    <?php include "footer.php" ?>
 </div>
-<?php include "footer.php" ?>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script src="front.js" type="application/javascript"></script>
 <script type="application/javascript">

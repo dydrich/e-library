@@ -6,6 +6,12 @@
     height: 360px;
 }
 
+#hfooter {
+    font-size: 1em;
+    grid-template-rows: 100px 60px;
+    grid-template-columns: 35% 30% 35%;
+}
+
 #sc_firstrow {
     width: 50%;
     height: 250px;
@@ -24,15 +30,4 @@
 
 #screenlab::after {
     content: " - larger";
-}
-
-div.footer_info {
-    width: 30%;
-
-}
-
-
-div.copyright p {
-    width: 30%;
-
 }

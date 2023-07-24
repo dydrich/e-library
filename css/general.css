@@ -106,32 +106,14 @@ footer.homepage {
     padding: 0;
 }
 
-div.footer_info {
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-top: 30px;
-    text-align: left;
-    height: 70px;
-    float: center;
-}
+
 
 div.copyright {
-    height: 70px;
     color: #888888;
     background-color: #1a1a1a;
-    width: 100%;
-    margin-left: auto;
-    float: center;
 }
 
 div.copyright p {
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 15px;
-    padding-left: 15px;
     text-align: left;
 }
 

@@ -1,10 +1,14 @@
-<footer id="footer" class="homepage" style="margin-top: auto;">
-	<div class="footer_info">
-		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> - Iglesias | <span style="color: #909090"> Scuola secondaria di primo grado</span>
+<footer id="hfooter" class="homepage" style="margin-top: auto;">
+	<div id="leftFspaceI"></div>
+	<div class="footer_info" id="footer_info">
+		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> - Iglesias <span style="padding-left: 5px; padding-right: 5px">|</span> <span style="color: #909090"> Scuola secondaria di primo grado</span>
 	</div>
-	<div class="copyright">
+	<div id="rightFspaceI"></div>
+	<div id="leftFspaceC"></div>
+	<div class="copyright" id="copyright">
 		<p>Copyright <?php echo date("Y") ?> Riccardo Bachis </p>
 	</div>
+	<div id="rightFspaceC"></div>
 </footer>
 <div id="alert" class="alert_msg" style="display: none">
 	<div class="alert_title">
