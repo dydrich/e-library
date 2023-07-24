@@ -12,9 +12,7 @@ html, body {
 }
 
 body {
-    display: flex; 
-    min-height: 100%; 
-    flex-direction: column
+
 }
 
 h2 {
@@ -62,7 +60,6 @@ table {
 }
 
 #main {
-    margin: 0 auto 0 auto;
     overflow: hidden;
 }
 
@@ -114,7 +111,7 @@ div.footer_info {
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
-    padding-top: 40px;
+    padding-top: 30px;
     text-align: left;
     height: 70px;
     float: center;
@@ -123,7 +120,6 @@ div.footer_info {
 div.copyright {
     height: 70px;
     color: #888888;
-    margin-top: 20px;
     background-color: #1a1a1a;
     width: 100%;
     margin-left: auto;
@@ -134,7 +130,7 @@ div.copyright p {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 30px;
+    padding-top: 15px;
     padding-left: 15px;
     text-align: left;
 }
@@ -1258,4 +1254,16 @@ iframe {
     justify-content: center;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
+}
+
+/** nuova gestione mdtabs */
+#navigation-with-mdtabs {
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+#navigation-with-mdtabs a {
+    text-decoration: none;
+    font-size: 1em;
+    text-transform: uppercase;
 }

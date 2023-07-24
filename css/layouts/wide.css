@@ -3,14 +3,13 @@
 }
 
 #main {
-    width: 75%;
-    margin: auto;
+
+
 }
 
 #footer {
     font-size: 1em;
     height: 15px;
-    margin: 10px auto 0 auto;
 }
 
 /*index*/
@@ -69,13 +68,11 @@ html, body {
 }
 
 #right_col {
-    width: 25%;
-    float: right;
+
 }
 
 #left_col {
-    width: 75%;
-    float: left;
+
 }
 
 .dashboard_card {

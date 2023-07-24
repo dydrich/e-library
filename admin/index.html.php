@@ -18,6 +18,7 @@
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
+    <div id="left_space"></div>
     <div id="left_col">
         <div style="display: flex; flex-wrap: wrap">
             <div id="cards_container" style="display: flex; width: 64%; flex-wrap: wrap; order: 1; justify-content: center">
@@ -29,7 +30,7 @@
     <div id="right_col">
         <?php include_once "menu.php" ?>
     </div>
-    
+    <div id="right_space"></div>
 <?php include_once "../share/footer.php" ?>
 <script>
     (function() {

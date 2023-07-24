@@ -1,9 +1,9 @@
 </div>
-<footer id="footer" class="homepage" style="margin-top: auto; position: fixed; bottom: 0">
-	<div class="footer_info">
+<footer id="footer" class="homepage" style="margin-top: auto; display: grid; grid-template-columns: auto; grid-template-rows: auto auto">
+	<div class="footer_info" style="grid-row: 1; grid-column: 1/2">
 		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> - Iglesias | <span style="color: #909090"> Scuola secondaria di primo grado</span>
 	</div>
-	<div class="copyright">
+	<div class="copyright" style="grid-row: 2; grid-column: 1/2">
 		<p>Copyright <?php echo date("Y") ?> Riccardo Bachis </p>
 	</div>
 </footer>

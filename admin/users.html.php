@@ -52,23 +52,10 @@
 </head>
 <body>
 <?php include_once "../share/header.php" ?>
-<?php include_once "../share/nav.php" ?>
-<div class="mdtabs">
-        <div class="mdtab <?php if (!isset($_GET['active'])) echo "mdselected_tab" ?>">
-            <a href="users.php"><span>Tutti</span></a>
-        </div>
-        <div class="mdtab <?php if ((isset($_GET['active']) && $_GET['active'] == 1)) echo "mdselected_tab" ?>">
-            <a href="users.php?active=1"><span>Attivi</span></a>
-        </div>
-        <div class="mdtab <?php if (isset($_GET['active']) && $_GET['active'] == 0) echo "mdselected_tab" ?>">
-            <a href="users.php?active=0"><span>Non attivi</span></a>
-        </div>
-    </div>
-<div id="main">
+<?php include_once "../share/nav_users.php" ?>
     
-	<div id="right_col">
-		<?php include_once "menu.php" ?>
-	</div>
+<div id="main" style="margin-top: 40px">
+    <div id="left_space"></div>
 	<div id="left_col">
         <div id="content" style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center">
             <?php
@@ -111,14 +98,18 @@
             ?>
         </div>
 	</div>
-    <button id="newuser" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuovo utente">
+    <div id="right_col">
+		<?php include_once "menu.php" ?>
+	</div>
+    <div id="right_space"></div>
+    <?php include_once "../share/footer.php" ?>
+    <button id="newuser" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuovo utente" style="z-index: 3">
         <span class="mdc-fab__icon">
             create
         </span>
     </button>
-	<p class="spacer"></p>
 </div>
-<?php include_once "../share/footer.php" ?>
+
 <div id="user_context_menu" class="mdc-elevation--z2">
     <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
         <a href="#" id="open_user">
@@ -151,7 +142,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById('newuser');
         var pos = scroll_button(btn);
-        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height;
+        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation-with-mdtabs').getBoundingClientRect().height;
         console.log("top="+top);
         btn.style.top = top+"px";
         btn.style.right = (pos[1])+"px";

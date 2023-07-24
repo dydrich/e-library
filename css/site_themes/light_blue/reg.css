@@ -1,5 +1,6 @@
 html {
-    height: 100%
+    height: 100%;
+    width: 100%;
 }
 
 :root {
@@ -14,14 +15,22 @@ html {
 
 body {
     margin: 0;
-    display: flex; 
-    min-height: 100%; 
-    flex-direction: column;
+    height: 100%;
+    width: 100%; 
     background-color: white;
+}
+
+.page {
+    display: grid; 
+    grid-template-columns: auto; 
+    grid-template-rows: auto auto 1fr auto; 
+    min-height: 100%;
 }
 
 #header {
     background-color: var(--mdc-theme-primary);
+    grid-row: 1; 
+    grid-column: 1/2;
 }
 
 #header a {
@@ -45,6 +54,26 @@ body {
 #main {
     padding: 0;
     background-color: white;
+    grid-row: 3; 
+    grid-column: 1/2; 
+    display: grid; 
+    grid-template-columns: 17% 40% 25% auto
+}
+
+#left_space {
+    grid-column: 1/2;
+}
+
+#right_space {
+    grid-column: 4/5;
+}
+
+#left_col {
+    grid-column: 2/3;
+}
+
+#right_col {
+    grid-column: 3/4;
 }
 
 #right_col a {
@@ -52,13 +81,18 @@ body {
     float: right;
 }
 
-#navigation {
+#navigation, #navigation-with-mdtabs {
     color: #FFFFFF;
     background-color: var(--main-700);
-    margin-bottom: 25px;
+    grid-row: 2; 
+    grid-column: 1/2;
 }
 
 #navigation a {
+    color: white;
+}
+
+#navigation-with-mdtabs a {
     color: white;
 }
 
@@ -109,7 +143,7 @@ div.mdtab {
     float: left;
     text-align: center;
     height: 25px;
-    margin-top: 5px;
+    /** margin-top: 5px; */
 }
 
 div.mdtab a {

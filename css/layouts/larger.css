@@ -3,7 +3,7 @@
 }
 
 #main {
-    width: 50%;
+    
 }
 
 body {
@@ -70,17 +70,15 @@ html, body {
 #navigation {
     display: flex;
     justify-content: space-between;
-    height: 75px!important;
+    height: 80px!important;
 }
 
 #right_col {
-    width: 25%;
-    float: right;
+    
 }
 
 #left_col {
-    width: 75%;
-    float: left;
+    
 }
 
 .dashboard_card {
@@ -121,4 +119,27 @@ div.menu_link {
 
 .info_back_card {
     width: 550px;
+}
+
+/* gestione mdtabs */
+nav#navigation-with-mdtabs {
+    display: grid; 
+    grid-template-rows: 80px 40px; 
+    grid-template-columns: 100%; 
+    padding: 0
+}
+
+div#head_label.with-mdtabs {
+    grid-row: 1; 
+    grid-column: 1/2; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    align-items: center; 
+    padding-left: 15px
+}
+
+div.mdtab {
+    margin-top: 15px;
 }
