@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Admin area</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-    <link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-    <link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-    <link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -51,10 +50,10 @@
     </style>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
-<?php include_once "../share/nav_users.php" ?>
-    
-<div id="main" style="margin-top: 40px">
+<?php include_once "../share/nav_mdtabs.php" ?>
+<div id="main">
     <div id="left_space"></div>
 	<div id="left_col">
         <div id="content" style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center">
@@ -142,10 +141,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         var btn = document.getElementById('newuser');
         var pos = scroll_button(btn);
-        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation-with-mdtabs').getBoundingClientRect().height;
+        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation-with-mdtabs').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
+        var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
         console.log("top="+top);
+        console.log("left="+left);
         btn.style.top = top+"px";
-        btn.style.right = (pos[1])+"px";
+        btn.style.left = left+"px";
         btn.style.position = 'fixed';
 
         document.getElementById('left_col').addEventListener('contextmenu', function (ev) {

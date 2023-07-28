@@ -40,3 +40,18 @@
 #screenlab::after {
     content: " - larger";
 }
+
+#nav_label {
+    font-size: 3em;
+}
+
+#sr_label {
+    font-weight: normal;
+    font-size: 1.5em;
+    color: #888888
+}
+
+
+.material_label {
+    font-size: 1.9em;
+}

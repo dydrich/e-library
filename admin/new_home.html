@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin area</title>
+    <style>
+        #header {
+            display: grid; 
+            width: 100%; 
+            grid-template-rows: 130px 70px; 
+            grid-template-columns: 30% 40% 30%;
+            grid-template-areas: 
+            "l1 info l2"
+        }
+
+        #navigation {
+            grid-row: 2;
+            grid-column: 1/4;
+            display: grid;
+            grid-template-columns: 30% 40% 30%;
+            grid-template-areas: 
+            "n1 void n2"
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div id="page" class="page">
+        <header id="header">
+            <div style="grid-area: l1;">E-library 0.1alpha</div>
+            <div style="grid-area: info; text-align: center;">Area amministrazion::Dashboard</div>
+            <div style="grid-area: l2">Riccardo Bachis</div>
+            <div style="grid-area: n1"></div>
+            <div style="grid-area: void"></div>
+            <div style="grid-area: n2"></div>
+        </header>
+<div id="main"></div>
+</body>
+</html>

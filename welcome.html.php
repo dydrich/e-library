@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/site_themes/light_blue/index.css">
     <link rel="stylesheet" media="screen and (min-width: 2200px)" href="css/layouts/index/larger.css">
     <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="css/layouts/index/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal_ext.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="application/javascript" src="js/page.js"></script>
 </head>
@@ -21,7 +21,7 @@
 			<div id="login" class="mdc-elevation--z2">
 				<div id="login_form" style="width: 75%">
 					<div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px; margin-bottom: 25px; border-bottom: 1px solid #dddddd">
-						<p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.9em; width: 100%; text-align: center">Welcome back, <?php echo $user->getFullName() ?></p>
+						<p class="material_label _bold" style="color: var(--mdc-theme-primary); width: 100%; text-align: center">Welcome back, <?php echo $user->getFullName() ?></p>
 					</div>
 					<div style="text-align: center; margin-top: 10px; margin-left: auto; margin-right: auto">
                         <?php

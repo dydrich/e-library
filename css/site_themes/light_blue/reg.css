@@ -3,6 +3,10 @@ html {
     width: 100%;
 }
 
+a {
+    text-decoration: none;
+}
+
 :root {
     --mdc-theme-primary: #01579B !important;
     --mdc-theme-secondary: #d9473c !important;
@@ -28,27 +32,40 @@ body {
 }
 
 #header {
-    background-color: var(--mdc-theme-primary);
+    /** background-color: var(--mdc-theme-primary); */
     grid-row: 1; 
     grid-column: 1/2;
+    border-bottom: 1px solid #eeeeee;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.35); 
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.35);
 }
 
 #header a {
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
+    color: var(--mdc-theme-primary);
 }
 
 #sc_firstrow {
-    color: rgb(255, 255, 255);
+    /*color: rgb(255, 255, 255);*/
+    color: var(--mdc-theme-primary);
+    font-weight: normal;
 }
 
 #sc_secondrow {
-    width: 25%;
     font-size: 1em;
-    color: rgb(255, 255, 255);
+    /*color: rgb(255, 255, 255);*/
+    color: var(--mdc-theme-primary);
+    font-weight: normal;
 }
 
 #sc_secondrow a {
     font-size: 1.0em;
+    font-weight: normal;
+}
+
+#drawer_label {
+    color: var(--mdc-theme-primary);
+    font-size: 1.5em
 }
 
 #main {
@@ -57,7 +74,6 @@ body {
     grid-row: 3; 
     grid-column: 1/2; 
     display: grid; 
-    grid-template-columns: 17% 40% 25% auto
 }
 
 #left_space {
@@ -70,6 +86,7 @@ body {
 
 #left_col {
     grid-column: 2/3;
+    padding-top: 0;
 }
 
 #right_col {
@@ -81,9 +98,16 @@ body {
     float: right;
 }
 
+#navigation {
+    background-color: white;;
+}
+
+#navigation-with-mdtabs {
+    background-color: #f0f0f0;
+}
+
 #navigation, #navigation-with-mdtabs {
-    color: #FFFFFF;
-    background-color: var(--main-700);
+    color: var(--mdc-theme-primary);
     grid-row: 2; 
     grid-column: 1/2;
 }
@@ -92,8 +116,54 @@ body {
     color: white;
 }
 
-#navigation-with-mdtabs a {
-    color: white;
+#hfooter {
+    font-size: 1em;
+    margin: 0;
+    padding-right: 0;
+    grid-row: 3;
+    grid-column: 1/2; 
+    display: grid;
+    grid-template-areas: 
+    "leftspaceInfo info rightspaceInfo"
+    "leftspaceCopy copyright rightspaceCopy";
+}
+
+#leftFspaceI {
+    grid-area: leftspaceInfo;
+}
+
+#rightFspaceI {
+    grid-area: rightspaceInfo;
+}
+
+#leftFspaceC {
+    grid-area: leftspaceCopy;
+    background-color: #1a1a1a;
+}
+
+#rightFspaceC {
+    grid-area: rightspaceCopy;
+    background-color: #1a1a1a;
+}
+
+.footer_info {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: col3-start;
+    grid-area: info;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.copyright {
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: col3-start;
+    grid-area: copyright;
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
 
 .nav_div {
@@ -127,20 +197,21 @@ fieldset {
 
 /* tabs */
 div.mdtabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
     width: 100%;
     height: 30px;
     font-size: 1em;
     margin: 0;
     padding: 0;
     position: relative;
-    top: -30px;
     text-align: center;
-    background-color: var(--main-700);
 }
 
 div.mdtab {
     width: 120px;
-    float: left;
     text-align: center;
     height: 25px;
     /** margin-top: 5px; */
@@ -151,7 +222,7 @@ div.mdtab a {
 }
 
 div.mdtab a > span {
-    color: #CCCCCC;
+    color: #aaaaaa;
 }
 
 div.mdselected_tab {
@@ -161,6 +232,7 @@ div.mdselected_tab {
 
 div.mdselected_tab a > span {
     color: #000000 !important;
+    font-weight: bold;
 }
 
 .rb_button, .mdc-fab, #newuser {
@@ -169,6 +241,11 @@ div.mdselected_tab a > span {
 
 .rb_bg {
     background-color: #FFF3E0;
+}
+
+.rb-login-container {
+    display: block;
+    width: 100%;
 }
 
 .conf_frame {
@@ -225,6 +302,13 @@ div.mdselected_tab a > span {
 .text_card a {
     color: #0288D1 !important;
     font-weight: 600;
+}
+
+select.android, input.android {
+    border-bottom: 1px solid #cccccc;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
 }
 
 input.android:focus, select.android:focus, textarea.android:focus {
@@ -320,4 +404,8 @@ select.form_input {
 
 .label_menu_item {
     color: var(--mdc-theme-secondary);
+}
+
+div.menu_link a {
+    font-size: 1.2em;
 }

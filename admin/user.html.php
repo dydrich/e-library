@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Admin area</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-    <link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-    <link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-    <link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,400italic,600,600italic,700,700italic,900,200' rel='stylesheet' type='text/css'>
@@ -33,61 +32,70 @@
     </script>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
-<div id="main">
-    <div id="right_col">
-		<?php include_once "menu.php" ?>
-	</div>
-	<div id="left_col">
-        <div style="margin: auto">
-            <form method="post" id="userform"  class="mdc-elevation--z5" style="width: 70%; text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
-                <div style="margin-top: 20px; width: 80%; text-align: center; float: center">
-                    <p style="text-align: left">Username</p>    
-                    <input type="email" required <?php if (isset($_user)) echo 'disabled' ?> style="width: 100%" id="username" name="username" class="android <?php if (isset($_user)) echo 'disabled_link' ?>" value="<?php if (isset($_user)) echo $_user->getUsername() ?>">
-                    <?php if (isset($_user)): ?>
-                    <a href="#" id="unlock" style="float: right; border-bottom: 1px solid rgba(0,0,0,.42);">
-                        <i class="material-icons accent_color" id="ulk_i">edit</i>
-                    </a>
-                    <?php endif; ?>
+    <div id="main">
+        <div id="left_space"></div>
+        <div id="left_col">
+            <div style="margin: auto; width: 80%" class="mdc-elevation--z2">
+                <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
+                    <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Inserisci nuovo utente</p>
                 </div>
-                <div style="margin-top: 30px; margin-left: 25px; width: 80%; text-align: center">
-                    <p style="text-align: left">Nome</p>    
-                    <input type="text" required style="width: 100%" id="firstname" name="firstname" class="android" value="<?php if (isset($_user)) echo $_user->getFirstName() ?>">
-                </div>
-                <div style="margin-top: 30px; margin-left: 25px; width: 80%; text-align: center">
-                    <p style="text-align: left">Cognome</p>    
-                    <input type="text" required style="width: 100%" id="lastname" name="lastname" class="android" value="<?php if (isset($_user)) echo $_user->getLastName() ?>">
-                </div>
-                <select class="mdc-select" name="role">
-                    <?php
-                    while ($row = $res_roles->fetch_assoc()) {
-                        $selected = '';
-                        if (!isset($_user)) {
-                            if ($row['rid'] == User::$STUDENT) {
-                                $selected = "default selected";
+                <form method="post" id="userform" style="width: 100%; text-align: center; margin: auto; padding: 10px; display: flex; flex-direction: column; align-items: center" onsubmit="submit_data()">
+                    <div style="margin-top: 20px; width: 80%; text-align: center;">
+                        <p class="material_label" style="text-align: left">Username</p>    
+                        <input type="email" required <?php if (isset($_user)) echo 'disabled' ?> style="width: 100%" id="username" name="username" class="android <?php if (isset($_user)) echo 'disabled_link' ?>" value="<?php if (isset($_user)) echo $_user->getUsername() ?>">
+                        <?php if (isset($_user)): ?>
+                        <a href="#" id="unlock" style="float: right; border-bottom: 1px solid rgba(0,0,0,.42);">
+                            <i class="material-icons accent_color" id="ulk_i">edit</i>
+                        </a>
+                        <?php endif; ?>
+                    </div>
+                    <div style="margin-top: 30px; width: 80%; text-align: center">
+                        <p class="material_label" style="text-align: left">Nome</p>    
+                        <input type="text" required style="width: 100%" id="firstname" name="firstname" class="android" value="<?php if (isset($_user)) echo $_user->getFirstName() ?>">
+                    </div>
+                    <div style="margin-top: 30px; width: 80%; text-align: center">
+                        <p class="material_label" style="text-align: left">Cognome</p>    
+                        <input type="text" required style="width: 100%" id="lastname" name="lastname" class="android" value="<?php if (isset($_user)) echo $_user->getLastName() ?>">
+                    </div>
+                    <div style="margin-top: 30px; width: 80%; text-align: center">
+                        <p class="material_label" style="text-align: left">Classe</p>    
+                        <select class="mdc-select android" name="role" style="width: 100%">
+                        <?php
+                        while ($row = $res_roles->fetch_assoc()) {
+                            $selected = '';
+                            if (!isset($_user)) {
+                                if ($row['rid'] == User::$STUDENT) {
+                                    $selected = "default selected";
+                                }
                             }
-                        }
-                        else {
-                            if ($_user->getCurrentRole() == $row['rid']) {
-                                $selected = "default selected";
+                            else {
+                                if ($_user->getCurrentRole() == $row['rid']) {
+                                    $selected = "default selected";
+                                }
                             }
+                        ?>
+                        <option <?php echo $selected ?> value="<?php echo $row['rid'] ?>"><?php echo $row['role'] ?></option>
+                        <?php
                         }
-                    ?>
-                    <option <?php echo $selected ?> value="<?php echo $row['rid'] ?>"><?php echo $row['role'] ?></option>
-                    <?php
-                    }
-                    ?>
-                </select>
-                <section class="mdc-card__actions">
-                    <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--raised mdc-card__action" style="margin-left: 16px">Registra</button>
-                </section>
-            </form>
+                        ?>
+                    </select>
+                    </div>
+                    <section class="mdc-card__actions" style="margin-top: 45px; margin-bottom: 30px; text-align: left; width: 80%; padding: 0">
+                        <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--raised mdc-card__action" style="margin-left: 0">Registra</button>
+                    </section>
+                </form>
+            </div>
         </div>
-	</div>
-	<p class="spacer"></p>
-</div>
-<?php include_once "../share/footer.php" ?>
+        <div id="right_col">
+            <?php include_once "menu.php" ?>
+        </div>
+        <div id="right_space"></div>
+        <?php include_once "../share/footer.php" ?>
+    </div>
+
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
     window.mdc.autoInit();
@@ -192,5 +200,6 @@
         }
     });
 </script>
+</div>
 </body>
 </html>

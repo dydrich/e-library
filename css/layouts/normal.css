@@ -3,14 +3,7 @@ html, body {
 }
 
 body {
-    background: rgb(30, 67, 137);
-    background: -moz-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -webkit-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -o-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: -ms-linear-gradient(90deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background: linear-gradient(180deg, rgb(30, 67, 137) 30%, rgb(90, 140, 250) 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    
 }
 
 /*index*/
@@ -55,32 +48,34 @@ body {
     margin-bottom: 20px
 }
 
-#header, #main, #navigation, #footer {
-    width: 1280px;
-}
-
-#footer {
+#hfooter {
     font-size: 1em;
-    height: 15px;
-    margin: 10px auto 0 auto;
+    display: grid;
+    grid-template-rows: 60px 40px;
+    grid-template-columns: 30% 40% 30%;
 }
 
 #right_col {
-    width: 270px;
-    float: right;
+
 }
 
 #left_col {
-    margin-right: 270px;
+
 }
 
 #left_col, #right_col {
-    padding-bottom: 9999px;
-    margin-bottom: -9999px;
+
 }
 
 #header {
-    height: 40px;
+    height: 70px;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "head_sx drawer head_user";
+    align-items: center;
+
 }
 
 .dashboard_card {
@@ -98,7 +93,8 @@ body {
 }
 
 #sc_firstrow {
-    width: 50%;
+    width: 100%;
+    font-size: 1.1em;
 }
 
 div.menu {
@@ -107,4 +103,35 @@ div.menu {
 
 .info_back_card {
     width: 450px;
+}
+
+/* gestione mdtabs */
+nav#navigation-with-mdtabs {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 40px;
+    grid-template-areas: 
+    "nav_sx nav_tabs nav_void";
+    height: 40px!important;
+    padding-top: 0
+}
+
+div#head_label.with-mdtabs {
+    grid-row: 1; 
+    grid-column: 1/2; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    align-items: center; 
+    padding-left: 15px
+}
+
+div.mdtab {
+    /*margin-top: 15px;*/
+}
+
+#main {
+    margin-top: 30px;
+    grid-template-columns: 12% 51% 25% auto;
 }

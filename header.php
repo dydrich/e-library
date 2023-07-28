@@ -5,6 +5,7 @@
 		<span style="position: relative; bottom: 8px; font-size: 0.9em; " id="soft_desc"></span>
 	</div>
 	<div id="sc_secondrow" style="display: flex; justify-content: right">
+    <?php if(isset($_SESSION['__user__'])) { ?>    
         <div style="" class="main_menu_item">
             <a href="#">
                 <i class="material-icons">person</i>
@@ -24,8 +25,16 @@
             <a href="do_logout.php">
                 <i class="material-icons">cloud_off</i>
             </a>
-        </div>
-		<div style="" class="main_menu_item">
+        </div> 
+    <?php 
+    }
+    else {
+    ?>    
+    <div id="sr_label">Istituto comprensivo Nivola - Iglesias</div>
+    <?php
+    }    
+    ?> 
+        <div style="" class="main_menu_item">
             <a href="do_logout.php">
                 <i class="material-icons">info</i>
             </a>

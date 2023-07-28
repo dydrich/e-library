@@ -7,7 +7,13 @@
 }
 
 #header {
-    height: 360px;
+    height: 300px;
+}
+
+#hfooter {
+    font-size: 1em;
+    grid-template-rows: 80px 50px;
+    grid-template-columns: 35% 30% 35%;
 }
 
 #navigation {
@@ -16,13 +22,13 @@
 
 #sc_firstrow {
     width: 50%;
-    height: 250px;
+    height: 190px;
     margin-top: 20px;
 }
 
 #sc_secondrow {
     width: 46%;
-    height: 250px;
+    height: 190px;
     margin-top: 20px;
 }
 
@@ -41,4 +47,12 @@
 
 .main_menu_item {
     width: 60px;
+}
+
+#nav_label {
+    font-size: 2.4em;
+}
+
+.material_label {
+    font-size: 1.7em;
 }

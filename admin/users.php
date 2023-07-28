@@ -44,6 +44,9 @@ try {
 	$ex->redirect();
 }
 
+$nav_link = "users.php";
+$nav_final_letter = "i";
+
 $drawer_label = "Utenti";
 
 include "users.html.php";

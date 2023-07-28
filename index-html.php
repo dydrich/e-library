@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/site_themes/light_blue/index.css">
     <link rel="stylesheet" media="screen and (min-width: 2200px)" href="css/layouts/index/larger.css">
     <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="css/layouts/index/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal_ext.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="application/javascript" src="js/page.js"></script>
 </head>

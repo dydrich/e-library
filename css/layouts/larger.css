@@ -17,6 +17,13 @@ body {
     padding-top: 10px;
 }
 
+#hfooter {
+    font-size: 1em;
+    display: grid;
+    grid-template-rows: 100px 60px;
+    grid-template-columns: 35% 30% 35%;
+}
+
 /*index*/
 #login_form {
     width: 600px;
@@ -64,17 +71,27 @@ html, body {
 }
 
 #header {
-    height: 150px;
+    height: 70px;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "head_sx drawer head_user";
+    align-items: center;
 }
 
 #navigation {
-    display: flex;
-    justify-content: space-between;
-    height: 80px!important;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 40px;
+    grid-template-areas: 
+    "nav_sx nav_tabs nav_void";
+    height: 40px!important;
+    padding-top: 0
 }
 
 #right_col {
-    
+    padding-top: 50px;
 }
 
 #left_col {
@@ -101,12 +118,12 @@ html, body {
 }
 
 #sc_firstrow {
-    width: 70%;
-    margin-top: 40px;
+    margin-top: 0;
+    font-size: 1.2em;
 }
 
 #sc_secondrow {
-    margin-top: 40px;
+    margin-top: 0;
 }
 
 div.menu {
@@ -114,7 +131,8 @@ div.menu {
 }
 
 div.menu_link {
-    border: 0
+    border: 0;
+    height: 70px;;
 }
 
 .info_back_card {
@@ -123,10 +141,13 @@ div.menu_link {
 
 /* gestione mdtabs */
 nav#navigation-with-mdtabs {
-    display: grid; 
-    grid-template-rows: 80px 40px; 
-    grid-template-columns: 100%; 
-    padding: 0
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 40px;
+    grid-template-areas: 
+    "nav_sx nav_tabs nav_void";
+    height: 40px!important;
+    padding-top: 0
 }
 
 div#head_label.with-mdtabs {
@@ -141,5 +162,20 @@ div#head_label.with-mdtabs {
 }
 
 div.mdtab {
-    margin-top: 15px;
+    /*margin-top: 15px;*/
+}
+
+#main {
+    margin-top: 40px;
+    grid-template-columns: 17% 40% 25% auto;
+}
+
+.mdc-list-item {
+    width: 300px;
+    height: 60px;
+    font-size: 1.1em!important;
+}
+
+a.mdc-list-item {
+    font-size: 1.2em;
 }

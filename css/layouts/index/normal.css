@@ -2,56 +2,69 @@
     width: 100%;
 }
 
-#main {
-    display: block;
-}
-
-#footer {
+#hfooter {
     font-size: 1em;
-    height: 15px;
-    margin: 10px auto 0 auto;
+    grid-template-rows: 60px 40px;
+    grid-template-columns: 30% 40% 30%;
 }
 
 #header {
-    min-height: 75px;
+    height: 100px;
 }
 
 #sc_firstrow {
-    width: 100%;
+    width: 50%;
+    height: 60px;
+    margin-top: 0;
+    padding-top: 20px
 }
 
 #sc_secondrow {
-    width: 100%;
-    text-align: right;
-    padding-right: 5%;
-    font-size: .75em;
-    position: relative;
-    left: -5%;
-    top: 5%;
+    width: 48%;
+    height: 60px;
+    margin-top: 0;
+    padding-top: 20px
 }
 
 #sc_secondrow i.material-icons {
-    font-size: 18px;
+    font-size: 15px;
 }
 
-#soft_desc {
-    display: none;
+
+#screenlab::after {
+    content: " - normal-ext";
 }
 
 #navigation {
-    display: flex;
-    justify-content: space-between;
+    font-size: 15px;
+    height: 30px; 
+    padding-top: 0;
 }
 
-#screenlab::after {
-    content: " - normal";
+#login {
+    width: 40%;
+    min-height: 280px;
+    font-size: 0.9em;
 }
 
-#menu {
-    width: 100%;
+#login_form {
+    margin-top: 20px;
 }
 
-div.menu {
-    width: 100%;
+.main_menu_item {
+    width: 30px;
+}
+
+#nav_label {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.text_card {
+    font-size: 1.1em;
+}
+
+.material_label {
+    font-size: 1.4em;
 }
 
