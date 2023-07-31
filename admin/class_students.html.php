@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Gestione classi</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-	<link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-	<link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-	<link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-	<link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -23,37 +22,41 @@
 	</style>
 </head>
 <body>
-<?php include_once "../share/header.php" ?>
-<?php include_once "../share/nav.php" ?>
-<div id="main">
-	<div id="right_col">
+<div id="page" class="page">
+    <?php include_once "../share/header.php" ?>
+    <?php include_once "../share/nav.php" ?>
+    <div id="main">
+        <div id="left_space"></div>
+        <div id="left_col">
+            <div id="content" style="width: 90%; margin: auto;">
+                <div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; align-items: center; flex-direction: row; column-gap: 40px; justify-content: center; margin: auto">
+                    <?php
+                    while ($row = $res_students->fetch_assoc()) {
+                        $url = urlencode('class_students.php?cid='.$_REQUEST['cid']);
+                        $style="student_card";
+                        if($row['rid'] == 2) {
+                            $style = "librarian_card";
+                        }
+                        ?>
+                        <a href="user.php?uid=<?php echo $row['uid'] ?>&back=<?php echo $url ?>" data-id="<?php echo $row['uid'] ?>" id="item<?php echo $row['uid'] ?>" class="_2sides-horiz-card-mini">
+                            <span class="_2sides-horiz-card-mini__icon-cont <?php echo $style ?>" role="presentation">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <span class="_2sides-horiz-card-mini__text">
+                                <?php echo $row['lastname']." ".$row['firstname'] ?>
+                            </span>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
+	    </div>
+    <div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
-	<div id="left_col">
-		<div id="content" style="width: 90%; margin: auto;">
-			<div class="normal _bold" style="font-size: 2em; margin-left: 10px">
-				<?php echo $class->toString(SchoolClass::$FIRST_UPPER) ?>
-			</div>
-			<div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
-				<?php
-				while ($row = $res_students->fetch_assoc()) {
-					$url = urlencode('class_students.php?cid='.$_REQUEST['cid']);
-					?>
-					<a href="user.php?uid=<?php echo $row['uid'] ?>&back=<?php echo $url ?>" data-id="<?php echo $row['uid'] ?>" id="item<?php echo $row['uid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
-						<span class="mdc-list-item__start-detail _bold" role="presentation">
-							<i class="material-icons accent_color">person</i>
-						</span>
-						<span class="mdc-list-item__text">
-						  <?php echo $row['lastname']." ".$row['firstname'] ?>
-						</span>
-					</a>
-					<?php
-				}
-				?>
-			</div>
-		</div>
-	</div>
-	<p class="spacer"></p>
+    <div id="right_space"></div>
+	<?php include_once "../share/footer.php" ?>
 </div>
 <div id="student_context_menu" class="mdc-elevation--z2">
     <div class="label_menu_item" style="border-bottom: 1px solid var(--mdc-theme-secondary)">
@@ -78,7 +81,6 @@
         </a>
     </div>
 </div>
-<?php include_once "../share/footer.php" ?>
 <script>
     var selected_tag = 0;
     document.addEventListener("DOMContentLoaded", function () {
@@ -103,7 +105,7 @@
             return false;
         });
 
-        var ends = document.querySelectorAll('.mdc-list-item');
+        var ends = document.querySelectorAll('._2sides-horiz-card-mini');
         for (i = 0; i < ends.length; i++) {
             ends[i].addEventListener('click', function (event) {
                 event.preventDefault();

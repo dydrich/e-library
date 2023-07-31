@@ -38,52 +38,57 @@
     <div id="main">
         <div id="left_space"></div>
         <div id="left_col">
-            <div style="margin: auto; width: 80%" class="mdc-elevation--z2">
-                <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
-                    <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Inserisci nuovo utente</p>
-                </div>
-                <form method="post" id="userform" style="width: 100%; text-align: center; margin: auto; padding: 10px; display: flex; flex-direction: column; align-items: center" onsubmit="submit_data()">
-                    <div style="margin-top: 20px; width: 80%; text-align: center;">
-                        <p class="material_label" style="text-align: left">Username</p>    
-                        <input type="email" required <?php if (isset($_user)) echo 'disabled' ?> style="width: 100%" id="username" name="username" class="android <?php if (isset($_user)) echo 'disabled_link' ?>" value="<?php if (isset($_user)) echo $_user->getUsername() ?>">
-                        <?php if (isset($_user)): ?>
-                        <a href="#" id="unlock" style="float: right; border-bottom: 1px solid rgba(0,0,0,.42);">
-                            <i class="material-icons accent_color" id="ulk_i">edit</i>
-                        </a>
-                        <?php endif; ?>
+            <div style="margin: auto" class="form_container">
+                <form method="post" id="userform" onsubmit="submit_data()">
+                    <div class="form_row">
+                        <p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Username</p>
+                        <div style="grid-row: 1; grid-column: 2/3">
+                            <input type="email" required <?php if (isset($_user)) echo 'disabled' ?> style="<?php if (!isset($_user)) echo "width: 100%"; ?>%" id="username" name="username" class="input_with_icon android <?php if (isset($_user)) echo 'disabled_link' ?>" value="<?php if (isset($_user)) echo $_user->getUsername() ?>">
+                            <?php if (isset($_user)): ?>
+                            <a href="#" id="unlock" style="float: right; border-bottom: 1px solid rgba(0,0,0,.42);">
+                                <i class="material-icons accent_color" id="ulk_i">edit</i>
+                            </a>
+                            <?php endif; ?>
+                        </div>    
                     </div>
-                    <div style="margin-top: 30px; width: 80%; text-align: center">
-                        <p class="material_label" style="text-align: left">Nome</p>    
-                        <input type="text" required style="width: 100%" id="firstname" name="firstname" class="android" value="<?php if (isset($_user)) echo $_user->getFirstName() ?>">
+                    <div class="form_row">
+                        <p class="material_label" style="text-align: left; grid-row: 2; grid-column: 1/2">Nome</p>  
+                        <div style="grid-row: 2; grid-column: 2/3">  
+                            <input type="text" required style="width: 100%" id="firstname" name="firstname" class="android" value="<?php if (isset($_user)) echo $_user->getFirstName() ?>">
+                        </div>
                     </div>
-                    <div style="margin-top: 30px; width: 80%; text-align: center">
-                        <p class="material_label" style="text-align: left">Cognome</p>    
-                        <input type="text" required style="width: 100%" id="lastname" name="lastname" class="android" value="<?php if (isset($_user)) echo $_user->getLastName() ?>">
+                    <div class="form_row">
+                        <p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Cognome</p>    
+                        <div style="grid-row: 3; grid-column: 2/3">
+                            <input type="text" required style="width: 100%" id="lastname" name="lastname" class="android" value="<?php if (isset($_user)) echo $_user->getLastName() ?>">
+                        </div>
                     </div>
-                    <div style="margin-top: 30px; width: 80%; text-align: center">
-                        <p class="material_label" style="text-align: left">Classe</p>    
-                        <select class="mdc-select android" name="role" style="width: 100%">
-                        <?php
-                        while ($row = $res_roles->fetch_assoc()) {
-                            $selected = '';
-                            if (!isset($_user)) {
-                                if ($row['rid'] == User::$STUDENT) {
-                                    $selected = "default selected";
+                    <div class="form_row">
+                        <p class="material_label" style="text-align: left; grid-row: 4; grid-column: 1/2">Ruolo</p>    
+                        <div style="grid-row: 4; grid-column: 2/3">
+                            <select class="android" name="role" style="width: 100%">
+                            <?php
+                            while ($row = $res_roles->fetch_assoc()) {
+                                $selected = '';
+                                if (!isset($_user)) {
+                                    if ($row['rid'] == User::$STUDENT) {
+                                        $selected = "default selected";
+                                    }
                                 }
-                            }
-                            else {
-                                if ($_user->getCurrentRole() == $row['rid']) {
-                                    $selected = "default selected";
+                                else {
+                                    if ($_user->getCurrentRole() == $row['rid']) {
+                                        $selected = "default selected";
+                                    }
                                 }
+                            ?>
+                            <option <?php echo $selected ?> value="<?php echo $row['rid'] ?>"><?php echo $row['role'] ?></option>
+                            <?php
                             }
-                        ?>
-                        <option <?php echo $selected ?> value="<?php echo $row['rid'] ?>"><?php echo $row['role'] ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
+                            ?>
+                            </select>
+                        </div>
                     </div>
-                    <section class="mdc-card__actions" style="margin-top: 45px; margin-bottom: 30px; text-align: left; width: 80%; padding: 0">
+                    <section class="mdc-card__actions form_row" style="margin-top: 45px; margin-bottom: 30px; text-align: left; padding: 0; grid-row: 5; grid-column: 1/3">
                         <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--raised mdc-card__action" style="margin-left: 0">Registra</button>
                     </section>
                 </form>
@@ -99,7 +104,6 @@
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
     window.mdc.autoInit();
-    mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
 
     function supportFormData() {
         return !! window.FormData;

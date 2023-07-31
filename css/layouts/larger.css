@@ -91,7 +91,7 @@ html, body {
 }
 
 #right_col {
-    padding-top: 50px;
+    padding-top: 0px;
 }
 
 #left_col {
@@ -99,13 +99,30 @@ html, body {
 }
 
 .dashboard_card {
-    width: 250px;
-    height: 120px;
+    width: 320px;
+    height: 150px;
 }
 
-.demo-card {
+.demo-card, ._2sides-horiz-card {
     width: 380px;
-    height: 150px;
+    height: 100px;
+}
+
+._2sides-horiz-card, ._2sides-horiz-card-mini {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+._2sides-horiz-card-mini {
+    width: 250px;
+    height: 80px;
+}
+
+.mdc-card__title {
+    font-size: 1.2em;
+}
+
+.mdc-card__subtitle {
+    font-size: 1em;
 }
 
 .dashboard_longcard {
@@ -167,15 +184,98 @@ div.mdtab {
 
 #main {
     margin-top: 40px;
-    grid-template-columns: 17% 40% 25% auto;
+    grid-template-columns: 17% 50% 15% auto;
 }
 
-.mdc-list-item {
-    width: 300px;
-    height: 60px;
+.mdc-list-item, .square-card {
+    width: 150px;
+    height: 150px;
     font-size: 1.1em!important;
+    border-radius: 20%;
 }
 
 a.mdc-list-item {
+    font-size: 1.2em;
+}
+
+.mdc-list-item__text {
+    font-size: 2.3em;
+    font-weight: bolder;
+}
+
+/** forms */
+.form_title {
+    font-size: 1.2em;
+}
+
+#userform {
+    width: 90%;
+    text-align: center; 
+    margin: auto; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+}
+
+.form_container {
+    width: 60%;
+    padding-top: 30px;
+}
+
+.form_row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+}
+
+.android {
+    min-height: 25px;
+}
+
+.input_with_icon {
+    width: 96%;
+}
+
+._2sides-horiz-card__icon {
+    font-size: 3em!important;
+}
+
+._2sides-horiz-card__text {
+    font-size: 1.5em!important;
+}
+
+._2sides-horiz-card-mini__icon {
+    font-size: 1.5em!important;
+}
+
+._2sides-horiz-card-mini__icon i {
+    font-size: 1.5em!important;
+}
+
+._2sides-horiz-card-mini__text {
+    font-size: 1.2em!important;
+}
+
+.square-card__circle {
+    font-size: 2.3em;
+    font-weight: bold;
+}
+
+.user-card {
+    width: 300px;
+    height: 100px;
+}
+
+.user-card__name {
+    font-size: 1.8em;
+}
+
+.user-card__icon i {
+    font-size: 2.6em;
+}
+
+.user-card__role {
     font-size: 1.2em;
 }

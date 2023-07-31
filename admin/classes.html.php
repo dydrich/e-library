@@ -27,28 +27,22 @@
         <div id="left_space"></div>
         <div id="left_col">
             <div id="content" style="width: 90%; margin: auto;">
-                <div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
+                <div class="mdc-list" style="display: flex; flex-wrap: wrap; align-items: center; flex-direction: row; column-gap: 40px; justify-content: center; margin: auto">
                     <?php
                     while ($row = $res_classes->fetch_assoc()) {
                         ?>
-                        <a href="class.php?cid=<?php echo $row['cid'] ?>&back=classes.php" data-id="<?php echo $row['cid'] ?>" data-active="<?php echo $row['active'] ?>" id="item<?php echo $row['cid'] ?>" class="mdc-list-item mdc-elevation--z3 tag">
-                            <span class="mdc-list-item__start-detail _bold" role="presentation">
-                                <i class="material-icons">people</i>
-                            </span>
-                            <span class="mdc-list-item__text">
-                            <?php echo $row['year'].$row['section'] ?>
+                        <a href="class.php?cid=<?php echo $row['cid'] ?>&back=classes.php" data-id="<?php echo $row['cid'] ?>" data-active="<?php echo $row['active'] ?>" id="item<?php echo $row['cid'] ?>" class="square-card">
+                            <span class="square-card__circle normal_card">
+                                <?php echo $row['year'].$row['section'] ?>
                             </span>
                         </a>
                         <?php
                     }
                     //if ($noclass_students > 0) {
                         ?>
-                        <a href="class.php?cid=0&back=classes.php" data-id="0" data-active="1" id="item0" class="mdc-list-item mdc-elevation--z3 tag">
-                            <span class="mdc-list-item__start-detail _bold" role="presentation">
-                                <i class="material-icons">people</i>
-                            </span>
-                            <span class="mdc-list-item__text">
-                            ASC
+                        <a href="class.php?cid=0&back=classes.php" data-id="0" data-active="1" id="item0" class="square-card">
+                            <span class="square-card__circle accent_card">
+                            SC
                             </span>
                         </a>
                     <?php
@@ -137,7 +131,7 @@
             return false;
         });
 
-        var ends = document.querySelectorAll('.mdc-list-item');
+        var ends = document.querySelectorAll('.square-card');
         for (i = 0; i < ends.length; i++) {
             document.getElementById('open_cls').addEventListener('click', function (ev) {
                 open_in_browser();

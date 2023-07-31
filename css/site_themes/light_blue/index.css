@@ -439,7 +439,14 @@ a {
     font-size: .9em;
 }
 
-input.android {
-    border-bottom: 1px solid rgb(224, 214, 214);
+input.android, select.android, textarea.android {
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    border-bottom: 1px solid #cccccc;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    font-size: 1em;
+    color: rgba(0, 0, 0, .87);
     margin-top: 5px;
 }

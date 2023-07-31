@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Dettaglio anno scolastico</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-	<link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-	<link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-	<link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-	<link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -28,27 +27,33 @@
 	</style>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
+<div id="left_space"></div>
+<div id="left_col">
+    <div class="form_container" style="margin: auto">
+		<form method="post" id="userform"  class="userform" style="margin: auto; padding: 10px" onsubmit="submit_data()">
+			<div class="form_row">
+                <p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Anno</p>	
+                <div style="grid-row: 1; grid-column: 2/3">
+                    <input type="text" required id="year" name="year" class="mdc-text-field__input android" value="<?php if (isset($year)) echo $year['description'] ?>">
+                </div>
+			</div>
+            <section class="mdc-card__actions" style="grid-row: 2; grid-column: 1/3; padding: 0">
+				<button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-top: 45px; margin-bottom: 35px">Registra</button>
+			</section>
+		</form>
+    </div>
+	</div>
 	<div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
-	<div id="left_col">
-		<form method="post" id="userform"  class="mdc-elevation--z5" style="width: 50%; text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
-			<div class="mdc-text-field" data-mdc-auto-init="MDCTextField" style="margin-top: 15px">
-				<input type="text" required id="year" name="year" class="mdc-text-field__input" value="<?php if (isset($year)) echo $year['description'] ?>">
-				<label class="mdc-floating-label" for="year">Anno</label>
-			</div>
-            <section class="mdc-card__actions">
-				<button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-left: 17px; margin-top: 25px">Registra</button>
-			</section>
-		</form>
-
-	</div>
-	<p class="spacer"></p>
+	<div id="right_space"></div>
+	<?php include_once "../share/footer.php" ?>
 </div>
-<?php include_once "../share/footer.php" ?>
+
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
     window.mdc.autoInit();

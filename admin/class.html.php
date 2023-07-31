@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Dettaglio etichetta</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-	<link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-	<link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-	<link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-	<link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -28,68 +27,81 @@
 	</style>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
+<div id="left_space"></div>
+<div id="left_col">
+	<div style="margin: auto"  class="form_container">
+		<form method="post" id="userform"  class="userform" style="text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
+			<div class="form_row">
+				<p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Anno di corso</p>
+				<select class="android" name="year" id="year" style="grid-row: 1; grid-column: 2/3">
+					<?php
+					foreach ($levels as $level) {
+						$selected = '';
+						if (isset($class)) {
+							if ($level == $class->getGrade()) {
+								$selected = "default selected";
+							}
+						}
+						?>
+						<option <?php echo $selected ?> value="<?php echo $level ?>"><?php echo $level ?></option>
+						<?php
+					}
+					?>
+				</select>
+			</div>	
+			<div class="form_row">
+				<p class="material_label" style="text-align: left; grid-row: 2; grid-column: 1/2">Sezione</p>
+				<select class="android" name="section" id="section" style="grid-row: 2; grid-column: 2/3">>
+					<?php
+					foreach ($sections as $section) {
+						$selected = '';
+						if (isset($class)) {
+							if ($section == $class->getSection()) {
+								$selected = "default selected";
+							}
+						}
+						?>
+						<option <?php echo $selected ?> value="<?php echo $section ?>"><?php echo $section ?></option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+			<div class="form_row">
+				<p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Anno</p>
+				<select class="android" name="start" id="start" style="grid-row: 3; grid-column: 2/3">>
+					<?php
+					while($row = $res_years->fetch_assoc()) {
+						$selected = '';
+						if (isset($class)) {
+							if ($row['_id'] == $class->getFirstYear()) {
+								$selected = "default selected";
+							}
+						}
+						?>
+						<option <?php echo $selected ?> value="<?php echo $row['_id'] ?>"><?php echo $row['year'] ?></option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+			<section class="mdc-card__actions" style="margin-top: 45px; margin-bottom: 30px; text-align: left; grid-row: 4; grid-column: 1/3; padding: 0">
+				<button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="">Registra</button>
+			</section>
+		</form>
+			</div>
+	</div>
 	<div id="right_col">
 		<?php include_once "menu.php" ?>
 	</div>
-	<div id="left_col">
-		<form method="post" id="userform"  class="mdc-elevation--z5" style="width: 50%; text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
-            <select class="mdc-select" name="year" id="year">
-				<?php
-				foreach ($levels as $level) {
-                    $selected = '';
-					if (isset($class)) {
-						if ($level == $class->getGrade()) {
-							$selected = "default selected";
-						}
-					}
-					?>
-                    <option <?php echo $selected ?> value="<?php echo $level ?>"><?php echo $level ?></option>
-					<?php
-				}
-				?>
-            </select>
-            <select class="mdc-select" name="section" id="section">
-				<?php
-				foreach ($sections as $section) {
-					$selected = '';
-					if (isset($class)) {
-						if ($section == $class->getSection()) {
-							$selected = "default selected";
-						}
-					}
-					?>
-                    <option <?php echo $selected ?> value="<?php echo $section ?>"><?php echo $section ?></option>
-					<?php
-				}
-				?>
-            </select>
-            <select class="mdc-select" name="start" id="start">
-				<?php
-				while($row = $res_years->fetch_assoc()) {
-					$selected = '';
-					if (isset($class)) {
-						if ($row['_id'] == $class->getFirstYear()) {
-							$selected = "default selected";
-						}
-					}
-					?>
-                    <option <?php echo $selected ?> value="<?php echo $row['_id'] ?>"><?php echo $row['description'] ?></option>
-					<?php
-				}
-				?>
-            </select>
-			<section class="mdc-card__actions">
-				<button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-left: 17px; margin-top: 15px">Registra</button>
-			</section>
-		</form>
-
-	</div>
-	<p class="spacer"></p>
+	<div id="right_space"></div>
+	<?php include_once "../share/footer.php" ?>
 </div>
-<?php include_once "../share/footer.php" ?>
+
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
     window.mdc.autoInit();

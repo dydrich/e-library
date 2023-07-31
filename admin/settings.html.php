@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Configurazione del sito</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-    <link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-    <link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-    <link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -34,16 +33,16 @@
 	</style>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
 <div id="main">
-	<div id="right_col">
-		<?php include_once "menu.php" ?>
-	</div>
+<div id="left_space"></div>
+	
 	<div id="left_col">
-        <div class="mdc-elevation--z5" style="width: 80%; padding: 20px; margin: auto">
-            <table class="admin_table" style="width: 95%; border-collapse: collapse">
-                <tr class="accent_decoration">
+        <div class="form_container" style="width: 80%; padding: 40px; margin: auto">
+            <table class="admin_table" style="width: 95%; border-collapse: collapse; margin: auto">
+                <tr class="accent_decoration" style="height: 50px">
                     <td style="width: 40%; padding-left: 10px; font-weight: bold">Variabile</td>
                     <td style="width: 50%; padding-left: 10px; font-weight: bold">Valore</td>
                     <td style="width: 10%; padding-left: 10px; font-weight: bold"></td>
@@ -54,7 +53,7 @@
 					$k = $row['var'];
 					$v = $row['value'];
 					?>
-                    <tr style="height: 30px" class="bottom_decoration" id="row<?php echo $row['id'] ?>">
+                    <tr style="height: 40px" class="bottom_decoration" id="row<?php echo $row['id'] ?>">
                         <td style="width: 40%; padding-left: 10px" id=""><?php print $k ?></td>
                         <td style="width: 50%; padding-left: 10px;">
                             <p id="<?php print $k ?>" class="edit" data-id="<?php echo $row['id'] ?>" style="margin-top: auto; margin-bottom: auto"><?php echo stripslashes($v) ?></p>
@@ -70,28 +69,30 @@
             </table>
         </div>
 	</div>
+    <div id="right_col">
+		<?php include_once "menu.php" ?>
+	</div>
+    <div id="right_space"></div>
 	<button id="newvalue" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuovo valore">
         <span class="mdc-fab__icon">
             create
         </span>
 	</button>
-	<p class="spacer"></p>
+	<?php include_once "../share/footer.php" ?>
 </div>
-<?php include_once "../share/footer.php" ?>
+
 <script type="application/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var heightMain = document.getElementById('main').clientHeight;
-        var heightScreen = document.body.clientHeight;
-        var usedHeight = heightMain > heightScreen ? heightScreen : heightMain;
         var btn = document.getElementById('newvalue');
-        btn.style.top = (usedHeight)+"px";
-        //btn.style.top = '700px';
-
-        var screenW = screen.width;
-        var bodyW = document.body.clientWidth;
-        var right_offset = (bodyW - document.getElementById('main').clientWidth) / 2;
-        right_offset += document.getElementById('right_col').clientWidth;
-        btn.style.right = (right_offset - 18)+"px";
+        var pos = scroll_button(btn);
+        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
+        var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
+        console.log("top="+top);
+        console.log("left="+left);
+        btn.style.top = top+"px";
+        btn.style.left = left+"px";
+        btn.style.position = 'fixed';
+        btn.style.zIndex = 3;
 
         var ends = document.querySelectorAll('.del');
         for (i = 0; i < ends.length; i++) {

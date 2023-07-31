@@ -1,5 +1,3 @@
-@CHARSET "UTF-8";
-
 * {
     box-sizing: border-box;
 }
@@ -323,11 +321,10 @@ p.spacer {
 
 input.android, select.android, textarea.android {
     background-color: rgb(255, 255, 255);
-    border-radius: 2px;
-    border-width: 0 0 1px 0;
-    border-color: rgba(30, 67, 137, .6);
-    border-style: solid;
-    font-size: 1em
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    font-size: 1em;
+    color: rgba(0, 0, 0, .87);
 }
 
 input.android:focus, select.android:focus, textarea.android:focus {
@@ -793,7 +790,7 @@ div.menu_link i {
 .dashboard_card_body {
     height: 67%;
     margin: 0;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     text-align: center;
     align-items: center;
@@ -1026,7 +1023,7 @@ div.dashboard_card_row i {
 .mdc-list-item {
     width: 180px;
     padding:0 10px;
-    margin: 10px;
+    margin-right: 50px;
     font-size: 1em;
     color: rgba(0, 0, 0, .66);
     font-weight: 500;
@@ -1039,6 +1036,8 @@ a.mdc-list-item {
     display: flex;
     flex-direction: row;
     align-items: center;
+    border: 1px solid var(--mdc-theme-primary);
+    border-radius: 20%;
 }
 
 .mdc-list-item__start-detail {
@@ -1047,17 +1046,6 @@ a.mdc-list-item {
     align-items: center;
 }
 
-.mdc-card__horizontal-block .material-icons{
-
-}
-
-.mdc-card__primary .mdc-card__title {
-    font-size: 1em;
-}
-
-.mdc-card__action .mdc-button--compact, .mdc-card__subtitle {
-    font-size: .875em;
-}
 
 iframe {
     border: 1px solid #E4E7EF;

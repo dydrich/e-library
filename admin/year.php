@@ -26,6 +26,6 @@ else {
 	$year = $res->fetch_assoc();
 }
 
-$res_years = $db->executeQuery("SELECT * FROM rb_years $exclude ORDER BY description");
+$res_years = $db->executeQuery("SELECT * FROM rb_years $exclude ORDER BY year");
 
 include "year.html.php";

@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Caricamento utenti</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-	<link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-	<link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-	<link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-	<link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -21,12 +20,12 @@
 	</style>
 </head>
 <body>
+<div id="page" class="page">
 <?php include_once "../share/header.php" ?>
 <?php include_once "../share/nav.php" ?>
-	<div id="main">
-		<div id="right_col">
-			<?php include_once "menu.php" ?>
-		</div>
+<div id="main">
+<div id="left_space"></div>
+		
 		<div id="left_col">
             <form class="no_border">
                 <div style="width: 75%; margin: 0 auto 0 auto; padding: 15px" class="mdc-elevation--z3">
@@ -68,9 +67,13 @@
                 <input type="hidden" name="server_file" id="server_file" />
             </form>
 		</div>
-		<p class="spacer"></p>
+        <div id="right_col">
+			<?php include_once "menu.php" ?>
+		</div>
+        <div id="right_space"></div>
+		<?php include_once "../share/footer.php" ?>
 	</div>
-	<?php include_once "../share/footer.php" ?>
+	
     <script type="application/javascript">
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('import_button').addEventListener('click', function (event) {

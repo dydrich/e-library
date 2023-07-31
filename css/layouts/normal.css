@@ -135,3 +135,111 @@ div.mdtab {
     margin-top: 30px;
     grid-template-columns: 12% 51% 25% auto;
 }
+
+.demo-card, ._2sides-horiz-card {
+    width: 250px;
+    height: 75px;
+}
+
+._2sides-horiz-card, ._2sides-horiz-card-mini {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+._2sides-horiz-card-mini {
+    width: 160px;
+    height: 48px;
+}
+
+.mdc-list-item, .square-card {
+    width: 90px;
+    height: 90px;
+    font-size: 1.1em!important;
+    border-radius: 20%
+}
+
+a.mdc-list-item {
+    font-size: 1.1em;
+}
+
+.mdc-list-item__text {
+    font-size: 1.9em;
+    font-weight: bolder;
+}
+
+/** forms */
+.form_title {
+    font-size: 1.1em;
+}
+
+#userform {
+    width: 90%;
+    text-align: center; 
+    margin: auto; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap;
+}
+
+.form_container {
+    width: 80%;
+    padding-top: 30px;
+}
+
+.form_row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+}
+
+.android {
+    min-height: 25px;
+}
+
+.input_with_icon {
+    width: 95%;
+}
+
+._2sides-horiz-card__icon {
+    font-size: 3em!important;
+}
+
+._2sides-horiz-card__text {
+    font-size: 1.5em!important;
+}
+
+._2sides-horiz-card-mini__icon {
+    font-size: 1.3em!important;
+}
+
+._2sides-horiz-card-mini__icon i {
+    font-size: 1.3em!important;
+}
+
+._2sides-horiz-card-mini__text {
+    font-size: 1.05em!important;
+}
+
+.square-card__circle {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.user-card {
+    width: 200px;
+    height: 60px;
+}
+
+.user-card__name {
+    font-size: 1.1em;
+}
+
+.user-card__icon i {
+    font-size: 2em;
+}
+
+.user-card__role {
+    font-size: .9em;
+}
