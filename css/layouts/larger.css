@@ -2,14 +2,6 @@
     width: 100%;
 }
 
-#main {
-    
-}
-
-body {
-    
-}
-
 #footer {
     font-size: 1em;
     height: 75px;
@@ -94,10 +86,6 @@ html, body {
     padding-top: 0px;
 }
 
-#left_col {
-    
-}
-
 .dashboard_card {
     width: 320px;
     height: 150px;
@@ -176,10 +164,6 @@ div#head_label.with-mdtabs {
     justify-content: flex-start; 
     align-items: center; 
     padding-left: 15px
-}
-
-div.mdtab {
-    /*margin-top: 15px;*/
 }
 
 #main {
