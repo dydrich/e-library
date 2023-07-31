@@ -2,10 +2,6 @@ html, body {
     font-size: 13px;
 }
 
-body {
-    
-}
-
 /*index*/
 #login_form {
     width: 600px;
@@ -53,18 +49,6 @@ body {
     display: grid;
     grid-template-rows: 60px 40px;
     grid-template-columns: 30% 40% 30%;
-}
-
-#right_col {
-
-}
-
-#left_col {
-
-}
-
-#left_col, #right_col {
-
 }
 
 #header {
@@ -125,10 +109,6 @@ div#head_label.with-mdtabs {
     justify-content: flex-start; 
     align-items: center; 
     padding-left: 15px
-}
-
-div.mdtab {
-    /*margin-top: 15px;*/
 }
 
 #main {
