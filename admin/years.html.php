@@ -97,7 +97,7 @@
             return false;
         });
 
-        var ends = document.querySelectorAll('.mdc-list-item');
+        var ends = document.querySelectorAll('._2sides-horiz-card');
         for (i = 0; i < ends.length; i++) {
             document.getElementById('open_item').addEventListener('click', function (ev) {
                 open_in_browser();

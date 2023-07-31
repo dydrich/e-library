@@ -69,16 +69,15 @@
 					$color = "student_color";
                 }
             ?>
-                <div id="user<?php echo $_user['uid'] ?>" data-id="user<?php echo $_user['uid'] ?>" class="">
-                    <a href="user.php?uid=<?php echo $_user['uid'] ?>&back=users.php" data-id="<?php echo $_user['uid'] ?>" data-active="<?php echo $_user['active'] ?>" id="item<?php echo $_user['uid'] ?>" class="user-card">
+                <a href="user.php?uid=<?php echo $_user['uid'] ?>&back=users.php" data-id="<?php echo $_user['uid'] ?>" data-active="<?php echo $_user['active'] ?>" id="item<?php echo $_user['uid'] ?>">
+                    <div id="user<?php echo $_user['uid'] ?>" data-id="<?php echo $_user['uid'] ?>" data-active="<?php echo $_user['active'] ?>" class="user-card">
                         <div class="user-card__name"><?php echo $_user['lastname']." ".$_user['firstname'] ?></div>
                         <div class="user-card__icon">
                             <i class="material-icons <?php echo $color ?>">people</i>
                         </div>
                         <div class="user-card__role"><?php echo User::getHumanReadableRole($_user['role']) ?></div>
-                    </a>
-
-                </div>
+                    </div>
+                </a>
             <?php
             }
             ?>
@@ -140,8 +139,9 @@
             ev.preventDefault();
             clear_context_menu(ev, 'user_context_menu');
             if (selected_tag !== 0) {
-                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                console.log("Lavoro su user"+selected_tag);
+                //document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                document.getElementById('user'+selected_tag).classList.remove('selected_tag');
             }
             return false;
         });
@@ -149,8 +149,8 @@
             ev.preventDefault();
             clear_context_menu(ev, 'user_context_menu');
             if (selected_tag !== 0) {
-                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                //document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                document.getElementById('user'+selected_tag).classList.remove('selected_tag');
             }
             return false;
         });
@@ -188,25 +188,28 @@
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 if (selected_tag !== 0) {
-                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                    document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                    //document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                    document.getElementById('user'+selected_tag).classList.remove('selected_tag');
                 }
                 selected_tag = event.currentTarget.getAttribute("data-id");
                 is_active = event.currentTarget.getAttribute("data-active");
                 event.currentTarget.classList.add('selected_tag');
-                document.getElementById('user'+selected_tag).classList.add('selected_tag_parent');
+                //document.getElementById('user'+selected_tag).classList.add('selected_tag_parent');
             });
             ends[i].addEventListener('contextmenu', function (event) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 if (selected_tag !== 0) {
-                    document.getElementById('item'+selected_tag).classList.remove('selected_tag');
-                    document.getElementById('user'+selected_tag).classList.remove('selected_tag_parent');
+                    console.log("Tag="+selected_tag);
+                    //document.getElementById('item'+selected_tag).classList.remove('selected_tag_parent');
+                    document.getElementById('user'+selected_tag).classList.remove('selected_tag');
                 }
                 selected_tag = event.currentTarget.getAttribute("data-id");
+                console.log("Tag="+selected_tag);
+                console.log("Item="+event.currentTarget.getAttribute("id"))
                 is_active = event.currentTarget.getAttribute("data-active");
                 event.currentTarget.classList.add('selected_tag');
-                document.getElementById('user'+selected_tag).classList.add('selected_tag_parent');
+                //document.getElementById('item'+selected_tag).classList.add('selected_tag_parent');
                 current_target_id = event.currentTarget.getAttribute("data-id");
                 //clear_context_menu(event);
                 show_context_menu(event, null, 150, 'user_context_menu');
