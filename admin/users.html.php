@@ -56,7 +56,7 @@
 <div id="main">
     <div id="left_space"></div>
 	<div id="left_col">
-        <div id="content" style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center; justify-content: center; column-gap: 30px">
+        <div id="content" style="margin: auto; display: flex; flex-wrap: wrap; align-content: center; align-items: center; justify-content: center; column-gap: 30px; row-gap: 40px">
             <?php
 			foreach ($users as $_user) {
 			    if ($_user['role'] == User::$ADMIN) {
@@ -111,7 +111,7 @@
     <div id="it_restore" class="item">
         <a href="#" id="activate_user">
             <i class="material-icons">sync</i>
-            <span>Ripristina</span>
+            <span>Attiva</span>
         </a>
     </div>
     <div id="it_destroy" class="item" style="border-top: 1px solid rgba(0, 0, 0, .10)">
