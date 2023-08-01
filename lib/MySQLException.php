@@ -36,7 +36,6 @@ class MySQLException extends CustomException{
             $this->errors['data'] = date("d/m/Y");
             $this->errors['ora'] = date("H:i:s");
             $this->errors['ip_address'] = $_SERVER['REMOTE_ADDRESS'];
-            $this->errors['referer'] = $_SERVER['HTTP_REFERER'];
             $this->errors['script'] = $_SERVER['SCRIPT_NAME'];
             $this->errors['query'] = $this->sql;
             $this->errors['error'] = $this->message;
