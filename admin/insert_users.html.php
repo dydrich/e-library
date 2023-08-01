@@ -40,6 +40,7 @@
                         <li style="margin-left: 20px">Cognome (obbligatorio)</li>
                         <li style="margin-left: 20px">Nome (obbligatorio)</li>
                         <li style="margin-left: 20px">Classe (nel formato di 2 lettere, ad esempio 2F, senza spazi)</li>
+                        <li style="margin-left: 20px">Email </li>
                         <li>In ogni riga devono essere presenti tutti i campi.<br />
                     </ul>
                 </div>

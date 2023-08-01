@@ -17,27 +17,17 @@ $errs = "";
 $log_path = "accounts".date("YmdHis").".txt";
 $log = fopen("../upload/{$log_path}", "w");
 foreach($rows as $row){
-	list($cognome, $nome, $cod_classe) = explode(",", $row);
+	list($cognome, $nome, $cod_classe, $email) = explode(",", $row);
 	$sel_id = "SELECT cid FROM rb_classes WHERE year = ".substr($cod_classe, 0, 1)." AND section = '".substr($cod_classe, 1, 1)."'";
 	$id_classe = $db->executeCount($sel_id);
 
-	$names = array();
-	$sel_usernames = "SELECT username FROM rb_users";
-	$res_usernames = $db->executeQuery($sel_usernames);
-	while($row = $res_usernames->fetch_assoc()){
-		$names[] = $row['username'];
-	}
-
-	$username = AccountManager::generateLogin($names, $nome, $cognome);
-	$pwd_chiaro = "";
-	$pwd = AccountManager::generatePassword();
-	$names[] = $username;
-
 	$cognome = $db->real_escape_string($cognome);
 	$nome = $db->real_escape_string($nome);
+	$email = $db->real_escape_string($email);
+	$pwd = AccountManager::generatePassword();
 
-	$insert = "INSERT INTO rb_users (username, password, lastname, firstname, registration_date, class) 
-			  VALUES ('$username', '{$pwd['e']}', '$cognome', '$nome', NOW(), $id_classe)";
+	$insert = "INSERT INTO rb_users (username, password, lastname, firstname, registration_date, class, active) 
+			  VALUES ('$email', '{$pwd['e']}', '$cognome', '$nome', NOW(), $id_classe, 0)";
 	try{
 		$uid = $db->executeUpdate($insert);
 		$db->executeUpdate("INSERT INTO rb_user_roles (uid, rid) VALUES ({$uid}, 3)");
