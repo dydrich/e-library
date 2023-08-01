@@ -28,11 +28,12 @@ try {
 }
 
 $venues = [];
-while ($r = $res_venues->fetch_assoc()) {
-	$venues[$r['vid']] = ['venue' => $r['name'], 'rooms' => []];
+while ($v = $res_venues->fetch_assoc()) {
+	$venues[$v['vid']] = ['venue' => $v['name']];
 }
-while ($rr = $res_rooms->fetch_assoc()) {
-	$venues[$rr['vid']]['rooms'][] = $rr;
+$rooms = [];
+while ($r = $res_rooms->fetch_assoc()) {
+	$rooms[$r['rid']] = ['room' => $r['name'], 'venue' => $venues[$r['vid']]];
 }
 
 $drawer_label = "Locali libreria";

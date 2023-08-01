@@ -7,7 +7,7 @@
  */
 require_once "../lib/start.php";
 
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 
 check_session();
 $user->setCurrentRole(User::$ADMIN);
@@ -27,16 +27,16 @@ try {
 	$res_rooms = $db->executeQuery($sel_rooms);
 	$res_venues = $db->executeQuery($sel_venues);
 } catch (MySQLException $ex) {
-
+	$ex->__toString();
 }
 
 $venues = [];
+$rooms = [];
 while ($r = $res_venues->fetch_assoc()) {
-	$venues[$r['vid']] = ['venue' => $r['name'], 'rooms' => []];
+	$venues[$r['vid']] = ['venue' => $r['name'], 'bookcases' => []];
 }
 while ($rr = $res_rooms->fetch_assoc()) {
-	$rr['bookcases'] = [];
-	$venues[$rr['vid']]['rooms'][$rr['rid']] = $rr;
+	$rooms[$rr['rid']] = $rr['name'];
 }
 
 $sel_bookcases = "SELECT rb_bookcases.*, rb_rooms.vid AS vid FROM rb_bookcases, rb_rooms, rb_venues WHERE rb_rooms.vid = rb_venues.vid AND rid = room $filter ORDER BY room, bid";
@@ -46,14 +46,15 @@ try {
 		$room = $db->executeCount("SELECT name FROM rb_rooms WHERE rid = {$_GET['rid']}");
 	}
 } catch (MySQLException $ex) {
-
+	$ex->__toString();
 }
 
 $bookcases = [];
 if ($res_bookcases->num_rows > 0) {
 	while ($row = $res_bookcases->fetch_assoc()) {
+		$row['room_desc'] = $rooms[$row['room']];
 		$bookcases[] = $row;
-		$venues[$row['vid']]['rooms'][$row['room']]['bookcases'][$row['bid']] = $row;
+		$venues[$row['vid']]['bookcases'][$row['bid']] = $row;
 	}
 }
 

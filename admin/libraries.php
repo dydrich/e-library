@@ -19,6 +19,7 @@ try {
 	$res_venues = $db->executeQuery($sel_venues);
 	$count_venues = $db->executeCount('SELECT COUNT(*) FROM rb_venues');
 	$count_rooms = $db->executeCount('SELECT COUNT(*) FROM rb_rooms');
+	$count_bookcases = $db->executeCount('SELECT COUNT(*) FROM rb_bookcases');
 } catch (MySQLException $ex) {
 
 }

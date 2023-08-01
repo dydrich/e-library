@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Gestione sedi</title>
 	<link rel="stylesheet" href="../css/general.css" type="text/css" media="screen,projection" />
-	<link rel="stylesheet" media="screen and (min-width: 2000px)" href="../css/layouts/larger.css">
-	<link rel="stylesheet" media="screen and (max-width: 1999px) and (min-width: 1300px)" href="../css/layouts/wide.css">
-	<link rel="stylesheet" media="screen and (max-width: 1299px) and (min-width: 1025px)" href="../css/layouts/normal.css">
-	<link rel="stylesheet" media="screen and (max-width: 1024px)" href="../css/layouts/small.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="../css/layouts/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="../css/layouts/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="../css/layouts/normal.css">
 	<link rel="stylesheet" href="../css/site_themes/light_blue/reg.css" type="text/css" media="screen,projection" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
@@ -20,42 +19,52 @@
 		}
 	</style>
 </head>
-<body>
-<?php include_once "../share/header.php" ?>
-<?php include_once "../share/nav.php" ?>
-<div id="main">
-	<div id="right_col">
-		<?php include_once "menu.php" ?>
-	</div>
-	<div id="left_col">
-		<div id="content" style="width: 90%; margin: auto;">
-			<div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: left; margin: auto">
-				<?php
-				foreach ($venues as $venue) {
-					?>
-					<a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<?php echo $venue['vid'] ?>" class="mdc-list-item mdc-elevation--z3 tag" style="border: 1px solid <?php echo $venue['color'] ?>; border-radius: 3px">
-						<span class="mdc-list-item__start-detail _bold" role="presentation">
-							<i class="material-icons">home</i>
+<div id="page" class="page">
+    <?php include_once "../share/header.php" ?>
+    <?php include_once "../share/nav.php" ?>
+    <div id="main">
+        <div id="left_space"></div>
+        <div id="left_col">
+            <div id="content" style="width: 90%; margin: auto;">
+            <div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; justify-content: center; margin: auto; column-gap: 30px; row-gap: 40px">
+                    <?php
+                    foreach ($venues as $venue) {
+                        ?>
+                        <a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<<?php echo $venue['vid'] ?>"  class="_2sides-horiz-card primary_border">
+						<span class="_2sides-horiz-card__icon-cont normal_card" role="presentation">
+							<i class="material-icons _2sides-horiz-card__icon" style="margin: auto">home</i>
 						</span>
-						<span class="mdc-list-item__text">
-						  <?php echo $venue['venue'] ?>
-						</span>
-					</a>
-					<?php
-				}
-				?>
+                        <div>
+                            <span class="_2sides-horiz-card__text primary_color">
+                            <?php echo $venue['venue'] ?>
+                            </span>
+                            <span class="mdc-list-item__end-detail material-icons accent_color" style="display: none; font-size: 1rem; position: relative; right: -7px; top: -7px">
+                                delete
+                            </span>
+                        </div>
+                    </a>
 
-			</div>
-		</div>
+
+
+                        <?php
+                    }
+                    ?>
+
+                </div>
+            </div>
+        </div>
+        <div id="right_col">
+            <?php include_once "menu.php" ?>
+        </div>
+        <div id="right_space"></div>
 	</div>
 	<button id="newcls" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuova sede">
         <span class="mdc-fab__icon">
             create
         </span>
 	</button>
-	<p class="spacer"></p>
+	<?php include_once "../share/footer.php" ?>
 </div>
-<?php include_once "../share/footer.php" ?>
 <div id="class_context_menu" class="mdc-elevation--z2">
 	<div id="open_ven_item" class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
 		<a href="#" id="open_ven">
@@ -80,18 +89,16 @@
     var selected_tag = 0;
     var is_active = '1';
     document.addEventListener("DOMContentLoaded", function () {
-        var heightMain = document.getElementById('main').clientHeight;
-        var heightScreen = document.body.clientHeight;
-        var usedHeight = heightMain > heightScreen ? heightScreen : heightMain;
         var btn = document.getElementById('newcls');
-        btn.style.top = (usedHeight)+"px";
-        //btn.style.top = '700px';
-
-        var screenW = screen.width;
-        var bodyW = document.body.clientWidth;
-        var right_offset = (bodyW - document.getElementById('main').clientWidth) / 2;
-        right_offset += document.getElementById('right_col').clientWidth;
-        btn.style.right = (right_offset - 18)+"px";
+        var pos = scroll_button(btn);
+        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
+        var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
+        console.log("top="+top);
+        console.log("left="+left);
+        btn.style.top = top+"px";
+        btn.style.left = left+"px";
+        btn.style.position = 'fixed';
+        btn.style.zIndex = 3;
 
         btn.addEventListener('click', function () {
             window.location = 'school_complex.php?vid=0&back=scholl_complexes.php';
@@ -114,7 +121,7 @@
             return false;
         });
 
-        var ends = document.querySelectorAll('.mdc-list-item');
+        var ends = document.querySelectorAll('._2sides-horiz-card');
         for (i = 0; i < ends.length; i++) {
             document.getElementById('open_ven').addEventListener('click', function (ev) {
                 open_in_browser();
