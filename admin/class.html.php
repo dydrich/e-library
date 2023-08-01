@@ -33,7 +33,7 @@
 <div id="main">
 <div id="left_space"></div>
 <div id="left_col">
-	<div style="margin: auto"  class="form_container">
+	<div style="margin: auto" class="form_container">
 		<form method="post" id="userform"  class="userform" style="text-align: center; margin: auto; padding: 10px" onsubmit="submit_data()">
 			<div class="form_row">
 				<p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Anno di corso</p>

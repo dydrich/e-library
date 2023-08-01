@@ -29,7 +29,7 @@
         <div id="left_space"></div>
         <div id="left_col">
             <div id="content" style="width: 90%; margin: auto;">
-                <div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; align-items: center; flex-direction: row; column-gap: 40px; justify-content: center; margin: auto">
+                <div class="mdc-list mdc-list" style="display: flex; flex-wrap: wrap; align-items: center; flex-direction: row; column-gap: 40px; justify-content: center; margin: auto; row-gap: 40px">
                     <?php
                     while ($row = $res_students->fetch_assoc()) {
                         $url = urlencode('class_students.php?cid='.$_REQUEST['cid']);
