@@ -1,5 +1,11 @@
+0.6
+Funzione caricamento alunni batch
+Attivazione completa area amministrazione
+Grafica e attivazione area librai attualmente presente
+grafica resa più coerente
+
 0.5.3
-istemazione codice html footer e relative pagine in admin e librarian
+sistemazione codice html footer e relative pagine in admin e librarian
 aggiunta di get_bookcases.php
 modifica codice campi mandactory per formattazione
 
