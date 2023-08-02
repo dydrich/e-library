@@ -26,8 +26,8 @@ foreach($rows as $row){
 	$email = $db->real_escape_string($email);
 	$pwd = AccountManager::generatePassword();
 
-	$insert = "INSERT INTO rb_users (username, password, lastname, firstname, registration_date, class, active) 
-			  VALUES ('$email', '{$pwd['e']}', '$cognome', '$nome', NOW(), $id_classe, 0)";
+	$insert = "INSERT INTO rb_users (username, password, lastname, firstname, registration_date, class, active, email) 
+			  VALUES ('$email', '{$pwd['e']}', '$cognome', '$nome', NOW(), $id_classe, 0, '$email')";
 	try{
 		$uid = $db->executeUpdate($insert);
 		$db->executeUpdate("INSERT INTO rb_user_roles (uid, rid) VALUES ({$uid}, 3)");

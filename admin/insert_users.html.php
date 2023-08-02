@@ -55,11 +55,10 @@
                         <span class="normal">Caricamento:</span>
                         <span id="info_div" style="font-weight: bold; display: none">inseriti <span id="load_info"></span> su <span id="tot"></span> con <span id="err"></span> errori</span>
                     </div>
-                    <div class="_bold">
-                        <span class="normal">Errori</span>
-                        <div id="errors_info" class="attention"></div>
+                    <div class="_bold" style="display: none; margin-top: 15px" id="log_div">
+                        <a href="" id="errors_info" class="attention" download >Scarica file di log</a>
                     </div>
-                    <div style="margin-right: auto; margin-left: auto; margin-top: 15px">
+                    <div style="margin-right: auto; margin-left: auto; margin-top: 25px">
                         <button type="button" class="mdc-button mdc-button--raised" id="import_button">
                             Importa file
                         </button>
@@ -139,6 +138,8 @@
                         document.getElementById('tot').innerText = xhr.response.tot;
                         document.getElementById('err').innerText = xhr.response.ko;
                         document.getElementById('info_div').style.display = '';
+                        document.getElementById('log_div').style.display = '';
+                        document.getElementById('errors_info').setAttribute("href", "../upload/" + xhr.response.log_path);
                         loaded("Operazione conclusa");
                     }
                 } else {
