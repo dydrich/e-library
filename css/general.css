@@ -632,6 +632,7 @@ forms
 */
 .mandatory::after {
     content: " *";
+    color: rgba(200, 6, 6, 1)
 }
 
 .disabled_link {

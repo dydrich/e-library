@@ -57,8 +57,8 @@
                 add
             </span>
         </button>
-        <?php include_once "../share/footer.php" ?>
     </div>
+    <?php include_once "../share/footer.php" ?>
     <div id="book_context_menu" class="mdc-elevation--z2">
         <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
             <a href="#" id="open_book">

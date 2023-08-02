@@ -30,9 +30,8 @@
             <?php include_once "menu.php" ?>
         </div>
         <div id="right_space"></div>
-        <?php include_once "../share/footer.php" ?>
     </div>
-
+    <?php include_once "../share/footer.php" ?>
     <script>
         (function() {
 

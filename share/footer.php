@@ -1,4 +1,3 @@
-</div>
 <footer id="hfooter" class="homepage" style="margin-top: auto;">
 	<div id="leftFspaceI"></div>
 	<div class="footer_info" id="footer_info">
