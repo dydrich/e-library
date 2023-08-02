@@ -9,10 +9,6 @@ html, body {
     background-color: white;
 }
 
-body {
-
-}
-
 h2 {
     font-size: 1.3em;
     font-weight: bold;
@@ -533,10 +529,6 @@ j_alert
     font-size: 1.6em;
     display: flex;
     align-items: center;
-}
-
-.confirm_title i {
-    /*margin-top: 3px;*/
 }
 
 .alert_title span, .error_title span, .confirm_title span {
