@@ -13,6 +13,9 @@ check_role($user, User::$LIBRARIAN);
 
 $_SESSION['area'] = 'librarian';
 
+$sel_books = "SELECT * FROM rb_books ORDER BY author, title";
+$res_books = $db->executeQuery($sel_books);
+
 $drawer_label = "Libreria";
 
 include "library.html.php";

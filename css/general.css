@@ -919,7 +919,7 @@ div.dashboard_card_row i {
     min-height: 360px;
 }
 
-#student_context_menu, #user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order, #bookcase_context_menu {
+#student_context_menu, #user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order, #bookcase_context_menu, #book_context_menu {
     width: 250px;
     display: none;
     background-color: white;

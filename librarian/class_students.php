@@ -14,7 +14,7 @@ check_role($user, User::$LIBRARIAN);
 
 $_SESSION['area'] = 'librarian';
 $class = null;
-$sel_students = "SELECT * FROM rb_users WHERE class = {$_REQUEST['cid']} ORDER BY lastname, firstname";
+$sel_students = "SELECT rb_users.*, rb_user_roles.rid FROM rb_users, rb_user_roles WHERE rb_users.uid = rb_user_roles.uid AND class = {$_REQUEST['cid']} ORDER BY lastname, firstname";
 
 try {
 	$res_students = $db->executeQuery($sel_students);
