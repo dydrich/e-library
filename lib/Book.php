@@ -18,12 +18,13 @@ class Book
 	private $fistEditionYear;
 	private $bookEditionYear;
 	private $pages;
-	private $isBorrowed;
-	private $borrowData = ['id' => null, 'studentID' => null, 'date' => null];
+	private $avalaible;
+	private $loanData = ['id' => null, 'studentID' => null, 'date' => null];
 	private $location = ['school_complex' => null, 'room' => null, 'bookcase' => null, 'shelf' => null];
 	private $reviews;
 	private $history = [['id' => null, 'studentID' => null, 'loan_date' => null, 'return_date' => null]];
 	private $datasource;
+	private $code;
 
 	/**
 	 * Book constructor.
@@ -40,8 +41,9 @@ class Book
 	 * @param $reviews
 	 * @param array $history
 	 * @param $datasource
+	 * @param $code
 	 */
-	public function __construct($bookID, $title, $author, $publisher, $fistEditionYear, $bookEditionYear, $pages, $isBorrowed, array $borrowData, array $location, $reviews, array $history, $datasource) {
+	public function __construct($bookID, $title, $author, $publisher, $fistEditionYear, $bookEditionYear, $pages, array $location, $datasource, $code) {
 		$this->bookID = $bookID;
 		$this->title = $title;
 		$this->author = $author;
@@ -49,12 +51,9 @@ class Book
 		$this->fistEditionYear = $fistEditionYear;
 		$this->bookEditionYear = $bookEditionYear;
 		$this->pages = $pages;
-		$this->isBorrowed = $isBorrowed;
-		$this->borrowData = $borrowData;
 		$this->location = $location;
-		$this->reviews = $reviews;
-		$this->history = $history;
 		$this->datasource = $datasource;
+		$this->code = $code;
 	}
 
 	/**
@@ -158,29 +157,29 @@ class Book
 	/**
 	 * @return mixed
 	 */
-	public function getisBorrowed() {
-		return $this->isBorrowed;
+	public function isAvalaible() {
+		return $this->avalaible;
 	}
 
 	/**
-	 * @param mixed $isBorrowed
+	 * @param mixed $avalaible
 	 */
-	public function setIsBorrowed($isBorrowed) {
-		$this->isBorrowed = $isBorrowed;
+	public function setAvalaible($avalaible) {
+		$this->avalaible = $avalaible;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getBorrowData() {
-		return $this->borrowData;
+	public function getLoanData() {
+		return $this->loanData;
 	}
 
 	/**
-	 * @param array $borrowData
+	 * @param array $loanData
 	 */
-	public function setBorrowData($borrowData) {
-		$this->borrowData = $borrowData;
+	public function setLoanData($loanData) {
+		$this->loanData = $loanData;
 	}
 
 	/**
@@ -237,6 +236,24 @@ class Book
 	 */
 	public function setDatasource(\MySQLDataLoader $datasource) {
 		$this->datasource = $datasource;
+	}
+	
+	public function insert() {
+		$sql = "INSERT INTO rb_books (author, title, publisher, school_complex, room, bookcase, shelf)
+				VALUES ('{$this->author}', '{$this->title}', '{$this->publisher}', {$this->location['school_complex']}, {$this->location['room']}, {$this->location['bookcase']}, {$this->location['shelf']}) ";
+		$this->bookID = $this->datasource->executeUpdate($sql);
+	}
+	
+	public function update() {
+		$sql = "UPDATE rb_books SET author = '{$this->author}', title = '{$this->title}', publisher = '{$this->publisher}', school_complex = {$this->location['school_complex']},
+				room = {$this->location['room']}, shelf = {$this->location['shelf']}
+				WHERE bid = {$this->bookID}";
+		$this->datasource->executeUpdate($sql);
+	}
+	
+	public function delete() {
+		$sql = "DELETE FROM rb_books WHERE bid = {$this->bookID}";
+		$this->datasource->executeUpdate($sql);
 	}
 
 }
