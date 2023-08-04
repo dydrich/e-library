@@ -37,12 +37,18 @@
                     <div class="form_container" style="margin: auto">
                         <form method="post" id="userform"  class="userform" style="margin: auto; padding: 10px" onsubmit="submit_data()">
                             <div class="form_row" id="lnk_field">
-                                <p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Nome sede</p>	
+                                <p class="material_label mandatory" style="text-align: left; grid-row: 1; grid-column: 1/2">Nome sede</p>	
                                 <div style="grid-row: 1; grid-column: 2/3">
                                     <input type="text" required id="venue" name="venue" class="android" style="width: 100%" value="<?php if ($res != null) echo $res['name'] ?>">
                                 </div>
                             </div>
-                            <section class="mdc-card__actions" style="grid-row: 2; grid-column: 1/3; padding: 0">
+                            <div class="form_row" id="lnk_field">
+                                <p class="material_label mandatory" style="text-align: left; grid-row: 2; grid-column: 1/2">Codice sede</p>	
+                                <div style="grid-row: 2; grid-column: 2/3">
+                                    <input type="text" required id="code" name="code" class="android" maxlength="3" style="width: 100%" value="<?php if ($res != null) echo $res['code'] ?>">
+                                </div>
+                            </div>
+                            <section class="mdc-card__actions" style="grid-row: 3; grid-column: 1/3; padding: 0">
                                 <button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-top: 45px; margin-bottom: 35px">Registra</button>
                             </section>
                         </form>
@@ -61,6 +67,9 @@
                 var vid = <?php if (isset($_REQUEST['vid'])) echo $_REQUEST['vid']; else echo 0 ?>;
 
                 var submit_data = function (event) {
+                    if(!validate_form()) {
+                        return;
+                    }
                     event.preventDefault();
                     var xhr = new XMLHttpRequest();
                     var form = document.getElementById('userform');
@@ -68,7 +77,7 @@
 
                     xhr.open('post', 'venue_manager.php');
                     var action = <?php if ($_REQUEST['vid'] != 0) echo ACTION_UPDATE; else echo ACTION_INSERT ?>;
-
+                    console.log(action);
                     formData.append('vid', vid);
                     formData.append('action', action);
                     xhr.responseType = 'json';
@@ -88,6 +97,31 @@
                         }
                     }
                 };
+
+                var validate_form = function() {
+                    var go = true;
+                    var msg = new Object();
+                    msg.data_field = "validation_data";
+                    msg.validation_message = "";
+                    msg.focus = "venue";
+                    var index = 1;
+                    if(document.getElementById('venue').value == ""){
+                        msg.validation_message += "<br />"+index+". Nome del plesso non presente";
+                        go = false;
+                        index++;
+			        }
+                    if(document.getElementById('code').value == ""){
+                        msg.validation_message += "<br />"+index+". Codice del plesso non presente";
+                        go = false;
+			        }
+                    msg.message = "Errori nel form";
+                    if(!go){
+                        j_alert("information", msg);
+                        return false;
+                    }
+
+                    return true;
+                }
 
                 document.addEventListener("DOMContentLoaded", function () {
                     var screenW = screen.width;

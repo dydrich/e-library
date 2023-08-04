@@ -10,13 +10,15 @@
 	</div>
 	<div id="rightFspaceC"></div>
 </footer>
+<!-- alert window -->
 <div id="alert" class="alert_msg" style="display: none">
-    <div class="alert_title">
-        <i class="material-icons">thumb_up</i>
-        <span>Successo</span>
+    <div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
+        <i class="material-icons primary_color">thumb_up</i>
     </div>
-    <p id="alertmessage" class="alertmessage"></p>
+    <div id="alert_title" style="grid-row: 1; grid-column: 2/3">Successo</div>
+    <p id="alertmessage" class="alertmessage" style="grid-row: 2; grid-column: 1/3"></p>
 </div>
+
 <div id="error" class="error_msg" style="display: none">
     <div class="error_title">
         <i class="material-icons">warning</i>
@@ -24,20 +26,18 @@
     </div>
     <p class="errormessage" id="errormessage"></p>
 </div>
+<!-- information window -->
 <div id="information" class="confirm_msg" style="display: none">
-    <div class="confirm_title">
-        <i class="material-icons">info</i>
-        <span></span>
+    <div class="confirm_title" style="grid-row: 1; grid-column: 1/2">
+        <i class="material-icons accent_color">info</i>
     </div>
-    <p class="confirmmessage" id="infomessage"></p>
-    <div class="confirmbuttons">
-        <a href="#" id="close_button">
-            <div class="alert_button material_dark_bg">
-                <span class="material_link">Chiudi</span>
-            </div>
-        </a>
+    <div id="message_title" style="grid-row: 1; grid-column: 2/3"></div>
+    <p class="confirmmessage" id="infomessage" style="grid-row: 2; grid-column: 1/3"></p>
+    <div class="confirmbuttons" style="grid-row: 3; grid-column: 1/3">
+        <button id="close_button" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" >Chiudi</button>
     </div>
 </div>
+
 <div id='background' class="alert_msg" style='display: none'>
     <div class="alert_title">
         <i class="fa fa-spin fa-circle-o-notch"></i>
@@ -46,25 +46,20 @@
     <p id="background_msg" class="alertmessage"></p>
 </div>
 <div class="overlay" id="overlay" style="display:none;"></div>
+
+<!-- confirm -->
 <div id="confirm" class="confirm_msg" style="display: none">
-    <div class="confirm_title">
-        <i class="material-icons">help</i>
-        <span>Conferma</span>
+    <div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
+        <i class="material-icons warning_color">help</i>
     </div>
-    <p class="confirmmessage" id="confirmmessage"></p>
-    <div class="confirmbuttons">
-        <a href="#" id="okbutton">
-            <div class="alert_button material_dark_bg">
-                <span class="material_link">OK</span>
-            </div>
-        </a>
-        <a href="#" id="nobutton">
-            <div class="alert_button material_dark_bg" style="margin-left: 20px">
-                <span>NO</span>
-            </div>
-        </a>
+    <div id="alert_title" style="grid-row: 1; grid-column: 2/3">Conferma</div>
+    <p class="confirmmessage" id="confirmmessage" style="grid-row: 2; grid-column: 1/3"></p>
+    <div class="confirmbuttons"  style="grid-row: 3; grid-column: 1/3; display: flex; flex-direction: rows; flex-shrink: 0; column-gap: 30px">
+        <button id="okbutton" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="width: 40px">OK</button>
+        <button id="nobutton" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="width: 40px">NO</button>
     </div>
 </div>
+
 <div id="context_menu" class="mdc-elevation--z2">
     <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
         <a href="#" id="open_item">

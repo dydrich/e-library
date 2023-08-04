@@ -31,7 +31,7 @@
                         <?php
                         foreach ($venues as $venue) {
                             ?>
-                            <a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<<?php echo $venue['vid'] ?>"  class="_2sides-horiz-card primary_border">
+                            <a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<?php echo $venue['vid'] ?>"  class="_2sides-horiz-card primary_border">
                                 <span class="_2sides-horiz-card__icon-cont normal_card" role="presentation">
                                     <i class="material-icons _2sides-horiz-card__icon" style="margin: auto">home</i>
                                 </span>
@@ -121,7 +121,7 @@
                             list_rooms(event);
                         });
                         document.getElementById('remove_ven').addEventListener('click', function (ev) {
-                            j_alert("confirm", "Eliminare la sede?");
+                            j_alert("confirm", "Questa operazione è definitiva.<br/>Vuoi davvero eliminare questo plesso dall'archivio?");
                             document.getElementById('okbutton').addEventListener('click', function (event) {
                                 event.preventDefault();
                                 remove_item(ev);

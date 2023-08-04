@@ -10,9 +10,19 @@ namespace elibrary;
 
 class Venue 
 {
-    private $id;
-    private $name;
-    private $code;
+    private $venueId;
+    private $venueName;
+    private $venueCode;
+    private $datasource;
+    private $venueRooms;
+
+    public function __construct($id, $name, $code, $datasource) {
+        $this->venueId = $id;
+        $this->venueName = $name;
+        $this->venueCode = $code;
+        $this->datasource = $datasource;
+        $this->venueRooms = [];
+    }
 
     /**
      * @return mixed
@@ -42,12 +52,10 @@ class Venue
 
     /**
      * @param mixed $name
-     * @return Venue
      */
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
     }
 
     /**
@@ -60,12 +68,60 @@ class Venue
 
     /**
      * @param mixed $code
-     * @return Venue
      */
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRooms()
+    {
+        return $this->rooms;
+    }
+
+    /**
+     * @param array $rooms
+     * @return Venue
+     */
+    public function setRooms($rooms)
+    {
+        $this->rooms = $rooms;
         return $this;
+    }
+
+    public function addRoom($room) {
+        array_push($this->rooms, $room);
+    }
+
+    public function deleteRoom($room) {
+
+    }
+
+    public function getRooomsNumber() {
+        return count($this->venueRooms);
+    }
+
+    public function insert() {
+        $sql = "INSERT INTO rb_venues (name, code) VALUES ('{$this->venueName}', '{$this->venueCode}')";
+        $this->venueId = $this->datasource->executeUpdate($sql);
+    }
+
+    public function update() {
+        $sql = "UPDATE rb_venues SET name = '{$this->venueName}', code = '{$this->venueCode}'} WHERE vid = {$this->venueId})";
+        $this->datasource->executeUpdate($sql);
+    }
+
+    public function delete($recursive = false) {
+        $sql = "DELETE FROM rb_venues WHERE vid =  {$this->venueId}";
+        $this->datasource->executeUpdate($sql);
+        if($recursive) {
+            /**
+             * implementare la cancellazione ricorsiva di stanze, armadi e libri
+             */
+        }
     }
 
 
