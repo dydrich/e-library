@@ -15,6 +15,7 @@ class Venue
     private $venueCode;
     private $datasource;
     private $venueRooms;
+    private $progRooms;
 
     public function __construct($id, $name, $code, $datasource) {
         $this->venueId = $id;
@@ -22,6 +23,7 @@ class Venue
         $this->venueCode = $code;
         $this->datasource = $datasource;
         $this->venueRooms = [];
+        $this->progRooms = 0;
     }
 
     /**
@@ -29,7 +31,7 @@ class Venue
      */
     public function getId()
     {
-        return $this->id;
+        return $this->venueId;
     }
 
     /**
@@ -38,8 +40,24 @@ class Venue
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->venueId = $id;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgRooms()
+    {
+        return $this->progRooms;
+    }
+
+    /**
+     * @param mixed $prog
+     */
+    public function setProgRooms($prog)
+    {
+        $this->progRooms = $prog;
     }
 
     /**
@@ -47,7 +65,7 @@ class Venue
      */
     public function getName()
     {
-        return $this->name;
+        return $this->venueName;
     }
 
     /**
@@ -55,7 +73,7 @@ class Venue
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->venueName = $name;
     }
 
     /**
@@ -63,7 +81,7 @@ class Venue
      */
     public function getCode()
     {
-        return $this->code;
+        return $this->venueCode;
     }
 
     /**
@@ -71,7 +89,7 @@ class Venue
      */
     public function setCode($code)
     {
-        $this->code = $code;
+        $this->venueCode = $code;
     }
 
     /**
@@ -79,7 +97,7 @@ class Venue
      */
     public function getRooms()
     {
-        return $this->rooms;
+        return $this->venueRooms;
     }
 
     /**
@@ -88,12 +106,12 @@ class Venue
      */
     public function setRooms($rooms)
     {
-        $this->rooms = $rooms;
+        $this->venueRooms = $rooms;
         return $this;
     }
 
     public function addRoom($room) {
-        array_push($this->rooms, $room);
+        array_push($this->venueRooms, $room);
     }
 
     public function deleteRoom($room) {
@@ -122,6 +140,41 @@ class Venue
              * implementare la cancellazione ricorsiva di stanze, armadi e libri
              */
         }
+    }
+
+     /**
+     * @param id $room
+     * @return string
+     */
+    public function getRoomCode($roomId) {
+        $code = null;
+        if ($roomId == 0){
+            $code = $this->createRoomCode();
+        }
+        else {
+            $roomId = $this->rooms[$roomId];
+            $code = $room->getCode();
+        }
+        return $code;
+    }
+
+    protected function createRoomCode() {
+        //echo "prog==>".$this->progRooms."\n";
+        $progressive = nmb_format(($this->getProgRooms() + 1), 2, "0");
+        $code = $this->venueCode."-R".$progressive;
+        return $code;
+    }
+
+    public function loadFields() {
+        $sql = "SELECT * FROM rb_venues WHERE vid = ".$this->venueId;
+        $values = $this->datasource->executeQuery($sql);
+        $this->venueName = $values['name'];
+        $this->venueCode = $values['code'];
+        $this->progRooms = $values['progressive'];
+    }
+
+    public function loadRooms() {
+
     }
 
 

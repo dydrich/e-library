@@ -18,7 +18,7 @@ class Room
      * @param $roomId
      * @param $roomName
      * @param $roomCode
-     * @param $venue
+     * @param \elibrary\Venue $venue
      * @param $datasource
      */
     public function __construct($roomId, $roomName, $roomCode, $venue, $datasource)
@@ -126,7 +126,25 @@ class Room
         $this->datasource = $datasource;
     }
 
+    public function insert() {
+        $sql = "INSERT INTO rb_rooms (vid, name, code) VALUES ({$this->venue->getId()}, '{$this->roomName}', '{$this->roomCode}')";
+        $this->roomId = $this->datasource->executeUpdate($sql);
+    }
 
+    public function update() {
+        $sql = "UPDATE rb_rooms SET name = '{$this->roomName}', code = '{$this->roomCode}', vid = {$this->venue->getId()} WHERE rid = {$this->roomId})";
+        $this->datasource->executeUpdate($sql);
+    }
+
+    public function delete($recursive = false) {
+        $sql = "DELETE FROM rb_rooms WHERE rid =  {$this->roomId}";
+        $this->datasource->executeUpdate($sql);
+        if($recursive) {
+            /**
+             * implementare la cancellazione ricorsiva di stanze, armadi e libri
+             */
+        }
+    }
 
 
 }
