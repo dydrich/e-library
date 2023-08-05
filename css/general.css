@@ -557,6 +557,7 @@ j_alert
 
 .confirmmessage, .alertmessage {
     padding-left: 20px;
+    padding-right: 20px;
     font-size: 1.2em;
 }
 

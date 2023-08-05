@@ -31,8 +31,8 @@
                         <?php
                         foreach ($rooms as $idv => $room) {
                         ?>
-                            <a href="room.php?uid=<?php echo $idv ?>" data-id="<?php echo $idv ?>" id="item<?php echo $idv ?>">
-                                <div id="room<?php echo $idv ?>" data-id="<?php echo $idv ?>" class="user-card">
+                            <a href="room.php?uid=<?php echo $idv ?>" data-id="<?php echo $idv ?>" id="item<?php echo $idv ?>" data-vid="<?php echo $room['vid'] ?>">
+                                <div id="room<?php echo $idv ?>" data-id="<?php echo $idv ?>"  data-vid="<?php echo $room['vid'] ?>" class="user-card">
                                     <div class="user-card__name"><?php echo $room['room'] ?></div>
                                     <div class="user-card__icon">
                                         <i class="material-icons librarian_color">location_on</i>
@@ -79,6 +79,7 @@
             </div>
             <script>
                 var selected_tag = 0;
+                var parent = 0;
                 var is_active = '1';
                 document.addEventListener("DOMContentLoaded", function () {
                     var btn = document.getElementById('newcls');
@@ -113,9 +114,7 @@
                         return false;
                     });
 
-                    var ends = document.querySelectorAll('.user-card');
-                    for (i = 0; i < ends.length; i++) {
-                        document.getElementById('open_room').addEventListener('click', function (ev) {
+                    document.getElementById('open_room').addEventListener('click', function (ev) {
                             open_in_browser();
                         });
                         document.getElementById('bookcases_room').addEventListener('click', function (event) {
@@ -123,7 +122,7 @@
                             list_bookcases(event);
                         });
                         document.getElementById('remove_room').addEventListener('click', function (ev) {
-                            j_alert("confirm", "Eliminare la sede?");
+                            j_alert("confirm", "Questa operazione è definitiva.<br/>Vuoi davvero eliminare questo locale dall'archivio?");
                             document.getElementById('okbutton').addEventListener('click', function (event) {
                                 event.preventDefault();
                                 remove_item(ev);
@@ -135,6 +134,10 @@
                                 return false;
                             })
                         });
+
+                    var ends = document.querySelectorAll('.user-card');
+                    for (i = 0; i < ends.length; i++) {
+                        
                         ends[i].addEventListener('click', function (event) {
                             event.preventDefault();
                             event.stopImmediatePropagation();
@@ -142,7 +145,8 @@
                                 document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                             }
                             event.currentTarget.classList.add('selected_tag');
-                            selected_tag = event.currentTarget.getAttribute("data-id")
+                            selected_tag = event.currentTarget.getAttribute("data-id");
+                            parent = event.currentTarget.getAttribute("data-vid");
                         });
                         ends[i].addEventListener('contextmenu', function (event) {
                             event.preventDefault();
@@ -153,6 +157,7 @@
                             event.currentTarget.classList.add('selected_tag');
                             selected_tag = event.currentTarget.getAttribute("data-id");
                             current_target_id = event.currentTarget.getAttribute("data-id");
+                            parent = event.currentTarget.getAttribute("data-vid");
                             //clear_context_menu(event);
                             show_context_menu(event, null, 150, 'class_context_menu');
 
@@ -179,10 +184,11 @@
                     var xhr = new XMLHttpRequest();
                     var formData = new FormData();
 
-                    xhr.open('post', 'venue_manager.php');
+                    xhr.open('post', 'room_manager.php');
                     var action = <?php echo ACTION_DELETE ?>;
-
-                    formData.append('vid', selected_tag);
+                    console.log("Function remove_item");
+                    formData.append('rid', selected_tag);
+                    formData.append('venue', parent);
                     formData.append('action', action);
                     xhr.responseType = 'json';
                     xhr.send(formData);

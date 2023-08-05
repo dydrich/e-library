@@ -8,6 +8,8 @@
 
 
 require_once "../lib/start.php";
+require_once "../lib/Room.php";
+require_once "../lib/Venue.php";
 
 check_session(AJAX_CALL);
 
@@ -15,12 +17,20 @@ if (!isset($_POST['action'])) {
 	echo "NOT ISSET";
 }
 
-$name = $vid = null;
+$name = $vid = $code = null;
+$rid = $_POST['rid'];
+$vid = $_POST['venue'];
+$venue = new \elibrary\Venue($vid, null, null, new MySQLDataLoader($db)); 
+$venue->loadFields();
 if($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE ){
 	$name =  $db->real_escape_string($_POST['room']);
-	$vid = $_POST['venue'];
+	$code = $db->real_escape_string($_POST['code']);
+	$room = new \elibrary\Room($rid, $name, $code, $venue, new MySQLDataLoader($db));
 }
-$rid = $_POST['rid'];
+else {
+	$room = new \elibrary\Room($rid, null, null, $venue, new MySQLDataLoader($db));
+}
+
 
 header("Content-type: application/json");
 $response = array("status" => "ok", "message" => "Operazione completata");
@@ -29,7 +39,8 @@ switch($_POST['action']){
 	case ACTION_INSERT:
 		try{
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("INSERT INTO rb_rooms (vid, name) VALUES ($vid, '{$name}')");
+			//$db->executeUpdate("INSERT INTO rb_rooms (vid, name) VALUES ($vid, '{$name}')");
+			$room->insert();
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex){
 			$db->executeUpdate("ROLLBACK");
@@ -45,7 +56,8 @@ switch($_POST['action']){
 	case ACTION_DELETE:
 		try{
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("DELETE FROM rb_rooms WHERE rid = {$rid}");
+			//$db->executeUpdate("DELETE FROM rb_rooms WHERE rid = {$rid}");
+			$room->delete();
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex){
 			$db->executeUpdate("ROLLBACK");
@@ -61,7 +73,8 @@ switch($_POST['action']){
 	case ACTION_UPDATE:
 		try{
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("UPDATE rb_rooms SET vid= $vid, name = '{$name}' WHERE rid = {$rid}");
+			//$db->executeUpdate("UPDATE rb_rooms SET vid= $vid, name = '{$name}', code = {$code} WHERE rid = {$rid}");
+			$room->update();
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex){
 			$response['status'] = "kosql";

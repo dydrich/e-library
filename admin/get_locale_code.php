@@ -2,6 +2,7 @@
 
 require_once "../lib/start.php";
 require_once "../lib/Venue.php";
+require_once "../lib/Room.php";
 
 check_session(AJAX_CALL);
 

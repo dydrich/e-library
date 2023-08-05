@@ -129,6 +129,7 @@ class Room
     public function insert() {
         $sql = "INSERT INTO rb_rooms (vid, name, code) VALUES ({$this->venue->getId()}, '{$this->roomName}', '{$this->roomCode}')";
         $this->roomId = $this->datasource->executeUpdate($sql);
+        $this->venue->updateRoomsData("add");
     }
 
     public function update() {
@@ -137,11 +138,12 @@ class Room
     }
 
     public function delete($recursive = false) {
-        $sql = "DELETE FROM rb_rooms WHERE rid =  {$this->roomId}";
+        $sql = "DELETE FROM rb_rooms WHERE rid = {$this->roomId}";
         $this->datasource->executeUpdate($sql);
+        $this->venue->updateRoomsData("del");
         if($recursive) {
             /**
-             * implementare la cancellazione ricorsiva di stanze, armadi e libri
+             * implementare la cancellazione ricorsiva di armadi e libri
              */
         }
     }

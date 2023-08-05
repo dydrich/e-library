@@ -7,6 +7,8 @@
  */
 require_once "../lib/start.php";
 
+ini_set('display_errors', 1);
+
 check_session();
 $user->setCurrentRole(User::$ADMIN);
 check_role($user, User::$ADMIN);
@@ -33,7 +35,7 @@ while ($v = $res_venues->fetch_assoc()) {
 }
 $rooms = [];
 while ($r = $res_rooms->fetch_assoc()) {
-	$rooms[$r['rid']] = ['room' => $r['name'], 'venue' => $venues[$r['vid']]];
+	$rooms[$r['rid']] = ['room' => $r['name'], 'vid' => $r['vid'], 'venue' => $venues[$r['vid']]];
 }
 
 $drawer_label = "Locali libreria";

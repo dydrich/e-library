@@ -64,9 +64,9 @@
 								</div>
 							</div><!-- form row #2 -->
 							<div class="form_row">
-								<p class="material_label" style="text-align: left; grid-row: 2; grid-column: 1/2">Codice locale</p>	
-								<div style="grid-row: 2; grid-column: 2/3">
-									<input type="text" id="code" name="code" class="android disabled_link" disabled style="width: 100%" value="<?php if ($res != null) echo $res['name'] ?>" />
+								<p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Codice locale</p>	
+								<div style="grid-row: 3; grid-column: 2/3">
+									<input type="text" id="code" name="code" class="android disabled_link" disabled style="width: 100%" value="<?php if ($res != null) echo $res['code'] ?>" />
 								</div>
 							</div><!-- form row #3 -->
 							<section class="mdc-card__actions" style="grid-row: 2; grid-column: 1/3; padding: 0">
@@ -89,6 +89,7 @@
 				var submit_data = function (event) {
 					event.preventDefault();
 					var xhr = new XMLHttpRequest();
+					document.getElementById('code').disabled = false;
 					var form = document.getElementById('userform');
 					var formData = new FormData(form);
 
@@ -122,7 +123,7 @@
 					right_offset += document.getElementById('right_col').clientWidth;
 
 					var sel = document.getElementById("venue").addEventListener("click", function(ev) {
-				
+						//document.location.href = "get_locale_code.php?type=room&object_id="+document.getElementById("venue").value+"&object_action=<?php echo $_REQUEST['rid'] ?>";
 						var xhr = new XMLHttpRequest();
 						var formData = new FormData();
 
