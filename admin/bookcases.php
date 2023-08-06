@@ -52,7 +52,9 @@ try {
 $bookcases = [];
 if ($res_bookcases->num_rows > 0) {
 	while ($row = $res_bookcases->fetch_assoc()) {
+		$books = $db->executeCount("SELECT COUNT(*) FROM rb_books WHERE bookcase = {$row['bid']}");
 		$row['room_desc'] = $rooms[$row['room']];
+		$row['count_books'] = $books;
 		$bookcases[] = $row;
 		$venues[$row['vid']]['bookcases'][$row['bid']] = $row;
 	}

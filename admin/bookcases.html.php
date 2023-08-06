@@ -42,7 +42,7 @@
                                 <?php
                                 foreach ($venue['bookcases'] as $k => $bookcase) {
                                 ?>
-                                    <a href="bookcase.php?bid=<?php echo $k ?>&back=bookcases.php" data-id="<?php echo $k ?>" id="item<?php echo $k ?>">
+                                    <a href="bookcase.php?bid=<?php echo $k ?>&back=bookcases.php" data-id="<?php echo $k ?>" id="item<?php echo $k ?>" data-books="<?php echo $bookcase['count_books'] ?>">
                                         <div id="bookcase<?php echo $k ?>" data-id="<?php echo $k ?>" class="user-card">
                                             <div class="user-card__name"><?php echo $bookcase['description'] ?></div>
                                             <div class="user-card__icon">
@@ -109,9 +109,17 @@
 
                     document.getElementById('left_col').addEventListener('contextmenu', function (ev) {
                         ev.preventDefault();
-                        clear_context_menu(ev, 'class_context_menu');
+                        clear_context_menu(ev, 'bookcase_context_menu');
                         if (selected_tag !== 0) {
-                            document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                            document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag');
+                        }
+                        return false;
+                    });
+                    document.getElementById('left_col').addEventListener('click', function (ev) {
+                        ev.preventDefault();
+                        clear_context_menu(ev, 'bookcase_context_menu');
+                        if (selected_tag !== 0) {
+                            document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag');
                         }
                         return false;
                     });
@@ -122,7 +130,18 @@
                             open_in_browser();
                         });
                         document.getElementById('remove_bookcase').addEventListener('click', function (ev) {
-                            j_alert("confirm", "Eliminare l'armadio?");
+                            if(document.getElementById("bookcase"+selected_tag).getAttribute("data-books") > 0){
+                                var msg = new Object();
+                                msg.data_field = "warning";
+                                msg.warning_message = "Impossibile cancellare l'armadio perché contiene dei libri.<br />Per eliminare l'armadio devi prima spostare tutti i libri";
+                                msg.focus = null;
+                                msg.message = "Operazione non consentita";
+                                clear_context_menu(ev, 'bookcase_context_menu');
+                                document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag')
+                                j_alert("information", msg);
+                                return;
+                            }
+                            j_alert("confirm", "Questa operazione è definitiva e non può essere annullata.<br />Vuoi eliminare l'armadio?");
                             clear_context_menu(ev, 'bookcase_context_menu');
                             document.getElementById('okbutton').addEventListener('click', function (event) {
                                 event.preventDefault();
@@ -130,19 +149,40 @@
                             });
                             document.getElementById('nobutton').addEventListener('click', function (event) {
                                 event.preventDefault();
+                                clear_context_menu(ev, 'bookcase_context_menu');
+                                document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag')
                                 fade('overlay', 'out', .1, 0);
                                 fade('confirm', 'out', .3, 0);
                                 return false;
                             });
                         });
+                        ends[i].addEventListener('click', function (event) {
+                            event.preventDefault();
+                            event.stopImmediatePropagation();
+                            if (selected_tag !== 0) {
+                                document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag');
+                            }
+                            clear_context_menu(event, 'bookcase_context_menu')
+                            event.currentTarget.classList.add('selected_tag');
+                            selected_tag = event.currentTarget.getAttribute("data-id");
+                        });
                         ends[i].addEventListener('contextmenu', function (event) {
                             event.preventDefault();
                             event.stopImmediatePropagation();
+                            if (selected_tag !== 0) {
+                                document.getElementById('bookcase'+selected_tag).classList.remove('selected_tag');
+                            }
+                            event.currentTarget.classList.add('selected_tag');
                             selected_tag = event.currentTarget.getAttribute("data-id");
                             current_target_id = event.currentTarget.getAttribute("data-id");
-                            //clear_context_menu(event);
                             show_context_menu(event, null, 150, 'bookcase_context_menu');
 
+                        });
+                        ends[i].addEventListener('dblclick', function (event) {
+                            event.preventDefault();
+                            event.stopImmediatePropagation();
+                            selected_tag = event.currentTarget.getAttribute("data-id");
+                            open_in_browser();
                         });
                     }
 
