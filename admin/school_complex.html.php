@@ -45,7 +45,7 @@
                             <div class="form_row" id="lnk_field">
                                 <p class="material_label mandatory" style="text-align: left; grid-row: 2; grid-column: 1/2">Codice sede</p>	
                                 <div style="grid-row: 2; grid-column: 2/3">
-                                    <input type="text" required id="code" name="code" class="android" maxlength="3" style="width: 100%" value="<?php if ($res != null) echo $res['code'] ?>">
+                                    <input type="text" required id="code" name="code" class="android <?php if ($res != null) echo "disabled_link" ?>" maxlength="3" style="width: 100%" <?php if ($res != null) echo "readOnly" ?> value="<?php if ($res != null) echo $res['code'] ?>">
                                 </div>
                             </div>
                             <section class="mdc-card__actions" style="grid-row: 3; grid-column: 1/3; padding: 0">
@@ -68,6 +68,7 @@
 
                 var submit_data = function (event) {
                     if(!validate_form()) {
+                        event.preventDefault();
                         return;
                     }
                     event.preventDefault();

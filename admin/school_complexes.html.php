@@ -31,7 +31,7 @@
                         <?php
                         foreach ($venues as $venue) {
                             ?>
-                            <a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<?php echo $venue['vid'] ?>"  class="_2sides-horiz-card primary_border">
+                            <a href="school_complex.php?sid=<?php echo $venue['vid'] ?>&back=school_complexes.php" data-id="<?php echo $venue['vid'] ?>" id="item<?php echo $venue['vid'] ?>" data-rooms="<?php echo $venue['rooms'] ?>" class="_2sides-horiz-card primary_border">
                                 <span class="_2sides-horiz-card__icon-cont normal_card" role="presentation">
                                     <i class="material-icons _2sides-horiz-card__icon" style="margin: auto">home</i>
                                 </span>
@@ -102,7 +102,7 @@
                         }
                         return false;
                     });
-                    document.getElementById('content').addEventListener('click', function (ev) {
+                    document.getElementById('left_col').addEventListener('click', function (ev) {
                         ev.preventDefault();
                         clear_context_menu(ev, 'class_context_menu');
                         if (selected_tag !== 0) {
@@ -121,6 +121,18 @@
                             list_rooms(event);
                         });
                         document.getElementById('remove_ven').addEventListener('click', function (ev) {
+                            if(document.getElementById("item"+selected_tag).getAttribute("data-rooms") > 0){
+                                var msg = new Object();
+                                msg.data_field = "warning";
+                                msg.warning_message = "Impossibile cancellare la sede perché vi sono dei locali associati.<br />Per eliminare la sede, elimina prima i locali";
+                                msg.focus = null;
+                                msg.message = "Operazione non consentita";
+                                clear_context_menu(ev, 'class_context_menu');
+                                document.getElementById('item'+selected_tag).classList.remove('selected_tag')
+                                j_alert("information", msg);
+                                return;
+                            }
+                            
                             j_alert("confirm", "Questa operazione è definitiva.<br/>Vuoi davvero eliminare questo plesso dall'archivio?");
                             document.getElementById('okbutton').addEventListener('click', function (event) {
                                 event.preventDefault();
@@ -136,6 +148,7 @@
                         ends[i].addEventListener('click', function (event) {
                             event.preventDefault();
                             event.stopImmediatePropagation();
+                            clear_context_menu(event, 'class_context_menu');
                             if (selected_tag !== 0) {
                                 document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                             }

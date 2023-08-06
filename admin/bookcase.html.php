@@ -39,11 +39,12 @@
 							<div class="form_row">
 								<p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Locale</p>
 								<select class="android" style="width: 100%; grid-row: 1; grid-column: 2/3" name="room" id="room">
+									<?php if (!isset($bookcase)) { ?><option selected value="0">Seleziona un locale</option><?php } ?>
 									<?php
 									while ($row = $res_rooms->fetch_assoc()) {
 										$selected = '';
 										if (isset($bookcase)) {
-											if ($bookcase['rid'] == $row['rid']) {
+											if ($bookcase['room'] == $row['rid']) {
 												$selected = "default selected";
 											}
 										}
@@ -66,15 +67,15 @@
 								<input type="text" id="bookcase" name="bookcase" class="android" value="<?php if ($bookcase != null) echo $bookcase['description']; else echo 'Armadio '.$progressive ?>" style="grid-row: 2; grid-column: 2/3" />
 							</div>
 							<div class="form_row">
-								<p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Numero progressivo</p>
-								<input type="text" id="progressive" name="progressive" class="android disabled_link" disabled value="<?php echo $progressive ?>" style="grid-row: 3; grid-column: 2/3" />
+								<p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Codice armadio</p>
+								<input type="text" id="code" name="code" class="android disabled_link" disabled value="<?php if ($bookcase != null) echo $bookcase['code']; else echo "" ?>" style="grid-row: 3; grid-column: 2/3" />
 							</div>
 							<div class="form_row">
 								<p class="material_label" style="text-align: left; grid-row: 4; grid-column: 1/2">Numero di scaffali</p>
 								<input type="text" id="shelves" name="shelves" class="android" value="<?php if ($bookcase != null) echo $bookcase['shelves']; else echo "0" ?>" style="grid-row: 4; grid-column: 2/3" />
 							</div>
-							<section class="mdc-card__actions" style="grid-row: 5; grid-column: 1/3; padding: 0"">
-								<button id="submit_btn" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-top: 45px; margin-bottom: 35px">Registra</button>
+							<section class="mdc-card__actions" style="grid-row: 5; grid-column: 1/3; padding: 0">
+								<button id="submit_btn" onclick="submit_data(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-top: 45px; margin-bottom: 35px">Registra</button>
 							</section>
 						</form>
 					</div>	
@@ -107,17 +108,46 @@
 			</div>
 			<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 			<script>
-				window.mdc.autoInit();
+				//window.mdc.autoInit();
 				
 				document.addEventListener("DOMContentLoaded", function () {
-					document.getElementById('submit_btn').addEventListener('click', function(event) {
-						submit_form(event);
+					
+
+					var sel = document.getElementById("room").addEventListener("click", function(ev) {
+						//document.location.href = "get_locale_code.php?type=bookcase&object_id="+document.getElementById("room").value+"&object_action=<?php echo $_REQUEST['bid'] ?>";
+						var xhr = new XMLHttpRequest();
+						document.getElementById('code').disabled = false;
+						var formData = new FormData();
+
+						xhr.open('post', 'get_locale_code.php');
+						formData.append('type', "bookcase");
+						formData.append('object_id', document.getElementById("room").value);
+						formData.append("object_action", <?php echo $_REQUEST['bid'] ?>);
+						xhr.responseType = 'json';
+						xhr.send(formData);
+						xhr.onreadystatechange = function () {
+							var DONE = 4; // readyState 4 means the request is done.
+							var OK = 200; // status 200 is a successful return.
+							if (xhr.readyState === DONE) {
+								if (xhr.status === OK) {
+									console.log("data retrieved");
+									var code = xhr.response.code;
+									document.getElementById('code').value = code;
+								}
+							} else {
+								console.log('Error: ' + xhr.status);
+							}
+						}
 					});
 				});
 
 				var bid = <?php if (isset($_REQUEST['bid'])) echo $_REQUEST['bid']; else echo 0 ?>;
 
-				var submit_form = function (event) {
+				var submit_data = function (event) {
+					if(!validate_form()) {
+						event.preventDefault();
+						return false;
+					}
 					event.preventDefault();
 					var xhr = new XMLHttpRequest();
 					var form = document.getElementById('bookcaseform');
@@ -145,6 +175,44 @@
 						}
 					}
 				};
+
+				var validate_form = function() {
+                    var go = true;
+                    var msg = new Object();
+                    msg.data_field = "validation_data";
+                    msg.validation_message = "";
+                    msg.focus = "room";
+                    var index = 1;
+					if(document.getElementById('room').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai scelto il locale";
+                        go = false;
+                        index++;
+						
+			        }
+                    if(document.getElementById('bookcase').value == ""){
+                        msg.validation_message += "<br />"+index+". Nome dell'armadio non presente";
+                        go = false;
+                        index++;
+			        }
+                    if(document.getElementById('code').value == ""){
+                        msg.validation_message += "<br />"+index+". Codice dell'armadio non presente";
+                        go = false;
+						index++;
+			        }
+					if(document.getElementById('shelves').value == 0){
+                        msg.validation_message += "<br />"+index+". Numero di scaffali dell'armadio non presente";
+                        go = false;
+						index++;
+			        }
+                    msg.message = "Errori nel form";
+                    if(!go){
+                        j_alert("information", msg);
+                        return false;
+                    }
+
+                    return true;
+                }
+
 			</script>
 		</div>
 	</body>

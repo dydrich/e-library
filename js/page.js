@@ -156,6 +156,9 @@ var j_alert = function(type, msg){
         else if (field === 'validation_data') {
             _text = msg.validation_message;
         }
+        else if("warning") {
+            _text = msg.warning_message;
+        }
         infomessage.innerHTML = _text;
         document.getElementById("message_title").innerText = msg.message;
         //infomessage.style.height = '50px';
@@ -171,7 +174,10 @@ var j_alert = function(type, msg){
                 fade('overlay', 'out', 100, .3);
                 fade('information', 'out', 500, 1);
             }, 10);
-            document.getElementById(msg.focus).focus();
+            if(msg.focus != null) {
+                document.getElementById(msg.focus).focus();
+            }
+            
         });
         overlay.style.opacity = 0;
         overlay.style.display = 'block';

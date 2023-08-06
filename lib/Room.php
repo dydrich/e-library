@@ -18,7 +18,7 @@ class Room
      * @param $roomId
      * @param $roomName
      * @param $roomCode
-     * @param \elibrary\Venue $venue
+     * @param $venue
      * @param $datasource
      */
     public function __construct($roomId, $roomName, $roomCode, $venue, $datasource)
@@ -28,6 +28,7 @@ class Room
         $this->roomCode = $roomCode;
         $this->venue = $venue;
         $this->datasource = $datasource;
+        $this->bookcases = [];
     }
 
     /**
@@ -94,6 +95,10 @@ class Room
         $this->bookcases = $bookcases;
     }
 
+    public function addBookcase($bookcase) {
+        array_push($this->bookcases, $bookcase);
+    }
+
     /**
      * @return mixed
      */
@@ -127,25 +132,70 @@ class Room
     }
 
     public function insert() {
-        $sql = "INSERT INTO rb_rooms (vid, name, code) VALUES ({$this->venue->getId()}, '{$this->roomName}', '{$this->roomCode}')";
+        $sql = "INSERT INTO rb_rooms (vid, name, code) VALUES ({$this->venue}, '{$this->roomName}', '{$this->roomCode}')";
         $this->roomId = $this->datasource->executeUpdate($sql);
-        $this->venue->updateRoomsData("add");
+        $archive = Archive::getInstance($this->datasource);
+        $archive->update(Archive::$INSERT_ROOM, $this);
     }
 
     public function update() {
-        $sql = "UPDATE rb_rooms SET name = '{$this->roomName}', code = '{$this->roomCode}', vid = {$this->venue->getId()} WHERE rid = {$this->roomId})";
+        $sql = "UPDATE rb_rooms SET name = '{$this->roomName}' WHERE rid = {$this->roomId})";
         $this->datasource->executeUpdate($sql);
     }
 
     public function delete($recursive = false) {
         $sql = "DELETE FROM rb_rooms WHERE rid = {$this->roomId}";
         $this->datasource->executeUpdate($sql);
-        $this->venue->updateRoomsData("del");
+        $archive = Archive::getInstance($this->datasource);
+        $archive->update(Archive::$DELETE_ROOM, $this);
         if($recursive) {
             /**
              * implementare la cancellazione ricorsiva di armadi e libri
              */
         }
+    }
+
+    public function loadFields() {
+        $sql = "SELECT * FROM rb_rooms WHERE rid = ".$this->roomId;
+        $values = $this->datasource->executeQuery($sql);
+        $this->roomName = $values['name'];
+        $this->roomCode = $values['code'];
+        for($i = 0; $i < $values['bookcases']; $i++){
+            $this->addBookcase(new Bookcase(null, null, null, null, null, null));
+        }
+        $this->venue = new Venue($values['vid'], null, null, $this->datasource);
+        $this->venue->loadFields();
+    }
+
+    public function getBookcaseCode($bookcaseId) {
+        $code = null;
+        if ($bookcaseId == 0){
+            $code = $this->createBookcaseCode();
+        }
+        return $code;
+    }
+
+    protected function createBookcaseCode() {
+        $prog = $this->datasource->executeCount("SELECT COALESCE(MAX(bid), 0) FROM `rb_bookcases`");
+        $progressive = nmb_format(($prog + 1), 2, "0");
+        $code = $this->roomCode."-A".$progressive;
+        return $code;
+    }
+
+    public function updateBookcaseData($operation) {
+        $bookcases = count($this->bookcases);
+        if($operation == "add") {
+            $this->addBookcase(new Bookcase(null, null, null, null, null, null));
+            $bookcases++;
+        }
+        else {
+            array_shift($this->bookcases);
+            $bookcases = count($this->bookcases);
+            $bookcases--;
+        }
+        
+        $upd = "UPDATE rb_rooms SET bookcases = {$bookcases} WHERE rid = {$this->roomId}";
+        $this->datasource->executeUpdate($upd);
     }
 
 

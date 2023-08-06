@@ -37,10 +37,10 @@
 					<div class="form_container" style="margin: auto">
 						<form method="post" id="userform"  class="userform" style="margin: auto; padding: 10px" onsubmit="submit_data()">
 							<div class="form_row">
-								<p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Plesso</p>	
+								<p class="material_label mandatory" style="text-align: left; grid-row: 1; grid-column: 1/2">Plesso</p>	
 								<div style="grid-row: 1; grid-column: 2/3">
-									<select class="android" name="venue" id="venue" style="width: 100%">
-										<option selected value="0">Seleziona un plesso</option>
+									<select class="android" name="venue" id="venue" style="width: 100%" <?php if($res != null) echo "disabled" ?> >
+										<?php if($res == null) { ?><option selected value="0">Seleziona un plesso</option><?php } ?>
 									<?php
 									while ($row = $res_venues->fetch_assoc()) {
 										$selected = '';
@@ -58,13 +58,13 @@
 								</div>
 							</div><!-- form row #1 -->
 							<div class="form_row">
-								<p class="material_label" style="text-align: left; grid-row: 2; grid-column: 1/2">Locale</p>	
+								<p class="material_label mandatory" style="text-align: left; grid-row: 2; grid-column: 1/2">Locale</p>	
 								<div style="grid-row: 2; grid-column: 2/3">
 									<input type="text" id="room" name="room" class="android" style="width: 100%" value="<?php if ($res != null) echo $res['name'] ?>" />
 								</div>
 							</div><!-- form row #2 -->
 							<div class="form_row">
-								<p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Codice locale</p>	
+								<p class="material_label mandatory" style="text-align: left; grid-row: 3; grid-column: 1/2">Codice locale</p>	
 								<div style="grid-row: 3; grid-column: 2/3">
 									<input type="text" id="code" name="code" class="android disabled_link" disabled style="width: 100%" value="<?php if ($res != null) echo $res['code'] ?>" />
 								</div>
@@ -87,6 +87,11 @@
 				var rid = <?php if (isset($_REQUEST['rid'])) echo $_REQUEST['rid']; else echo 0 ?>;
 
 				var submit_data = function (event) {
+					console.log(validate_form());
+					if(!validate_form()) {
+						event.preventDefault();
+                        return false;
+                    }
 					event.preventDefault();
 					var xhr = new XMLHttpRequest();
 					document.getElementById('code').disabled = false;
@@ -116,6 +121,36 @@
 					}
 				};
 
+				var validate_form = function() {
+                    var go = true;
+                    var msg = new Object();
+                    msg.data_field = "validation_data";
+                    msg.validation_message = "";
+                    msg.focus = "venue";
+                    var index = 1;
+					if(document.getElementById('venue').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai scelto il plesso";
+                        go = false;
+                        index++;
+			        }
+                    if(document.getElementById('room').value == ""){
+                        msg.validation_message += "<br />"+index+". Nome del locale non presente";
+                        go = false;
+                        index++;
+			        }
+                    if(document.getElementById('code').value == ""){
+                        msg.validation_message += "<br />"+index+". Codice del locale non presente";
+                        go = false;
+			        }
+                    msg.message = "Errori nel form";
+                    if(!go){
+                        j_alert("information", msg);
+                        return false;
+                    }
+
+                    return true;
+                }
+
 				document.addEventListener("DOMContentLoaded", function () {
 					var screenW = screen.width;
 					var bodyW = document.body.clientWidth;
@@ -123,6 +158,9 @@
 					right_offset += document.getElementById('right_col').clientWidth;
 
 					var sel = document.getElementById("venue").addEventListener("click", function(ev) {
+						if(document.getElementById("venue").value == 0) {
+							return;
+						}
 						//document.location.href = "get_locale_code.php?type=room&object_id="+document.getElementById("venue").value+"&object_action=<?php echo $_REQUEST['rid'] ?>";
 						var xhr = new XMLHttpRequest();
 						var formData = new FormData();

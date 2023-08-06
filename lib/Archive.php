@@ -10,9 +10,60 @@ namespace elibrary;
 
 class Archive
 {
+
+    public static $INSERT_ROOM = 1;
+    public static $DELETE_ROOM = 2;
+    public static $INSERT_BOOKCASE = 3;
+    public static $DELETE_BOOKCASE = 4;
+
     private $venues;
     private $rooms;
     private $bookcases;
+    private static $instance;
+	private $datasource;
+	
+	private function __construct($conn){
+		$this->datasource = $conn;
+	}
 
+    public static function getInstance($conn){
+		if(empty(self::$instance)){
+			self::$instance = new Archive($conn);
+		}
+		return self::$instance;
+	}
+
+    public function update($action, $object){
+        switch($action){
+            case Archive::$INSERT_ROOM:
+                $this->updateRooms($object, "add");
+                break;
+            case Archive::$DELETE_ROOM:
+                $this->updateRooms($object, "del");
+                break;
+            default:
+            break;
+        }
+    }
+
+    protected function updateRooms($room, $operation){
+        $vid = $room->getVenue();
+        $venue = new Venue($vid, null, null, $this->datasource);
+        $venue->loadFields();
+
+        $sel = "SELECT rid FROM rb_rooms WHERE vid = {$venue->getID()}";
+        $rids = $this->datasource->executeQuery($sel);
+        $rooms = count($rids);
+        $prog = $venue->getProgRooms();
+        if($operation == "add") {
+            $prog++;
+        }
+        else {
+            $prog--;
+        }
+        
+        $upd = "UPDATE rb_venues SET rooms = {$rooms}, progressive = {$prog} WHERE vid = {$venue->getId()}";
+        $this->datasource->executeUpdate($upd);
+    }
 
 }

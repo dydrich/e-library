@@ -42,3 +42,12 @@ define("NEXT", 1);
 define("INDEX_OUT_OF_BOUND", 0);
 
 define("ROOT_SITE", 'https://e-library.rbachis.net');
+
+/**
+ * Archive
+
+define("INSERT_ROOM", 1);
+define("DELETE_ROOM", 2);
+define("INSERT_BOOKCASE", 3);
+define("DELETE_BOOKCASE", 4);
+ */

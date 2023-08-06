@@ -10,6 +10,9 @@
 require_once "../lib/start.php";
 require_once "../lib/Room.php";
 require_once "../lib/Venue.php";
+require_once "../lib/Archive.php";
+
+ini_set('display_errors', 1);
 
 check_session(AJAX_CALL);
 
@@ -20,15 +23,14 @@ if (!isset($_POST['action'])) {
 $name = $vid = $code = null;
 $rid = $_POST['rid'];
 $vid = $_POST['venue'];
-$venue = new \elibrary\Venue($vid, null, null, new MySQLDataLoader($db)); 
-$venue->loadFields();
+
 if($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE ){
 	$name =  $db->real_escape_string($_POST['room']);
 	$code = $db->real_escape_string($_POST['code']);
-	$room = new \elibrary\Room($rid, $name, $code, $venue, new MySQLDataLoader($db));
+	$room = new \elibrary\Room($rid, $name, $code, $vid, new MySQLDataLoader($db));
 }
 else {
-	$room = new \elibrary\Room($rid, null, null, $venue, new MySQLDataLoader($db));
+	$room = new \elibrary\Room($rid, null, null, $vid, new MySQLDataLoader($db));
 }
 
 

@@ -116,7 +116,7 @@
                         return false;
                     });
                     
-                    var ends = document.querySelectorAll('.mdc-list-item');
+                    var ends = document.querySelectorAll('.user-card');
                     for (i = 0; i < ends.length; i++) {
                         document.getElementById('open_bookcase').addEventListener('click', function (ev) {
                             open_in_browser();

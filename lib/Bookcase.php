@@ -128,4 +128,26 @@ class Bookcase
         $this->datasource = $datasource;
     }
 
+    public function insert() {
+        $sql = "INSERT INTO rb_bookcases (room, description, code, shelves) VALUES ({$this->bookcaseRoom->getRoomId()}, '{$this->bookcaseName}', '{$this->bookcaseCode}', {$this->numberOfShelves})";
+        $this->bookcaseId = $this->datasource->executeUpdate($sql);
+        $this->bookcaseRoom->updateBookcaseData("add");
+    }
+
+    public function update() {
+        //$sql = "UPDATE rb_rooms SET name = '{$this->roomName}', code = '{$this->roomCode}', vid = {$this->venue->getId()} WHERE rid = {$this->roomId})";
+        //$this->datasource->executeUpdate($sql);
+    }
+
+    public function delete($recursive = false) {
+        $sql = "DELETE FROM rb_bookcases WHERE bid = {$this->bookcaseId}";
+        $this->datasource->executeUpdate($sql);
+        $this->bookcaseRoom->updateBookcaseData("del");
+        if($recursive) {
+            /**
+             * implementare la cancellazione ricorsiva di armadi e libri
+             */
+        }
+    }
+
 }

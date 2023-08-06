@@ -8,6 +8,8 @@
 
 namespace elibrary;
 
+require_once "Archive.php";
+
 class Venue 
 {
     private $venueId;
@@ -118,26 +120,6 @@ class Venue
 
     }
 
-    public function updateRoomsData($operation) {
-        $rooms = $this->getRooomsNumber();
-        $prog = $this->progRooms;
-        if($operation == "add") {
-            $this->addRoom(new Room(null, null, null, null, null));
-            $rooms++;
-            $prog++;
-        }
-        else {
-            array_shift($this->venueRooms);
-            $rooms = $this->getRooomsNumber();
-            $room--;
-            $prog--;
-        }
-        $this->setProgRooms($prog);
-        
-        $upd = "UPDATE rb_venues SET rooms = {$rooms}, progressive = {$prog} WHERE vid = {$this->venueId}";
-        $this->datasource->executeUpdate($upd);
-    }
-
     public function getRooomsNumber() {
         return count($this->venueRooms);
     }
@@ -166,19 +148,15 @@ class Venue
      * @param id $room
      * @return string
      */
-    public function getRoomCode($roomId) {
+    public function getRoomCode($rid) {
         $code = null;
-        if ($roomId == 0){
+        if ($rid == 0){
             $code = $this->createRoomCode();
-        }
-        else {
-            $roomId = $this->rooms[$roomId];
-            $code = $room->getCode();
         }
         return $code;
     }
 
-    protected function createRoomCode() {
+    public function createRoomCode() {
         //echo "prog==>".$this->progRooms."\n";
         $progressive = nmb_format(($this->getProgRooms() + 1), 2, "0");
         $code = $this->venueCode."-R".$progressive;
@@ -191,6 +169,7 @@ class Venue
         $this->venueName = $values['name'];
         $this->venueCode = $values['code'];
         $this->progRooms = $values['progressive'];
+        
         for($i = 0; $i < $values['rooms']; $i++){
             $this->addRoom(new Room(null, null, null, $this, null));
         }

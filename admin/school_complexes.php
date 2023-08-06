@@ -25,7 +25,8 @@ $venues = [];
 $colors = ['#0288d1', '#00796b', '#c62828', '#8e24aa', '#303f9f'];
 $k = 0;
 while ($row = $res_venues->fetch_assoc()) {
-	$venues[$row['vid']] = ['vid' => $row['vid'], 'venue' => $row['name'], 'color' => $colors[$k]];
+	$rooms = $db->executeCount("SELECT COUNT(*) FROM rb_rooms WHERE vid = {$row['vid']}");
+	$venues[$row['vid']] = ['vid' => $row['vid'], 'venue' => $row['name'], 'rooms' => $rooms, 'color' => $colors[$k]];
 	$k++;
 }
 

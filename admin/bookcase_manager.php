@@ -9,6 +9,10 @@
 
 
 require_once "../lib/start.php";
+require_once "../lib/start.php";
+require_once "../lib/Room.php";
+require_once "../lib/Venue.php";
+require_once "../lib/Bookcase.php";
 
 check_session(AJAX_CALL);
 
@@ -17,13 +21,20 @@ if (!isset($_POST['action'])) {
 }
 
 $rid = $bid = $progressive = $shelves = $bookcase = null;
-if ($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE) {
-	$bookcase = $db->real_escape_string($_POST['bookcase']);
-	$progressive = $_POST['progressive'];
-	$rid = $_POST['room'];
-	$shelves = $_POST['shelves'];
-}
 $bid = $_POST['bid'];
+$rid = $_POST['room'];
+$room = new \elibrary\Room($rid, null, null, null, new MySQLDataLoader($db));
+$room->loadFields();
+if ($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE) {
+	$name = $db->real_escape_string($_POST['bookcase']);
+	$code = $_POST['code'];
+	$shelves = $_POST['shelves'];
+	$bk = new \elibrary\Bookcase($bid, $name, $code, $room, $shelves, new MySQLDataLoader($db));
+}
+else {
+	$bk = new \elibrary\Bookcase($bid, null, null, $room, 0, new MySQLDataLoader($db));
+}
+
 
 header("Content-type: application/json");
 $response = array("status" => "ok", "message" => "Operazione completata");
@@ -32,7 +43,8 @@ switch ($_POST['action']) {
 	case ACTION_INSERT:
 		try {
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("INSERT INTO rb_bookcases (bid, description, room, shelves) VALUES ($bid, '$bookcase', $rid, $shelves)");
+			//$db->executeUpdate("INSERT INTO rb_bookcases (bid, description, room, shelves) VALUES ($bid, '$bookcase', $rid, $shelves)");
+			$bk->insert();
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex) {
 			$db->executeUpdate("ROLLBACK");
@@ -48,7 +60,8 @@ switch ($_POST['action']) {
 	case ACTION_DELETE:
 		try {
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("DELETE FROM rb_bookcases WHERE bid = {$bid}");
+			//$db->executeUpdate("DELETE FROM rb_bookcases WHERE bid = {$bid}");
+			$bk->delete();
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex) {
 			$db->executeUpdate("ROLLBACK");

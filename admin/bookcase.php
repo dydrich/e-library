@@ -45,7 +45,7 @@ try {
 }
 
 if ($_GET['bid'] == 0) {
-	$drawer_label = "Armadio";
+	$drawer_label = "Nuovo armadio";
 	try {
 		$progressive = $db->executeCount("SELECT COALESCE(MAX(bid), 0) FROM `rb_bookcases`");
 	} catch (MySQLException $ex) {
