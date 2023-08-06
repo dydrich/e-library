@@ -12,13 +12,13 @@ ini_set('display_errors', 1);
 check_session();
 
 $_SESSION['area'] = 'admin';
-$drawer_label = null;
+$drawer_label = "<a href='school_complexes.php' style='font-size: 1em'>Sedi scolastiche</a> :: ";
 if ($_GET['vid'] == 0) {
-	$drawer_label = "Nuova sede";
+	$drawer_label .= "Nuova sede";
 	$res = null;
 }
 else {
-	$drawer_label = "Modifica sede";
+	$drawer_label .= "Modifica sede";
 	$r = $db->executeQuery("SELECT * FROM rb_venues WHERE vid = ".$_GET['vid']);
 	$res = $r->fetch_assoc();
 }

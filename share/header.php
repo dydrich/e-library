@@ -7,7 +7,7 @@
 
 	<div id="head_drawer" style="grid-area: drawer; display: flex; flex-direction: row; align-items: center">
 		<div id="head_label" style="width: 100%; text-align: center">
-			<p id="drawer_label" style="width: 100%">Area amministrazione::<?php echo $drawer_label ?></p>
+			<p id="drawer_label" style="width: 100%">Area amministrazione :: <?php echo $drawer_label ?></p>
 		</div>
 	</div>
 
