@@ -12,13 +12,13 @@ ini_set('display_errors', 1);
 check_session();
 
 $_SESSION['area'] = 'admin';
-$drawer_label = null;
+$drawer_label = "<a href='rooms.php' style='font-size: 1em'>Locali librerie</a> :: ";
 if ($_GET['rid'] == 0) {
-	$drawer_label = "Nuovo locale";
+	$drawer_label .= "Nuovo locale";
 	$res = null;
 }
 else {
-	$drawer_label = "Modifica locale";
+	$drawer_label .= "Modifica locale";
 	$r = $db->executeQuery("SELECT * FROM rb_rooms WHERE rid = ".$_GET['rid']);
 	$res = $r->fetch_assoc();
 }

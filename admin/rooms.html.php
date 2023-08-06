@@ -31,7 +31,7 @@
                         <?php
                         foreach ($rooms as $idv => $room) {
                         ?>
-                            <a href="room.php?uid=<?php echo $idv ?>" data-id="<?php echo $idv ?>" id="item<?php echo $idv ?>" data-vid="<?php echo $room['vid'] ?>">
+                            <a href="room.php?uid=<?php echo $idv ?>" data-id="<?php echo $idv ?>" id="item<?php echo $idv ?>" data-vid="<?php echo $room['vid'] ?>" data-bk="<?php echo $room['bookcases'] ?>">
                                 <div id="room<?php echo $idv ?>" data-id="<?php echo $idv ?>"  data-vid="<?php echo $room['vid'] ?>" class="user-card">
                                     <div class="user-card__name"><?php echo $room['room'] ?></div>
                                     <div class="user-card__icon">
@@ -101,15 +101,15 @@
                         ev.preventDefault();
                         clear_context_menu(ev, 'class_context_menu');
                         if (selected_tag !== 0) {
-                            document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                            document.getElementById('room'+selected_tag).classList.remove('selected_tag');
                         }
                         return false;
                     });
-                    document.getElementById('content').addEventListener('click', function (ev) {
+                    document.getElementById('left_col').addEventListener('click', function (ev) {
                         ev.preventDefault();
                         clear_context_menu(ev, 'class_context_menu');
                         if (selected_tag !== 0) {
-                            document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                            document.getElementById('room'+selected_tag).classList.remove('selected_tag');
                         }
                         return false;
                     });
@@ -122,6 +122,18 @@
                             list_bookcases(event);
                         });
                         document.getElementById('remove_room').addEventListener('click', function (ev) {
+                            if(document.getElementById("item"+selected_tag).getAttribute("data-bk") > 0){
+                                var msg = new Object();
+                                msg.data_field = "warning";
+                                msg.warning_message = "Impossibile cancellare il locale perché vi sono degli armadi associati.<br />Per eliminare il locale, elimina prima gli armadi";
+                                msg.focus = null;
+                                msg.message = "Operazione non consentita";
+                                clear_context_menu(ev, 'class_context_menu');
+                                document.getElementById('room'+selected_tag).classList.remove('selected_tag')
+                                j_alert("information", msg);
+                                return;
+                            }
+
                             j_alert("confirm", "Questa operazione è definitiva.<br/>Vuoi davvero eliminare questo locale dall'archivio?");
                             document.getElementById('okbutton').addEventListener('click', function (event) {
                                 event.preventDefault();
@@ -129,6 +141,8 @@
                             });
                             document.getElementById('nobutton').addEventListener('click', function (event) {
                                 event.preventDefault();
+                                clear_context_menu(ev, 'class_context_menu');
+                                document.getElementById('room'+selected_tag).classList.remove('selected_tag')
                                 fade('overlay', 'out', .1, 0);
                                 fade('confirm', 'out', .3, 0);
                                 return false;
@@ -142,8 +156,9 @@
                             event.preventDefault();
                             event.stopImmediatePropagation();
                             if (selected_tag !== 0) {
-                                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                                document.getElementById('room'+selected_tag).classList.remove('selected_tag');
                             }
+                            clear_context_menu(event, 'class_context_menu')
                             event.currentTarget.classList.add('selected_tag');
                             selected_tag = event.currentTarget.getAttribute("data-id");
                             parent = event.currentTarget.getAttribute("data-vid");
@@ -152,7 +167,7 @@
                             event.preventDefault();
                             event.stopImmediatePropagation();
                             if (selected_tag !== 0) {
-                                document.getElementById('item'+selected_tag).classList.remove('selected_tag');
+                                document.getElementById('room'+selected_tag).classList.remove('selected_tag');
                             }
                             event.currentTarget.classList.add('selected_tag');
                             selected_tag = event.currentTarget.getAttribute("data-id");

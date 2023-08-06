@@ -140,6 +140,8 @@
                             });
                             document.getElementById('nobutton').addEventListener('click', function (event) {
                                 event.preventDefault();
+                                clear_context_menu(ev, 'class_context_menu');
+                                document.getElementById('item'+selected_tag).classList.remove('selected_tag')
                                 fade('overlay', 'out', .1, 0);
                                 fade('confirm', 'out', .3, 0);
                                 return false;

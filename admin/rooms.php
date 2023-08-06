@@ -35,7 +35,8 @@ while ($v = $res_venues->fetch_assoc()) {
 }
 $rooms = [];
 while ($r = $res_rooms->fetch_assoc()) {
-	$rooms[$r['rid']] = ['room' => $r['name'], 'vid' => $r['vid'], 'venue' => $venues[$r['vid']]];
+	$bk = $db->executeCount("SELECT COUNT(*) FROM rb_bookcases WHERE room = {$r['rid']}");
+	$rooms[$r['rid']] = ['room' => $r['name'], 'vid' => $r['vid'], 'venue' => $venues[$r['vid']], 'bookcases' => $bk];
 }
 
 $drawer_label = "Locali libreria";
