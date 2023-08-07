@@ -38,7 +38,7 @@
 						<form method="post" id="bookcaseform"  class="userform" style="width: 90%; text-align: center; margin: auto; padding: 20px">
 							<div class="form_row">
 								<p class="material_label" style="text-align: left; grid-row: 1; grid-column: 1/2">Locale</p>
-								<select class="android" style="width: 100%; grid-row: 1; grid-column: 2/3" name="room" id="room">
+								<select class="android" style="width: 100%; grid-row: 1; grid-column: 2/3" name="room" id="room" <?php if(isset($bookcase)) echo "disabled" ?>>
 									<?php if (!isset($bookcase)) { ?><option selected value="0">Seleziona un locale</option><?php } ?>
 									<?php
 									while ($row = $res_rooms->fetch_assoc()) {

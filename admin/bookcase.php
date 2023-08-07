@@ -15,6 +15,8 @@ check_role($user, User::$ADMIN);
 
 $_SESSION['area'] = 'admin';
 
+$drawer_label = "<a href='bookcases.php' style='font-size: 1em'>Armadi</a> :: ";
+
 $bookcase = null;
 if (!isset($_GET['bid']) || $_GET['bid'] == 0) {
 	$bookcase = null;
@@ -45,7 +47,7 @@ try {
 }
 
 if ($_GET['bid'] == 0) {
-	$drawer_label = "Nuovo armadio";
+	$drawer_label .= "Nuovo armadio";
 	try {
 		$progressive = $db->executeCount("SELECT COALESCE(MAX(bid), 0) FROM `rb_bookcases`");
 	} catch (MySQLException $ex) {
@@ -54,7 +56,7 @@ if ($_GET['bid'] == 0) {
 	$progressive++;
 }
 else {
-	$drawer_label = "Modifica armadio";
+	$drawer_label .= "Modifica armadio";
 	$progressive = $_GET['bid'];
 }
 
