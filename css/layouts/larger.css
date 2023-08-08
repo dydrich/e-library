@@ -301,3 +301,17 @@ div#alert {
     grid-template-columns: 20% 80%;
     grid-template-rows: 55px auto 70px;
 }
+
+/** profile menu */
+#profile_menu {
+    width: 250px;
+    height: 150px;
+}
+
+#profile_menu .profile_item {
+    height: 55px;
+}
+
+#profile_menu .profile_item:first-of-type {
+    height: 40px;
+}

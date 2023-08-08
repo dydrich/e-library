@@ -96,3 +96,37 @@
         </a>
     </div>
 </div>
+
+<!-- user profiles -->
+<div id="profile_menu">
+    <div class="profile_item">
+        <span class="_bold">Cambia profilo</span>
+        </a>
+    </div>
+<?php
+$links = array("admin/index.php", "librarian/index.php", "student/index.php");
+$labels = array("Amministratore", "Bibliotecario", "Studente");
+$icons = array('admin_panel_settings', 'person', 'school');
+$roles = $user->getRoles();
+if(count($roles) > 0) {
+	foreach($roles as $role){
+?>
+    <div class="profile_item">
+        <a href="../<?php echo $links[$role - 1] ?>" id="default_item">
+            <i class="material-icons"><?php echo $icons[$role - 1] ?></i>
+            <span style="margin-left: 10px"><?php echo $labels[$role - 1] ?></span>
+        </a>
+    </div>
+
+<?php
+    }
+}
+?>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('profile').addEventListener('click', function(ev) {
+        show_profile_menu(ev);
+    });
+});
+</script>

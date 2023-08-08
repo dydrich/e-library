@@ -7,11 +7,13 @@
  */
 require_once "../lib/start.php";
 
+ini_set("display_errors", 1);
+
 check_session();
 $user->setCurrentRole(User::$LIBRARIAN);
 check_role($user, User::$LIBRARIAN);
 
-$_SESSION['area'] = 'libt=rarian';
+$_SESSION['area'] = 'librarian';
 
 $drawer_label = "Dashboard";
 

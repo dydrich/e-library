@@ -283,6 +283,25 @@ clear_context_menu = function (event, _menu) {
     }
 };
 
+var show_profile_menu = function (event) {
+    event.preventDefault();
+    var menu = document.getElementById("profile_menu");
+    var x, y;
+    var coords = document.getElementById("profile").getBoundingClientRect();
+    var h_coords = document.getElementById("header").getBoundingClientRect();
+    x = coords.left;
+    y = h_coords.bottom;
+
+    menu.style.opacity = 0;
+    menu.style.position = "absolute";
+    menu.style.top = parseInt(y)+"px";
+    menu.style.left = parseInt(x)+"px";
+    menu.style.display = 'block';
+    window.setTimeout(function () {
+        fade("profile_menu", 'in', 500, 1);
+    }, 10);
+};
+
 /*
 codice per la visualizzazione dei processi in background
 
