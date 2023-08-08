@@ -27,7 +27,7 @@
                 <div id="left_space"></div>
                 <div id="left_col">
                     <div id="form_container" style="width: 90%; margin: auto;">
-                        <form method="post" id="bookform"  class="userform mdc-elevation--z3" style="width: 80%; text-align: center; margin: auto; padding: 20px; ">
+                        <form method="post" id="bookform"  class="userform mdc-elevation--z2" style="width: 80%; text-align: center; margin: auto; padding: 20px; ">
                             <fieldset style="width: 90%; margin: auto; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
                                 <legend style="text-align: left">Dati di archiviazione</legend>
                                 <div class="form_row">
@@ -129,12 +129,12 @@
 
                 var submit_form = function (event) {
                     event.preventDefault();
-                    if(!validate_form() {
+                    if(!validate_form()) {
                         jalert("error", "Ricontrolla i campi obbligatori del form");
                         window.setTimeout(function () {
                             window.location = 'library.php';
                         }, 2500);
-                    })
+                    };
                     var xhr = new XMLHttpRequest();
                     var form = document.getElementById('bookform');
                     var formData = new FormData(form);
@@ -193,6 +193,48 @@
                         }
                     }
                 };
+
+                var validate_form = function() {
+                    var go = true;
+                    var msg = new Object();
+                    msg.data_field = "validation_data";
+                    msg.validation_message = "Ricontrolla il form e inserisci tutti i dati obbligatori.";
+                    msg.focus = "room";
+                    var index = 1;
+					if(document.getElementById('room').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai selezionato il locale";
+                        go = false;
+                        index++;
+						
+			        }
+                    if(document.getElementById('bookcase').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai selezionato l'armadio";
+                        go = false;
+                        index++;
+			        }
+                    if(document.getElementById('shelf').value == ""){
+                        msg.validation_message += "<br />"+index+". Non hai indicato lo scaffale";
+                        go = false;
+						index++;
+			        }
+					if(document.getElementById('title').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai inserito il titolo";
+                        go = false;
+						index++;
+			        }
+                    if(document.getElementById('author').value == 0){
+                        msg.validation_message += "<br />"+index+". Non hai inserito l'autore";
+                        go = false;
+						index++;
+			        }
+                    msg.message = "Errori nel form";
+                    if(!go){
+                        j_alert("information", msg);
+                        return false;
+                    }
+
+                    return true;
+                }
 
             </script>
         </div>

@@ -27,6 +27,6 @@ try {
 
 }
 
-$drawer_label = "Elenco studenti";
+$drawer_label = "<a href='classes.php' style='font-size: 1em'>Classi</a> :: Elenco studenti ".$res['year'].$res['section'];
 
 include "class_students.html.php";

@@ -16,6 +16,6 @@ $_SESSION['area'] = 'librarian';
 $sel_books = "SELECT * FROM rb_books ORDER BY author, title";
 $res_books = $db->executeQuery($sel_books);
 
-$drawer_label = "Libreria";
+$drawer_label = "Catalogo libri";
 
 include "library.html.php";

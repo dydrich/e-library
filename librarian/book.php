@@ -11,7 +11,7 @@ check_role($user, User::$LIBRARIAN);
 
 $_SESSION['area'] = 'librarian';
 
-$sel_rooms = "SELECT rb_rooms.*, rb_venues.name AS venue FROM rb_rooms, rb_venues WHERE rb_rooms.vid=rb_venues.vid ORDER BY rb_rooms.vid, name";
+$sel_rooms = "SELECT rb_rooms.*, rb_venues.name AS venue FROM rb_rooms, rb_venues WHERE rb_rooms.vid=rb_venues.vid AND bookcases > 0 ORDER BY rb_rooms.vid, name";
 $sel_bookcases = "SELECT * FROM rb_bookcases ORDER BY room, bid";
 $book = null;
 
