@@ -22,10 +22,10 @@
 <!-- error window -->
 <div id="error" class="error_msg" style="display: none">
 <div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
-        <i class="material-icons primary_color">warning</i>
+        <i class="material-icons accent_color">warning</i>
     </div>
     <div id="alert_title" style="grid-row: 1; grid-column: 2/3">Errore</div>
-    <p class="errormessage" id="errormessage"></p>
+    <p class="errormessage" id="errormessage" style="grid-row: 2; grid-column: 1/3"></p>
 </div>
 
 <!-- information window -->

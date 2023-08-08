@@ -479,6 +479,10 @@ div.menu_link a {
 .admin_card {
     background-color: #1E4389;
 }
+.unused_card {
+    background-color: rgba(0, 0, 0, .10);
+    color: rgba(0, 0, 0, .76)
+}
 
 .librarian_color {
     color: #C2185B;

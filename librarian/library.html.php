@@ -49,7 +49,7 @@
             </div>
         </div>
         <div id="right_col">
-            <?php include_once "menu.php" ?>
+            <?php include_once "menu_books.php" ?>
         </div>
         <div id="right_space"></div>
         <button id="newbook" class="mdc-fab material-icons app-fab--absolute" aria-label="Nuovo libro">

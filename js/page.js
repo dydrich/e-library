@@ -129,7 +129,7 @@ var j_alert = function(type, msg){
         overlay.style.opacity = 0;
         overlay.style.display = 'block';
         _alert.style.opacity = 0;
-        _alert.style.display = 'block';
+        _alert.style.display = 'grid';
         _alert.style.top = mtop+"px";
         _alert.style.left = mleft+"px";
         window.setTimeout(function(){

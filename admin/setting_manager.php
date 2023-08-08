@@ -28,6 +28,7 @@ switch($_POST['action']){
 		try{
 			$begin = $db->executeUpdate("BEGIN");
 			$db->executeUpdate("INSERT INTO rb_settings (var, value, readonly) VALUES ('{$name}', '{$val}', 0)");
+			require_once "../lib/load_env.php";
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (\edocs\MySQLException $ex){
 			$db->executeUpdate("ROLLBACK");

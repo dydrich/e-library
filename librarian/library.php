@@ -13,7 +13,7 @@ check_role($user, User::$LIBRARIAN);
 
 $_SESSION['area'] = 'librarian';
 
-$sel_books = "SELECT * FROM rb_books ORDER BY author, title";
+$sel_books = "SELECT bid, author, title, COALESCE(cover, 'blankbook_th.jpg') FROM rb_books ORDER BY title";
 $res_books = $db->executeQuery($sel_books);
 
 $drawer_label = "Catalogo libri";
