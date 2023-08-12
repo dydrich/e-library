@@ -70,7 +70,7 @@ class Archive
         $select = "SELECT * FROM rb_books WHERE bid = {$bookId}";
         $res = $this->datasource->executeQuery($select);
         $sel_cat = "SELECT rb_categories.* FROM rb_categories JOIN `rb_categories_book` ON rb_categories.cid = rb_categories_book.cid WHERE bid = {$bookId}";
-        $cat = $his->datasource->executeQuery($sel_cat);
+        $cat = $this->datasource->executeQuery($sel_cat);
         $res['cat'] = $cat;
         $location = ['school_complex' => $res['school_complex'], 'room' => $res['room'], 'bookcase' => $res['bookcase'], 'shelf' => $res['shelf']];
         $book = new Book($bookId, $res['title'], $res['author'], $res['publisher'], $res['cat']['cid'], $res['cover'], $res['pages'], $location, $this->datasource, $res['code']);
