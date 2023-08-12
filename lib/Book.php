@@ -15,9 +15,8 @@ class Book
 	private $title;
 	private $author;
 	private $publisher;
-	private $fistEditionYear;
-	private $bookEditionYear;
 	private $pages;
+	private $category;
 	private $avalaible;
 	private $loanData = ['id' => null, 'studentID' => null, 'date' => null];
 	private $location = ['school_complex' => null, 'room' => null, 'bookcase' => null, 'shelf' => null];
@@ -25,6 +24,8 @@ class Book
 	private $history = [['id' => null, 'studentID' => null, 'loan_date' => null, 'return_date' => null]];
 	private $datasource;
 	private $code;
+	private $cover;
+	private $defaultCover = "blankbook_th.jpg";
 
 	/**
 	 * Book constructor.
@@ -43,17 +44,42 @@ class Book
 	 * @param $datasource
 	 * @param $code
 	 */
-	public function __construct($bookID, $title, $author, $publisher, $fistEditionYear, $bookEditionYear, $pages, array $location, $datasource, $code) {
+	public function __construct($bookID, $title, $author, $publisher, $category, $cover, $pages, array $location, $datasource, $code) {
 		$this->bookID = $bookID;
 		$this->title = $title;
 		$this->author = $author;
 		$this->publisher = $publisher;
-		$this->fistEditionYear = $fistEditionYear;
-		$this->bookEditionYear = $bookEditionYear;
+		$this->category = $category;
 		$this->pages = $pages;
 		$this->location = $location;
 		$this->datasource = $datasource;
 		$this->code = $code;
+		if($cover == "" || is_null($cover)) {
+			$this->setCoverToDefault();
+		}
+		else {
+			$this->cover = $cover;
+		}
+	}
+
+	public function setCoverToDefault() {
+		$this->cover = $this->defaultCover;
+	}
+
+	public function getCategory() {
+		return $this->category;
+	}
+
+	public function setCategory($category) {
+		$this->category = $category;
+	}
+
+	public function setCode($code) {
+		$this->code = $code;
+	}
+
+	public function getCode() {
+		return $this->code;
 	}
 
 	/**
@@ -113,35 +139,7 @@ class Book
 	}
 
 	/**
-	 * @return mixed
-	 */
-	public function getFistEditionYear() {
-		return $this->fistEditionYear;
-	}
-
-	/**
-	 * @param mixed $fistEditionYear
-	 */
-	public function setFistEditionYear($fistEditionYear) {
-		$this->fistEditionYear = $fistEditionYear;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getBookEditionYear() {
-		return $this->bookEditionYear;
-	}
-
-	/**
-	 * @param mixed $bookEditionYear
-	 */
-	public function setBookEditionYear($bookEditionYear) {
-		$this->bookEditionYear = $bookEditionYear;
-	}
-
-	/**
-	 * @return mixed
+	 * @return number
 	 */
 	public function getPages() {
 		return $this->pages;

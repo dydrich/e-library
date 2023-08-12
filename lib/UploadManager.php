@@ -13,6 +13,7 @@ class UploadManager {
 	const FILE_EXISTS = 1;
 	const UPL_ERROR = 2;
 	const UPL_OK = 3;
+	const WRONG_FILE_EXT = 4;
 	
 	public function __construct($file, $db, $pt = 'upload'){
 		$this->pathTo = $pt;
@@ -32,7 +33,7 @@ class UploadManager {
 		/**
 		 * gestione file nel filesystem
 		*/
-		$dir = $_SESSION['__config__']['document_root']."/upload/";
+		$dir = $_SESSION['__config__']['document_root']."/images/covers/";
 		/*
 		if(!file_exists($dir)){
 			echo $dir. 'non esiste???';
@@ -53,13 +54,19 @@ class UploadManager {
 				chmod($file, 0644);
 			}
 			else {
-				echo "<br>moving error to $target_path";
+				echo "<br>error moving to $target_path";
 			}
 		}
 		return $file;
 	}
 	
-	public function upload(){
+	public function upload($ext = null){
+		if($ext != null) {
+			$file_ext = pathinfo($this->file['name'], PATHINFO_EXTENSION);
+			if (!in_array($file_ext, $ext)) {
+				return false;
+			}
+		}
 		return $this->uploadDocument();
 	}
 	

@@ -93,6 +93,16 @@
 				<div id="right_space"></div>
 			</div>
 			<?php include_once "../share/footer.php" ?>
+			<script>
+				document.addEventListener("DOMContentLoaded", function () {
+					var ends = document.querySelectorAll('a');
+					for (var i = 0; i < ends.length; i++) {
+						ends[i].addEventListener('click', function (event) {
+							event.stopPropagation();
+						});
+					}
+				});
+			</script>
 		</div>
 	</body>
 </html>

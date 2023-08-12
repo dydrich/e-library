@@ -128,5 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('profile').addEventListener('click', function(ev) {
         show_profile_menu(ev);
     });
+    document.getElementById('left_col').addEventListener('click', function(ev) {
+        clear_context_menu(ev, "profile_menu");
+    });
 });
 </script>

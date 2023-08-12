@@ -50,7 +50,7 @@ switch ($_POST['action']) {
 	case ACTION_UPDATE:
 		try {
 			$begin = $db->executeUpdate("BEGIN");
-			$db->executeUpdate("UPDATE rb_categories SET category = '{$name}', code = '$code' WHERE cid = {$cat_id}");
+			$db->executeUpdate("UPDATE rb_categories SET category = '{$name}' WHERE cid = {$cat_id}");
 			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex) {
 			$response['status'] = "kosql";

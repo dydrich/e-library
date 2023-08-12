@@ -176,7 +176,6 @@
 							var OK = 200; // status 200 is a successful return.
 							if (xhr.readyState === DONE) {
 								if (xhr.status === OK) {
-									console.log("data retrieved");
 									var code = xhr.response.code;
 									document.getElementById('code').value = code;
 								}

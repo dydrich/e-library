@@ -26,8 +26,8 @@
             <div id="main">
                 <div id="left_space"></div>
                 <div id="left_col">
-                    <div id="form_container" style="width: 90%; margin: auto;">
-                        <form method="post" id="bookform"  class="userform mdc-elevation--z2" style="width: 80%; text-align: center; margin: auto; padding: 20px; ">
+                    <div id="form_container" class="form_container" style="width: 80%; margin: auto;">
+                        <form method="post" id="bookform"  class="userform" style="width: 90%; text-align: center; margin: auto; padding: 20px; ">
                             <fieldset style="width: 90%; margin: auto; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
                                 <legend style="text-align: left">Dati di archiviazione</legend>
                                 <div class="form_row">
@@ -59,6 +59,7 @@
                                 <div class="form_row">
                                     <p class="material_label mandatory" style="text-align: left; grid-row: 2; grid-column: 1/2">Libreria</p>
                                     <select class="android" name="bookcase" id="bookcase" style="width: 100%; margin-right: auto; margin-left: auto; grid-row: 2; grid-column: 2/3">
+                                        <option value="0" selected>Seleziona una libreria</option>
                                         <?php
                                         while ($row = $res_bookcases->fetch_assoc()) {
                                             $selected = '';
@@ -78,30 +79,68 @@
                                     <p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Scaffale</p>
                                     <input type="text" id="shelf" name="shelf" disabled class="android disabled" value="<?php if (isset($book)) echo $location['shelf'] ?>" style="grid-row: 3; grid-column: 2/3" />
                                 </div><!-- form_row #3 --> 
+                                <div class="form_row">
+                                    <p class="material_label mandatory" style="text-align: left; grid-row: 4; grid-column: 1/2">Categoria</p>
+                                    <select class="android" name="category" id="category" style="width: 100%; margin: auto; grid-row: 4; grid-column: 2/3">
+                                        <option value="0" selected>Seleziona una categoria</option>
+                                        <?php
+                                        while ($cat = $res_categories->fetch_assoc()) {
+                                            $selected = '';
+                                            if (isset($book)) {
+                                                if ($book->getCategory() == $cat['cid']) {
+                                                    $selected = "default selected";
+                                                }
+                                            }
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $cat['cid'] ?>"><?php echo $cat['category'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div> <!-- form_row #4 -->
+                                <div class="form_row">
+                                    <p class="material_label mandatory" style="text-align: left; grid-row: 5; grid-column: 1/2">Codice</p>
+                                    <input type="text" id="code" name="code" class="android disabled_link" value="<?php if (isset($book)) echo $book->getCode() ?>" readOnly style="grid-row: 5; grid-column: 2/3" />
+                                </div><!-- form_row #5 -->
                             </fieldset>
                             <fieldset style="width: 90%; margin-right: auto; margin-left: auto; margin-top: 20px; padding-top: 10px; padding-bottom: 20px">
                                 <legend style="text-align: left">Dati libro</legend>
                                 <div class="form_row">
-                                    <p class="material_label mandatory" style="text-align: left; grid-row: 4; grid-column: 1/2">Titolo</p>
-                                    <input type="text" id="title" name="title" class="android" value="<?php if (isset($book)) echo $book->getTitle() ?>" style="grid-row: 4; grid-column: 2/3" />
-                                </div><!-- form_row #4 -->
-                                <div class="form_row">
-                                    <p class="material_label mandatory" style="text-align: left; grid-row: 5; grid-column: 1/2">Autore</p>
-                                    <input type="text" id="author" name="author" class="android" value="<?php if (isset($book)) echo $book->getAuthor(); ?>" style="grid-row: 5; grid-column: 2/3" />
-                                </div><!-- form_row #5 -->
-                                <div class="form_row">
-                                    <p class="material_label" style="text-align: left; grid-row: 6; grid-column: 1/2">Casa editrice</p>
-                                    <input type="text" id="publisher" name="publisher" class="android" value="<?php if (isset($book)) echo $book->getPublisher() ?>" style="grid-row: 6; grid-column: 2/3" />
+                                    <p class="material_label mandatory" style="text-align: left; grid-row: 6; grid-column: 1/2">Titolo</p>
+                                    <input type="text" id="title" name="title" class="android" value="<?php if (isset($book)) echo $book->getTitle() ?>" style="grid-row: 6; grid-column: 2/3" />
                                 </div><!-- form_row #6 -->
                                 <div class="form_row">
-                                    <p class="material_label" style="text-align: left; grid-row: 7; grid-column: 1/2">Pagine</p>
-                                    <input type="text" id="pages" name="pages" class="android" value="<?php if (isset($book)) echo $book->getPages() ?>" style="grid-row: 7; grid-column: 2/3" />
-                                </div><!-- form_row #6 -->
+                                    <p class="material_label mandatory" style="text-align: left; grid-row: 7; grid-column: 1/2">Autore</p>
+                                    <input type="text" id="author" name="author" class="android" value="<?php if (isset($book)) echo $book->getAuthor(); ?>" style="grid-row: 7; grid-column: 2/3" />
+                                </div><!-- form_row #7 -->
+                                <div class="form_row">
+                                    <p class="material_label" style="text-align: left; grid-row: 8; grid-column: 1/2">Casa editrice</p>
+                                    <input type="text" id="publisher" name="publisher" class="android" value="<?php if (isset($book)) echo $book->getPublisher() ?>" style="grid-row: 8; grid-column: 2/3" />
+                                </div><!-- form_row #8 -->
+                                <div class="form_row">
+                                    <p class="material_label" style="text-align: left; grid-row: 9; grid-column: 1/2">Pagine</p>
+                                    <input type="text" id="pages" name="pages" class="android" value="<?php if (isset($book)) echo $book->getPages(); else echo "0" ?>" style="grid-row: 9; grid-column: 2/3" />
+                                </div><!-- form_row #9 -->
+                                <div class="form_row">
+                                    <p class="material_label" style="text-align: left; grid-row: 10; grid-column: 1/2">Copertina</p>
+                                <?php if(isset($current_doc)){ ?>
+                                    <div style="grid-row: 10; grid-column: 2/3">    
+                                        <input class="android" type="text" name="fname" id="fname" style="width: 75%; " readOnly value="<?php print $book->getCover() ?>"/>
+                                        <a href="#" onclick="load_iframe('<?php print $book->getCover() ?>')" style="margin-left: 15px">Modifica file</a>
+                                    </div>
+                                <?php }  else{ ?>
+                                    <div style="grid-row: 10; grid-column: 2/3">
+                                        <div id="iframe"><iframe src="../admin/upload_manager.php" id="aframe"></iframe></div>
+                                        <a href="#" onclick="del_file()" id="del_upl" style="">Annulla</a>
+                                    <div>
+                                <?php } ?>
+                                </div><!-- form_row #10 -->
                             </fieldset>
                             
                             <section class="mdc-card__actions" style="width: 90%; margin-top: 20px; margin-right: auto; margin-left: auto">
-                                <button id="submit_btn" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-left: -8px;margin-top: 15px">Registra</button>
+                                <button id="submit_btn" onclick="submit_form(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-left: -8px;margin-top: 15px">Registra</button>
                             </section>
+                            <input type="hidden" id="server_file" name="server_file" value="" />
                         </form>
                     </div>
                 </div>
@@ -117,7 +156,12 @@
                 
                 document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('room').addEventListener('change', function() {
-                    get_bookcases(this.value);
+                        get_bookcases(this.value);
+                        //alert(this.value);
+                    });
+                    document.getElementById('category').addEventListener('change', function() {
+                        event.preventDefault();
+                        get_code(this.value);
                         //alert(this.value);
                     });
                     document.getElementById('submit_btn').addEventListener('click', function(event) {
@@ -126,6 +170,7 @@
 
                 });
                 var book_id = <?php if (isset($_REQUEST['book_id'])) echo $_REQUEST['book_id']; else echo 0 ?>;
+                var debug = <?php echo $_SESSION['__config__']['debug'] ?>;
 
                 var submit_form = function (event) {
                     event.preventDefault();
@@ -194,6 +239,33 @@
                     }
                 };
 
+                var get_code = function (category) {
+                    if(category == 0) {
+                        return false;
+                    }
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
+
+                    xhr.open('post', 'book_manager.php');
+                    formData.append('cat', category);
+                    formData.append('action', <?php echo ACTION_GET_BOOK_CODE ?>);
+                    formData.append('book_id', 0);
+                    xhr.responseType = 'json';
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function () {
+                        var DONE = 4; // readyState 4 means the request is done.
+                        var OK = 200; // status 200 is a successful return.
+                        if (xhr.readyState === DONE) {
+                            if (xhr.status === OK) {
+                                var code = xhr.response.code;
+								document.getElementById('code').value = code;
+                            }
+                        } else {
+                            console.log('Error: ' + xhr.status);
+                        }
+                    }
+                };
+
                 var validate_form = function() {
                     var go = true;
                     var msg = new Object();
@@ -217,6 +289,11 @@
                         go = false;
 						index++;
 			        }
+                    if(document.getElementById('category').value == ""){
+                        msg.validation_message += "<br />"+index+". Non hai indicato la categoria";
+                        go = false;
+						index++;
+			        }
 					if(document.getElementById('title').value == 0){
                         msg.validation_message += "<br />"+index+". Non hai inserito il titolo";
                         go = false;
@@ -236,6 +313,52 @@
                     return true;
                 }
 
+                var del_file = function(event){
+                    if(document.getElementById('server_file').value == ""){
+                        j_alert("error", "Non hai ancora fatto l'upload di alcun file");
+                        return false;
+                    }
+                    
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
+
+                    xhr.open('post', 'book_manager.php');
+                    formData.append('action', <?php echo ACTION_UNLOAD_FILE ?>);
+                    formData.append('server_file', document.getElementById('server_file').value);
+                    xhr.responseType = 'json';
+                    xhr.send(formData);
+
+                    xhr.onreadystatechange = function () {
+                        var DONE = 4; // readyState 4 means the request is done.
+                        var OK = 200; // status 200 is a successful return.
+                        if (xhr.readyState === DONE) {
+                            if (xhr.status === OK) {
+                                if (xhr.response.status == "kofile"){
+                                    if(debug) {
+                                        var error_msg = xhr.response.message+"\n"+xhr.response.dbg_message;
+                                        j_alert("error", error_msg);
+                                    }
+                                    else {
+                                        j_alert("error", xhr.response.message);
+                                    }
+                                    console.log(json.dbg_message);
+                                }
+                                else {
+                                    reload_iframe("alert;Il file è stato cancellato dal server");
+                                    document.getElementById('server_file').value = "";
+                                }
+                            }
+                        } else {
+                            console.log('Error: ' + xhr.status);
+                        }
+                    }
+		        };
+
+                var reload_iframe = function(msg){
+                    document.getElementById('aframe').setAttribute('src', '../admin/upload_manager.php');
+                    var data = msg.split(";");
+                    j_alert(data[0], data[1]);
+                };
             </script>
         </div>
     </body>

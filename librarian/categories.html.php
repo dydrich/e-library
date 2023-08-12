@@ -16,8 +16,6 @@
             div.item:first-of-type {
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
-                border-top-color: var(--mdc-theme-secondary);
-                border-top: 1px solid var(--mdc-theme-secondary);
             }
         </style>
     </head>
@@ -37,7 +35,7 @@
                                     $style = "librarian_card";
                                 }
                                 ?>
-                                <a href="category.php?cid=<?php echo $row['cid'] ?>" data-id="<?php echo $row['cid'] ?>" id="item<?php echo $row['cid'] ?>" class="_2sides-horiz-card-mini">
+                                <a href="category.php?cid=<?php echo $row['cid'] ?>" data-id="<?php echo $row['cid'] ?>" id="item<?php echo $row['cid'] ?>" data-books="<?php echo $row['books'] ?>" class="_2sides-horiz-card-mini">
                                     <span class="_2sides-horiz-card-mini__icon-cont <?php echo $style ?>" role="presentation">
                                         <i class="material-icons">category</i>
                                     </span>
@@ -62,6 +60,20 @@
                     add
                 </span>
             </button>
+            <div id="cat_context_menu" class="mdc-elevation--z2">
+                <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+                    <a href="#" id="open_cat">
+                        <i class="material-icons">mode_edit</i>
+                        <span>Modifica</span>
+                    </a>
+                </div>
+                <div id="destroy_item" class="item" style="">
+                    <a href="#" id="remove_cat">
+                        <i class="material-icons">delete</i>
+                        <span>Elimina</span>
+                    </a>
+                </div>
+            </div>
             <script>
                 var selected_tag = 0;
                 document.addEventListener("DOMContentLoaded", function () {
@@ -85,6 +97,7 @@
                         if (selected_tag !== 0) {
                             document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                         }
+                        clear_context_menu(ev, 'cat_context_menu');
                         return false;
                     });
                     document.getElementById('left_col').addEventListener('click', function (ev) {
@@ -92,7 +105,40 @@
                         if (selected_tag !== 0) {
                             document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                         }
+                        clear_context_menu(ev, 'cat_context_menu');
                         return false;
+                    });
+                    document.getElementById('open_cat').addEventListener('click', function (ev) {
+                        alert("click");
+                        open_in_browser();
+                    });
+
+                    document.getElementById('remove_cat').addEventListener('click', function (ev) {
+                        if(document.getElementById("item"+selected_tag).getAttribute("data-books") > 0){
+                            var msg = new Object();
+                            msg.data_field = "warning";
+                            msg.warning_message = "Impossibile cancellare la categoria perché vi sono dei libri associati.<br />Per eliminare la categoria, modifica prima i libri";
+                            msg.focus = null;
+                            msg.message = "Operazione non consentita";
+                            clear_context_menu(ev, 'cat_context_menu');
+                            document.getElementById('item'+selected_tag).classList.remove('selected_tag')
+                            j_alert("information", msg);
+                            return;
+                        }
+                        
+                        j_alert("confirm", "Questa operazione è definitiva.<br/>Vuoi davvero eliminare questa categoria dall'archivio?");
+                        document.getElementById('okbutton').addEventListener('click', function (ev) {
+                            event.preventDefault();
+                            remove_item(ev);
+                        });
+                        document.getElementById('nobutton').addEventListener('click', function (ev) {
+                            event.preventDefault();
+                            clear_context_menu(ev, 'cat_context_menu');
+                            document.getElementById('item'+selected_tag).classList.remove('selected_tag')
+                            fade('overlay', 'out', .1, 0);
+                            fade('confirm', 'out', .3, 0);
+                            return false;
+                        })
                     });
 
                     var ends = document.querySelectorAll('._2sides-horiz-card-mini');
@@ -105,6 +151,7 @@
                             }
                             event.currentTarget.classList.add('selected_tag');
                             selected_tag = event.currentTarget.getAttribute("data-id");
+                            clear_context_menu(event, 'cat_context_menu');
                         });
                         ends[i].addEventListener('contextmenu', function (event) {
                             event.preventDefault();
@@ -112,9 +159,11 @@
                             if (selected_tag !== 0) {
                                 document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                             }
+                            clear_context_menu(event, 'cat_context_menu');
                             event.currentTarget.classList.add('selected_tag');
                             current_target_id = event.currentTarget.getAttribute("data-id");
                             selected_tag = event.currentTarget.getAttribute("data-id");
+                            show_context_menu(event, null, 150, 'cat_context_menu');
                             
                         });  
                         ends[i].addEventListener('dblclick', function (event) {
@@ -128,6 +177,34 @@
 
                 var open_in_browser = function () {
                     document.location.href = 'category.php?cid='+selected_tag;
+                };
+
+                var remove_item = function (ev) {
+                    fade('confirm', 'out', .1, 0);
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
+
+                    xhr.open('post', 'category_manager.php');
+                    var action = <?php echo ACTION_DELETE ?>;
+
+                    formData.append('cid', selected_tag);
+                    formData.append('action', action);
+                    xhr.responseType = 'json';
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function () {
+                        var DONE = 4; // readyState 4 means the request is done.
+                        var OK = 200; // status 200 is a successful return.
+                        if (xhr.readyState === DONE) {
+                            if (xhr.status === OK) {
+                                j_alert("alert", xhr.response.message);
+                                var item_to_del = document.getElementById('item'+selected_tag);
+                                item_to_del.style.display = 'none';
+                                clear_context_menu(ev, 'cat_context_menu');
+                            }
+                        } else {
+                            console.log('Error: ' + xhr.status);
+                        }
+                    }
                 };
 
             </script>

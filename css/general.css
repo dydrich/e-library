@@ -911,7 +911,7 @@ div.dashboard_card_row i {
     min-height: 360px;
 }
 
-#student_context_menu, #user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order, #bookcase_context_menu, #book_context_menu {
+#student_context_menu, #user_context_menu, #class_context_menu, #yearcontext_menu, #context_menu, #field_order, #bookcase_context_menu, #book_context_menu, #cat_context_menu {
     width: 250px;
     display: none;
     background-color: white;
@@ -992,13 +992,13 @@ div.dashboard_card_row i {
     text-decoration: none;
 }
 
-#student_context_menu .item a i, #user_context_menu .item a i, #class_context_menu .item a i, #bookcase_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i {
+#student_context_menu .item a i, #user_context_menu .item a i, #class_context_menu .item a i, #bookcase_context_menu .item a i, #yearcontext_menu .item a i, #context_menu .item a i, #field_order .item a i, #context_menu .item span, #doc_context_menu .item a i, #doc_context_menu .item span, #cat_menu .item span, #cat_menu .item a i , #cat_context_menu .item a i {
       margin-left: 15px;
       color: rgba(0, 0, 0, .54);
       text-decoration: none;
 }
 
-#student_context_menu .item a span, #user_context_menu .item a span, #class_context_menu .item a span, #bookcase_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span {
+#student_context_menu .item a span, #user_context_menu .item a span, #class_context_menu .item a span, #bookcase_context_menu .item a span, #yearcontext_menu .item a span, #context_menu .item a span, #doc_context_menu .item a span, #cat_menu .item a span, #cat_context_menu .item a span {
     margin-left: 15px;
     color: rgba(0, 0, 0, .87);
     text-decoration: none;
@@ -1230,7 +1230,7 @@ iframe {
     display: none;
     color: rgba(0, 0, 0, .84);
     background-color: white;
-    border: 1px solid rgba(0, 0, 0, .20);
+    border: 1px solid rgba(0, 0, 0, .15);
     z-index: 200;
 }
 
@@ -1255,7 +1255,13 @@ iframe {
 }
 
 /** books */
-.book_card {
+.book-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-data {
+    color: rgba(0, 0, 0, .67);
     display: flex;
     flex-direction: column;
 }

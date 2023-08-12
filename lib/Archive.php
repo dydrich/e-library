@@ -66,4 +66,27 @@ class Archive
         $this->datasource->executeUpdate($upd);
     }
 
+    public function getBookFromId($bookId) {
+        $select = "SELECT * FROM rb_books WHERE bid = {$bookId}";
+        $res = $this->datasource->executeQuery($select);
+        $sel_cat = "SELECT rb_categories.* FROM rb_categories JOIN `rb_categories_book` ON rb_categories.cid = rb_categories_book.cid WHERE bid = {$bookId}";
+        $cat = $his->datasource->executeQuery($sel_cat);
+        $res['cat'] = $cat;
+        $location = ['school_complex' => $res['school_complex'], 'room' => $res['room'], 'bookcase' => $res['bookcase'], 'shelf' => $res['shelf']];
+        $book = new Book($bookId, $res['title'], $res['author'], $res['publisher'], $res['cat']['cid'], $res['cover'], $res['pages'], $location, $this->datasource, $res['code']);
+        return $book;
+    }
+
+    public function getBookCode($bookId, $category) {
+        if($bookId == 0) {
+            $max = $this->datasource->executeCount("SELECT MAX(bid) FROM rb_books");
+            $max++;
+            $cat_code = $this->datasource->executeCount("SELECT code FROM rb_categories WHERE cid = {$category}");
+            $code = $cat_code."-";
+            $prog = nmb_format($max, 6, "0");
+            $code .= $prog;
+            return $code;
+        }
+    }
+
 }

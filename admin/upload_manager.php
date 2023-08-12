@@ -32,7 +32,7 @@ ini_set('display_errors', 1);
         }
         else{
         ?>
-            <input class="file" type="file" name="fname" id="fname" style="width: 90%; border: 1px solid lightgray; border-radius: " onchange="parent.loading(300); document.forms[0].submit()" />
+            <input class="file" type="file" name="fname" id="fname" style="width: 90%; border: 1px solid lightgray;" onchange="parent.loading(300); document.forms[0].submit()" />
         <?php
         }
         ?>
@@ -49,15 +49,28 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "upload"){
 	$file = preg_replace("/\\\/", "", $file);
 	$upload_manager = new UploadManager($_FILES['fname'], $db, null);
 
-	$ret = $upload_manager->upload();
+    $ext = ['jpg', 'jpeg', 'gif', 'png'];
+    $dir = $_SESSION['__config__']['document_root']."/images/covers/";
+	$ret = $upload_manager->upload($ext);
+    $path = $dir.$ret;
+    if(!$ret) {
+        $html = "error;Il file caricato non è una immagine valida per il web";
+	    print("<script>parent.reload_iframe('{$html}'); </script>");
+        exit;
+    }
 
 	$fs = 00;
 	$dati_file = MimeType::getMimeContentType($file);
-	if (file_exists("../upload/{$ret}")) {
-        $fs = filesize("../upload/{$ret}");
+	if (file_exists($path)) {
+        $fs = filesize($path);
+        $dati_file['size'] = formatBytes($fs, 2);
 	}
+    else {
+        $fs = "non trovato ".$path;
+        $dati_file['size'] = $fs;
+    }
 
-	$dati_file['size'] = formatBytes($fs, 2);
+
 	$dati_file['encoded_name'] = $file;
 	$json = json_encode($dati_file);
 	$html = "Nome file: $file_name<br />Tipo: {$dati_file['tipo']}<br />Size: {$dati_file['size']}<br />Nome in archivio: {$ret}";

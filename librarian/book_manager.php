@@ -2,6 +2,9 @@
 
 require_once "../lib/start.php";
 require_once "../lib/Book.php";
+require_once "../lib/Archive.php";
+
+ini_set('display_errors', 1);
 
 check_session(AJAX_CALL);
 
@@ -18,7 +21,7 @@ if ($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE) {
 	$location = ['school_complex' => $school_complex, 'room' => $room, 'bookcase' => $bookcase, 'shelf' => $shelf];
 	$book = new \elibrary\Book($book_id, $title, $author, $publisher, null, null, null, $location, new MySQLDataLoader($db));
 }
-else {
+else if ($_POST['action'] == ACTION_DELETE){
 	$book = new \elibrary\Book($book_id, null, null, null, null, null, null, [], new MySQLDataLoader($db));
 }
 
@@ -73,6 +76,38 @@ switch ($_POST['action']) {
 		}
 		$msg = "Libro aggiornato";
 		break;
+	case ACTION_UNLOAD_FILE:
+		$file = $_POST['server_file'];
+		$dir = $_SESSION['__config__']['document_root']."/images/covers/";
+		$path = $dir.$file;
+		try {
+			if (file_exists($path)){
+				unlink($path);
+			}
+			else {
+				$response['status'] = "kofile";
+				$response['message'] = "File non trovato";
+				$response['dbg_message'] = "Non è stato possibile completare l'operazione perché il file {$file} non si trova nella posizione indicata";
+				$response['dir'] = $dir;
+				echo json_encode($response);
+				exit;
+			}
+		} catch (Exception $ex) {
+			$response['status'] = "ko";
+			$response['message'] = "Operazione non completata";
+			$response['dbg_message'] = $ex->getMessage();
+			$response['dir'] = $dir.$file;
+			echo json_encode($response);
+			exit;
+		}
+	case ACTION_GET_BOOK_CODE:
+		$id = $_REQUEST['book_id'];
+		$cat = $_REQUEST['cat'];
+		$archive = \elibrary\Archive::getInstance(new MySQLDataLoader($db));
+		$code = $archive->getBookCode($id, $cat);
+		$response['code'] = $code;
+		$msg = "";
+	break;
 }
 
 $response['message'] = $msg;

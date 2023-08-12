@@ -30,18 +30,14 @@
                 <?php
                 while ($row = $res_books->fetch_assoc()) {
                 ?>
-                <div class="file-card" id="item<?php echo $row['bid'] ?>" data-id="<?php echo $row['bid'] ?>">
-                    <section class="file-subject">
-                        <p style="margin: auto"><?php echo $row['author'] ?></p>
-                    </section>
-                    <section class="file-ext">
-                        <div>
-                            <i class="material-icons" style="font-size: 9rem; color: #81D4FA">book</i>
-                        </div>
-                    </section>
-                    <section class="file-title">
-                        <h1 class="normal"><?php echo $row['title'] ?></h1>
-                    </section>
+                <div class="book-card">
+                    <div class="book-cover">
+                        <img src="<?php echo $covers_home.$row['cover'] ?>" alt=""/>
+                    </div>
+                    <div class="book-data">
+                        <p style="margin: 10px 0 0 0; font-weight: bold"><?php echo $row['title'] ?>
+                        <p style="margin: 5px 0 0 0; font-style: italic"><?php echo $row['author'] ?>
+                    </div>
                 </div>
                 <?php
                 }
@@ -90,15 +86,15 @@
         var is_active = '1';
         document.addEventListener("DOMContentLoaded", function () {
             var btn = document.getElementById('newbook');
-        var pos = scroll_button(btn);
-        var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
-        var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
-        console.log("top="+top);
-        console.log("left="+left);
-        btn.style.top = top+"px";
-        btn.style.left = left+"px";
-        btn.style.position = 'fixed';
-        btn.style.zIndex = 3;
+            var pos = scroll_button(btn);
+            var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
+            var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
+            console.log("top="+top);
+            console.log("left="+left);
+            btn.style.top = top+"px";
+            btn.style.left = left+"px";
+            btn.style.position = 'fixed';
+            btn.style.zIndex = 3;
 
             btn.addEventListener('click', function () {
                 window.location = 'book.php?book_id=0&back=library.php';
@@ -212,60 +208,6 @@
                         var item_to_del = document.getElementById('item'+selected_tag);
                         item_to_del.style.display = 'none';
                         clear_context_menu(ev, 'book_context_menu');
-                    }
-                } else {
-                    console.log('Error: ' + xhr.status);
-                }
-            }
-        };
-
-        var deactivate_item = function (ev) {
-            var xhr = new XMLHttpRequest();
-            var formData = new FormData();
-
-            xhr.open('post', 'book_manager.php');
-            var action = <?php echo ACTION_DEACTIVATE ?>;
-
-            formData.append('bid', selected_tag);
-            formData.append('action', action);
-            xhr.responseType = 'json';
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                var DONE = 4; // readyState 4 means the request is done.
-                var OK = 200; // status 200 is a successful return.
-                if (xhr.readyState === DONE) {
-                    if (xhr.status === OK) {
-                        j_alert("alert", xhr.response.message);
-                        var item_to_del = document.getElementById('item'+selected_tag);
-                        item_to_del.style.display = 'none';
-                        clear_context_menu(ev, 'book_context_menu');
-                    }
-                } else {
-                    console.log('Error: ' + xhr.status);
-                }
-            }
-        };
-
-        var activate_item = function (ev) {
-            var xhr = new XMLHttpRequest();
-            var formData = new FormData();
-
-            xhr.open('post', 'class_manager.php');
-            var action = <?php echo ACTION_RESTORE ?>;
-
-            formData.append('cid', selected_tag);
-            formData.append('action', action);
-            xhr.responseType = 'json';
-            xhr.send(formData);
-            xhr.onreadystatechange = function () {
-                var DONE = 4; // readyState 4 means the request is done.
-                var OK = 200; // status 200 is a successful return.
-                if (xhr.readyState === DONE) {
-                    if (xhr.status === OK) {
-                        j_alert("alert", xhr.response.message);
-                        window.setTimeout(function(){
-                            document.location.href = 'classes.php?active=1';
-                        }, 2000);
                     }
                 } else {
                     console.log('Error: ' + xhr.status);

@@ -17,6 +17,8 @@ define("ACTION_RESTORE", 4);
 define("ACTION_DEACTIVATE", 5);
 define("ACTION_SET_DEFAULT", 6);
 define("ACTION_DESTROY", 7); // permanently delete from db
+define("ACTION_UNLOAD_FILE", 8);
+define("ACTION_GET_BOOK_CODE", 9);
 
 /*
  * tipologie di finestra per check_session
