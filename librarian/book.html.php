@@ -26,9 +26,9 @@
             <div id="main">
                 <div id="left_space"></div>
                 <div id="left_col">
-                    <div id="form_container" class="form_container" style="width: 80%; margin: auto;">
+                    <div id="form_container" class="form_container" style="margin: auto;">
                         <form method="post" id="bookform"  class="userform" style="width: 90%; text-align: center; margin: auto; padding: 20px; ">
-                            <fieldset style="width: 90%; margin: auto; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
+                            <fieldset style="margin: auto; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
                                 <legend style="text-align: left">Dati di archiviazione</legend>
                                 <div class="form_row">
                                     <p class="material_label mandatory" style="text-align: left; grid-row: 1; grid-column: 1/2">Locale</p>
@@ -103,7 +103,7 @@
                                     <input type="text" id="code" name="code" class="android disabled_link" value="<?php if (isset($book)) echo $book->getCode() ?>" readOnly style="grid-row: 5; grid-column: 2/3" />
                                 </div><!-- form_row #5 -->
                             </fieldset>
-                            <fieldset style="width: 90%; margin-right: auto; margin-left: auto; margin-top: 20px; padding-top: 10px; padding-bottom: 20px">
+                            <fieldset style="margin-right: auto; margin-left: auto; margin-top: 20px; padding-top: 10px; padding-bottom: 20px">
                                 <legend style="text-align: left">Dati libro</legend>
                                 <div class="form_row">
                                     <p class="material_label mandatory" style="text-align: left; grid-row: 6; grid-column: 1/2">Titolo</p>

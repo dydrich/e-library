@@ -371,7 +371,6 @@ a {
     float: left;
     margin: 0;
     text-align: center;
-    border-radius: 0 0 1px 1px;
     height: 50px;
 }
 
@@ -385,13 +384,13 @@ a {
     text-align: left;
     position: relative;
     bottom: -15px;
-    font-weight: 600;
+    font-weight: normal;
     font-size: 1.4em;
     padding-left: 15px;
 }
 
 .text_card a {
-    font-weight: 600;
+    font-weight: normal;
 }
 
 .nowcard.logout {

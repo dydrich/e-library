@@ -207,6 +207,14 @@ a.mdc-list-item {
     padding-top: 30px;
 }
 
+#form_container {
+    width: 80%; 
+}
+
+#bookform fieldset {
+    width: 90%; 
+}
+
 .form_row {
     width: 100%;
     display: grid;

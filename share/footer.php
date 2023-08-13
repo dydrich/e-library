@@ -8,8 +8,7 @@
 	<div class="copyright" id="copyright">
 		<p>Copyright <?php echo date("Y") ?> Riccardo Bachis </p>
 	</div>
-	<div id="rightFspaceC"></div>
-</footer>
+	<div id="rightFspaceC">
 <!-- alert window -->
 <div id="alert" class="alert_msg" style="display: none">
     <div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
@@ -133,3 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
+    </div>
+</footer>
