@@ -197,7 +197,7 @@ a.mdc-list-item {
 .form_row {
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     align-items: center;
 }
 

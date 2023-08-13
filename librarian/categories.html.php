@@ -79,7 +79,7 @@
                 document.addEventListener("DOMContentLoaded", function () {
                     var btn = document.getElementById('newcls');
                     var pos = scroll_button(btn);
-                    var top = document.getElementById('header').getBoundingClientRect().height + document.getElementById('navigation').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
+                    var top = document.getElementById('header').getBoundingClientRect().height - (btn.getBoundingClientRect().height / 2);
                     var left = document.getElementById('left_space').getBoundingClientRect().width + document.getElementById('left_col').getBoundingClientRect().width;
                     console.log("top="+top);
                     console.log("left="+left);

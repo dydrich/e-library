@@ -26,7 +26,7 @@
             <div id="main">
                 <div id="left_space"></div>
                 <div id="left_col">
-                    <div id="form_container" class="form_container" style="margin: auto;">
+                    <div id="form_container" class="form_container" style="margin: 0 auto 30px auto;">
                         <form method="post" id="bookform"  class="userform" style="width: 90%; text-align: center; margin: auto; padding: 20px; ">
                             <fieldset style="margin: auto; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
                                 <legend style="text-align: left">Dati di archiviazione</legend>
