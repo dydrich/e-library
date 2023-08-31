@@ -1,7 +1,7 @@
 <footer id="hfooter" class="homepage" style="margin-top: auto;">
 	<div id="leftFspaceI"></div>
 	<div class="footer_info" id="footer_info">
-		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> - Iglesias <span style="padding-left: 5px; padding-right: 5px">|</span> <span style="color: #909090"> Scuola secondaria di primo grado</span>
+		<a href="https://icnivolaiglesias.edu.it" style="color: white">Istituto comprensivo Nivola</a> <span style="color: white"> - Iglesias</span> <span style="padding-left: 5px; padding-right: 5px; color: white">|</span> <span style="color: #909090"> Scuola secondaria di primo grado</span>
 	</div>
 	<div id="rightFspaceI"></div>
 	<div id="leftFspaceC"></div>
