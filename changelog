@@ -1,3 +1,6 @@
+0.6-171
+bug fixes
+
 0.6-170
 bug fixes
 
@@ -41,7 +44,7 @@ breadcrumbs in school_complex.php
 
 0.6-158
 iniziato trasferimento operazioni tra elementi in classe Archive
-completata la gestione di Venue concontrolli js in validazione form e prevenzione cancellazione
+completata la gestione di Venue con controlli js in validazione form e prevenzione cancellazione
 bug fixes
 migliorie per j_alert(information)
 
