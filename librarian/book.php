@@ -2,6 +2,7 @@
 
 require_once "../lib/start.php";
 require_once "../lib/Book.php";
+require_once "../lib/Archive.php";
 
 ini_set('display_errors', 1);
 
@@ -21,9 +22,10 @@ try {
 	$res_rooms = $db->executeQuery($sel_rooms);
 	$res_categories = $db->executeQuery($sel_categories);
 	if($_REQUEST['book_id'] != 0) {
-		$archive = Archive::getInstance(new MySQLDataLoader($db));
-		$book = archive->getBookFromId($_REQUEST['book_id']);
+		$archive = \elibrary\Archive::getInstance(new MySQLDataLoader($db));
+		$book = $archive->getBookFromId($_REQUEST['book_id']);
 		$location = $book->getLocation();
+		$current_doc = $book;
 	}
 	else {
 		$book = new \elibrary\Book($_REQUEST['book_id'], null, null, null, null, null, null, [], new MySQLDataLoader($db), null);

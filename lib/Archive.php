@@ -73,7 +73,7 @@ class Archive
         $cat = $this->datasource->executeQuery($sel_cat);
         $res['cat'] = $cat;
         $location = ['school_complex' => $res['school_complex'], 'room' => $res['room'], 'bookcase' => $res['bookcase'], 'shelf' => $res['shelf']];
-        $book = new Book($bookId, $res['title'], $res['author'], $res['publisher'], $res['cat']['cid'], $res['cover'], $res['pages'], $location, $this->datasource, $res['code']);
+        $book = new Book($bookId, $res['title'], $res['author'], $res['publisher'], $res['cat']['cid'], $res['cover'], $res['pages'], $location, $this->datasource, $res['inventory']);
         return $book;
     }
 

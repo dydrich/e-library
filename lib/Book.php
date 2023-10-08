@@ -235,16 +235,21 @@ class Book
 	public function setDatasource(\MySQLDataLoader $datasource) {
 		$this->datasource = $datasource;
 	}
+
+	public function getCover() {
+		return $this->cover;
+	}
 	
 	public function insert() {
-		$sql = "INSERT INTO rb_books (author, title, publisher, school_complex, room, bookcase, shelf)
-				VALUES ('{$this->author}', '{$this->title}', '{$this->publisher}', {$this->location['school_complex']}, {$this->location['room']}, {$this->location['bookcase']}, {$this->location['shelf']}) ";
+		$sql = "INSERT INTO rb_books (author, title, publisher, school_complex, room, bookcase, shelf, inventory, cover)
+				VALUES ('{$this->author}', '{$this->title}', '{$this->publisher}', {$this->location['school_complex']}, {$this->location['room']}, {$this->location['bookcase']}, {$this->location['shelf']}, '{$this->code}', '{$this->cover}') ";
 		$this->bookID = $this->datasource->executeUpdate($sql);
+		$this->datasource->executeUpdate("INSERT INTO rb_categories_book (cid, bid) VALUES ({$this->category}, {$this->bookID})");
 	}
 	
 	public function update() {
 		$sql = "UPDATE rb_books SET author = '{$this->author}', title = '{$this->title}', publisher = '{$this->publisher}', school_complex = {$this->location['school_complex']},
-				room = {$this->location['room']}, shelf = {$this->location['shelf']}
+				room = {$this->location['room']}, shelf = {$this->location['shelf']}, inventory = '{$this->code}', cover = '{$this->cover}'
 				WHERE bid = {$this->bookID}";
 		$this->datasource->executeUpdate($sql);
 	}
@@ -252,6 +257,7 @@ class Book
 	public function delete() {
 		$sql = "DELETE FROM rb_books WHERE bid = {$this->bookID}";
 		$this->datasource->executeUpdate($sql);
+		$this->datasource->executeUpdate("DELETE FROM rb_categories_book WHERE bid = {$this->bookID}");
 	}
 
 }

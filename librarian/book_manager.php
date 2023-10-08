@@ -19,10 +19,13 @@ if ($_POST['action'] == ACTION_INSERT || $_POST['action'] == ACTION_UPDATE) {
 	$school_complex = $db->executeCount("SELECT vid FROM rb_rooms WHERE rid = {$room}");
 	$shelf = $_POST['shelf'];
 	$location = ['school_complex' => $school_complex, 'room' => $room, 'bookcase' => $bookcase, 'shelf' => $shelf];
-	$book = new \elibrary\Book($book_id, $title, $author, $publisher, null, null, null, $location, new MySQLDataLoader($db));
+	$code = $_POST['code'];
+	$cover = $_POST['server_file'];
+	$category = $_POST['category'];
+	$book = new \elibrary\Book($book_id, $title, $author, $publisher, $category, $cover, null, $location, new MySQLDataLoader($db), $code);
 }
 else if ($_POST['action'] == ACTION_DELETE){
-	$book = new \elibrary\Book($book_id, null, null, null, null, null, null, [], new MySQLDataLoader($db));
+	$book = new \elibrary\Book($book_id, null, null, null, null, null, null, [], new MySQLDataLoader($db), null);
 }
 
 header("Content-type: application/json");

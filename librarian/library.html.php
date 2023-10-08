@@ -26,11 +26,11 @@
     <div id="main">
         <div id="left_space"></div>
         <div id="left_col">
-            <div id="content" style="width: 90%; margin: auto; display: flex">
+            <div id="content" style="width: 90%; margin: auto; display: flex; column-gap: 45px">
                 <?php
                 while ($row = $res_books->fetch_assoc()) {
                 ?>
-                <div class="book-card">
+                <div class="book-card" data-id="<?php echo $row['bid'] ?>" data-title="<?php echo $row['title'] ?>" id="item<?php echo $row['bid'] ?>">
                     <div class="book-cover">
                         <img src="<?php echo $covers_home.$row['cover'] ?>" alt=""/>
                     </div>
@@ -57,6 +57,11 @@
     <?php include_once "../share/footer.php" ?>
     <div id="book_context_menu" class="mdc-elevation--z2">
         <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
+            <a href="#" id="book_title">
+                <span id="bt" style="font-weight: bold"></span>
+            </a>
+        </div>
+        <div class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
             <a href="#" id="open_book">
                 <i class="material-icons">open_in_browser</i>
                 <span>Modifica</span>
@@ -68,7 +73,7 @@
                 <span>Stato</span>
             </a>
         </div>
-        <div id="history" class="item">
+        <div id="history" class="item" style="border-bottom: 1px solid rgba(0, 0, 0, .10)">
             <a href="#" id="history_book">
                 <i class="material-icons">poll</i>
                 <span>Storico</span>
@@ -116,7 +121,7 @@
                 return false;
             });
 
-            var ends = document.querySelectorAll('.file-card');
+            var ends = document.querySelectorAll('.book-card');
             for (var i = 0; i < ends.length; i++) {
                 document.getElementById('open_book').addEventListener('click', function (event) {
                     event.preventDefault();
@@ -161,11 +166,11 @@
                     if (selected_tag !== 0) {
                         document.getElementById('item'+selected_tag).classList.remove('selected_tag');
                     }
-                    event.currentTarget.classList.add('selected_tag');
                     is_active = event.currentTarget.getAttribute("data-active");
                     selected_tag = event.currentTarget.getAttribute("data-id");
                     current_target_id = event.currentTarget.getAttribute("data-id");
                     //clear_context_menu(event);
+                    document.getElementById("bt").innerText = event.currentTarget.getAttribute("data-title");
                     show_context_menu(event, null, 150, 'book_context_menu');
                     if (current_target_id === '0') {
 
@@ -189,6 +194,7 @@
 
         var remove_item = function (ev) {
             fade('confirm', 'out', .1, 0);
+            clear_context_menu(ev, 'book_context_menu');
             var xhr = new XMLHttpRequest();
             var formData = new FormData();
 

@@ -9,7 +9,7 @@ if(count($roles) > 0) {
 <header id="header" class="mdc-elevation--z2">
 	<div id="sc_firstrow" style="grid-area: head_sx; display: flex; flex-direction: row; align-items: center">
 		<i class="material-icons" style="font-size: 1.6em; position: relative; bottom: 2px">school</i>
-		<span style="position: relative; margin-left: 5px"><?php echo $_SESSION['__config__']['software_name'].' '.$_SESSION['__config__']['software_version'] ?> - Istituto comprensivo Nivola</span>
+		<span style="position: relative; margin-left: 5px"><?php echo $_SESSION['__config__']['software_name'].' '.$_SESSION['__config__']['software_version'] .' - '. $_SESSION['__config__']['school_name'] ?></span>
 	</div>
 
 	<div id="head_drawer" style="grid-area: drawer; display: flex; flex-direction: row; align-items: center">

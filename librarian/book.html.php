@@ -77,7 +77,7 @@
                                 </div> <!-- form_row #2 --> 
                                 <div class="form_row">
                                     <p class="material_label" style="text-align: left; grid-row: 3; grid-column: 1/2">Scaffale</p>
-                                    <input type="text" id="shelf" name="shelf" disabled class="android disabled" value="<?php if (isset($book)) echo $location['shelf'] ?>" style="grid-row: 3; grid-column: 2/3" />
+                                    <input type="text" id="shelf" name="shelf" class="android" value="<?php if (isset($book)) echo $location['shelf'] ?>" style="grid-row: 3; grid-column: 2/3" />
                                 </div><!-- form_row #3 --> 
                                 <div class="form_row">
                                     <p class="material_label mandatory" style="text-align: left; grid-row: 4; grid-column: 1/2">Categoria</p>
@@ -103,7 +103,7 @@
                                     <input type="text" id="code" name="code" class="android disabled_link" value="<?php if (isset($book)) echo $book->getCode() ?>" readOnly style="grid-row: 5; grid-column: 2/3" />
                                 </div><!-- form_row #5 -->
                             </fieldset>
-                            <fieldset style="margin-right: auto; margin-left: auto; margin-top: 20px; padding-top: 10px; padding-bottom: 20px">
+                            <fieldset style="margin-right: auto; margin-left: auto; margin-top: 20px; padding-top: 10px; padding-bottom: 20px; padding-left: 30px; padding-right: 30px">
                                 <legend style="text-align: left">Dati libro</legend>
                                 <div class="form_row">
                                     <p class="material_label mandatory" style="text-align: left; grid-row: 6; grid-column: 1/2">Titolo</p>
@@ -124,12 +124,12 @@
                                 <div class="form_row">
                                     <p class="material_label" style="text-align: left; grid-row: 10; grid-column: 1/2">Copertina</p>
                                 <?php if(isset($current_doc)){ ?>
-                                    <div style="grid-row: 10; grid-column: 2/3">    
-                                        <input class="android" type="text" name="fname" id="fname" style="width: 75%; " readOnly value="<?php print $book->getCover() ?>"/>
-                                        <a href="#" onclick="load_iframe('<?php print $book->getCover() ?>')" style="margin-left: 15px">Modifica file</a>
+                                    <div id="if_container" style="grid-row: 10; grid-column: 2/3">    
+                                        <input class="android" type="text" name="fname" id="fname" style="width: 86%; " readOnly value="<?php print $book->getCover() ?>"/>
+                                        <a href="#" onclick="load_iframe('<?php print $book->getCover() ?>')" style="margin-left: 15px; color: rgba(0, 0, 0, .87);">Modifica file</a>
                                     </div>
                                 <?php }  else{ ?>
-                                    <div style="grid-row: 10; grid-column: 2/3">
+                                    <div id="if_container" style="grid-row: 10; grid-column: 2/3">
                                         <div id="iframe"><iframe src="../admin/upload_manager.php" id="aframe"></iframe></div>
                                         <a href="#" onclick="del_file()" id="del_upl" style="">Annulla</a>
                                     <div>
@@ -140,7 +140,7 @@
                             <section class="mdc-card__actions" style="width: 90%; margin-top: 20px; margin-right: auto; margin-left: auto">
                                 <button id="submit_btn" onclick="submit_form(event)" class="mdc-button mdc-button--compact mdc-button--raised mdc-card__action" style="margin-left: -8px;margin-top: 15px">Registra</button>
                             </section>
-                            <input type="hidden" id="server_file" name="server_file" value="" />
+                            <input type="hidden" id="server_file" name="server_file" value="<?php if (isset($book)) echo $book->getCover() ?>" />
                         </form>
                     </div>
                 </div>
@@ -164,9 +164,6 @@
                         get_code(this.value);
                         //alert(this.value);
                     });
-                    document.getElementById('submit_btn').addEventListener('click', function(event) {
-                        submit_form(event);
-                    });
 
                 });
                 var book_id = <?php if (isset($_REQUEST['book_id'])) echo $_REQUEST['book_id']; else echo 0 ?>;
@@ -175,10 +172,7 @@
                 var submit_form = function (event) {
                     event.preventDefault();
                     if(!validate_form()) {
-                        jalert("error", "Ricontrolla i campi obbligatori del form");
-                        window.setTimeout(function () {
-                            window.location = 'library.php';
-                        }, 2500);
+                        return;
                     };
                     var xhr = new XMLHttpRequest();
                     var form = document.getElementById('bookform');
@@ -273,7 +267,7 @@
                     msg.validation_message = "Ricontrolla il form e inserisci tutti i dati obbligatori.";
                     msg.focus = "room";
                     var index = 1;
-					if(document.getElementById('room').value == 0){
+                    if(document.getElementById('room').value == 0){
                         msg.validation_message += "<br />"+index+". Non hai selezionato il locale";
                         go = false;
                         index++;
@@ -358,6 +352,10 @@
                     document.getElementById('aframe').setAttribute('src', '../admin/upload_manager.php');
                     var data = msg.split(";");
                     j_alert(data[0], data[1]);
+                };
+
+                var load_iframe = function(file){
+                    document.getElementById("if_container").innerHTML = '<div id="iframe"><iframe src="../admin/upload_manager.php" id="aframe"></iframe></div><a href="#" onclick="del_file()" id="del_upl" style="">Annulla</a>';
                 };
             </script>
         </div>
