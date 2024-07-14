@@ -205,7 +205,7 @@
                                 document.getElementById('user'+selected_tag).classList.remove('selected_tag');
                             }
                             selected_tag = event.currentTarget.getAttribute("data-id");
-                            console.log("Tag="+selected_tag);
+                            console.log("Tag on contextmenu="+selected_tag);
                             console.log("Item="+event.currentTarget.getAttribute("id"))
                             is_active = event.currentTarget.getAttribute("data-active");
                             event.currentTarget.classList.add('selected_tag');
@@ -233,102 +233,102 @@
                     }
 
                 var open_in_browser = function () {
-                        document.location.href = 'user.php?uid='+selected_tag+'&back=users.php';
-                    };
+                    document.location.href = 'user.php?uid='+selected_tag+'&back=users.php';
+                };
 
-                    var deactivate_item = function (event) {
-                        del_user(event, false);
-                    };
+                var deactivate_item = function (event) {
+                    del_user(event, false);
+                };
 
-                    var destroy_item = function (event) {
-                        del_user(event, true);
-                    };
+                var destroy_item = function (event) {
+                    del_user(event, true);
+                };
 
-                    var del_user = function(event, delete_from_db){
-                        fade('confirm', 'out', .1, 0);
-                        clear_context_menu(event, 'user_context_menu');
-                        var url = "users_manager.php";
+                var del_user = function(event, delete_from_db){
+                    fade('confirm', 'out', .1, 0);
+                    clear_context_menu(event, 'user_context_menu');
+                    var url = "user_manager.php";
 
-                        var xhr = new XMLHttpRequest();
-                        var formData = new FormData();
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
 
-                        xhr.open('post', 'user_manager.php');
-                        var uid = selected_tag;
-                        var action = null;
-                        if (delete_from_db) {
-                            action = <?php echo ACTION_DESTROY ?>;
-                        }
-                        else {
-                            action = <?php echo ACTION_DELETE ?>;
-                        }
+                    xhr.open('post', 'user_manager.php');
+                    var uid = selected_tag;
+                    var action = null;
+                    if (delete_from_db) {
+                        action = <?php echo ACTION_DESTROY ?>;
+                    }
+                    else {
+                        action = <?php echo ACTION_DELETE ?>;
+                    }
 
-                        formData.append('uid', uid);
-                        formData.append('action', action);
-                        xhr.responseType = 'json';
-                        xhr.send(formData);
-                        xhr.onreadystatechange = function () {
-                            var DONE = 4; // readyState 4 means the request is done.
-                            var OK = 200; // status 200 is a successful return.
-                            if (xhr.readyState === DONE) {
-                                if (xhr.status === OK) {
-                                    j_alert('alert', xhr.response.message);
-                                    <?php if(isset($_GET['active'])): ?>
-                                    document.getElementById("user"+uid).style.display = 'none';
-                                    <?php else: ?>
-                                    var btn = document.querySelector('#user'+uid+" section button.del");
-                                    btn.classList.remove('del');
-                                    btn.classList.add('res');
-                                    btn.innerText = "Ripristina";
-                                    <?php endif; ?>
-                                }
-                            } else {
-                                console.log('Error: ' + xhr.status);
+                    formData.append('uid', uid);
+                    formData.append('action', action);
+                    xhr.responseType = 'json';
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function () {
+                        var DONE = 4; // readyState 4 means the request is done.
+                        var OK = 200; // status 200 is a successful return.
+                        if (xhr.readyState === DONE) {
+                            if (xhr.status === OK) {
+                                j_alert('alert', xhr.response.message);
+                                <?php if(isset($_GET['active'])): ?>
+                                document.getElementById("user"+uid).style.display = 'none';
+                                <?php else: ?>
+                                var btn = document.querySelector('#user'+uid+" section button.del");
+                                btn.classList.remove('del');
+                                btn.classList.add('res');
+                                btn.innerText = "Ripristina";
+                                <?php endif; ?>
                             }
+                        } else {
+                            console.log('Error: ' + xhr.status);
                         }
-                    };
+                    }
+                };
 
-                    var restore_user = function(event){
-                        var url = "users_manager.php";
-                        clear_context_menu(event, 'user_context_menu');
-                        var xhr = new XMLHttpRequest();
-                        var formData = new FormData();
+                var restore_user = function(event){
+                    var url = "users_manager.php";
+                    clear_context_menu(event, 'user_context_menu');
+                    var xhr = new XMLHttpRequest();
+                    var formData = new FormData();
 
-                        xhr.open('post', 'user_manager.php');
-                        var action = <?php echo ACTION_RESTORE ?>;
+                    xhr.open('post', 'user_manager.php');
+                    var action = <?php echo ACTION_RESTORE ?>;
 
-                        formData.append('uid', selected_tag);
-                        formData.append('action', action);
-                        xhr.responseType = 'json';
-                        xhr.send(formData);
-                        xhr.onreadystatechange = function () {
-                            var DONE = 4; // readyState 4 means the request is done.
-                            var OK = 200; // status 200 is a successful return.
-                            if (xhr.readyState === DONE) {
-                                if (xhr.status === OK) {
-                                    j_alert("alert", xhr.response.message);
-                                    <?php if(isset($_GET['active']) && $_GET['active'] == 0): ?>
-                                    window.setTimeout(function () {
-                                        window.location.href = "users.php?active=1";
-                                    }, 2500);
-                                    <?php else: ?>
-                                    var btn = document.querySelector('#user'+uid+" section button.res");
-                                    btn.classList.remove('res');
-                                    btn.classList.add('del');
-                                    btn.innerText = "Elimina";
-                                    <?php endif; ?>
-                                }
-                            } else {
-                                console.log('Error: ' + xhr.status);
+                    formData.append('uid', selected_tag);
+                    formData.append('action', action);
+                    xhr.responseType = 'json';
+                    xhr.send(formData);
+                    xhr.onreadystatechange = function () {
+                        var DONE = 4; // readyState 4 means the request is done.
+                        var OK = 200; // status 200 is a successful return.
+                        if (xhr.readyState === DONE) {
+                            if (xhr.status === OK) {
+                                j_alert("alert", xhr.response.message);
+                                <?php if(isset($_GET['active']) && $_GET['active'] == 0): ?>
+                                window.setTimeout(function () {
+                                    window.location.href = "users.php?active=1";
+                                }, 2500);
+                                <?php else: ?>
+                                var btn = document.querySelector('#user'+uid+" section button.res");
+                                btn.classList.remove('res');
+                                btn.classList.add('del');
+                                btn.innerText = "Elimina";
+                                <?php endif; ?>
                             }
+                        } else {
+                            console.log('Error: ' + xhr.status);
                         }
-                    };
-                });
+                    }
+                };
+            });
 
-                var btn = document.getElementById('newuser');
-                btn.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    document.location.href = 'user.php?uid=0&back=users.php';
-                });
+            var btn = document.getElementById('newuser');
+            btn.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.location.href = 'user.php?uid=0&back=users.php';
+            });
             </script>
         </div>
     </body>

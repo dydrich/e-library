@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="application/javascript" src="js/page.js"></script>
 </head>
-<body style="">
+<body>
 <div id="page" class="hp" style="margin: 0">
     <?php include "header.php" ?>
     <section id="main">
@@ -41,7 +41,8 @@
                             Login
                         </button>
                         <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 10px" id="pwd_req">
-                            <a href="#" id="newpwd" class="normal material_link">Password dimenticata?</a>
+                            <a href="pwd_request.php" class="normal material_link" style="margin-right: 25px">Password dimenticata?</a>|
+                            <a href="request_login.php" id="request" class="normal material_link" style="margin-left: 25px">Vuoi registrarti al sito?</a>
                         </p>
                     </form>
                 </div>

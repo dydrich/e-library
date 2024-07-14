@@ -36,9 +36,12 @@ class User {
 		$this->roles = $rl;
 
 		$this->currentRole = null;
-		if (count($this->roles) == 1) {
-			$this->currentRole = $this->roles[0];
+		if($rl != null) {
+			if (count($this->roles) == 1) {
+				$this->currentRole = $this->roles[0];
+			}
 		}
+		
 		if ($dl instanceof \MySQLDataLoader) {
 			$this->datasource = $dl;
 		}

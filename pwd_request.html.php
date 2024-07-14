@@ -5,59 +5,49 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>Nuova password</title>
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-	<link rel="stylesheet" href="css/site_themes/light_blue/index.css">
-	<link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/site_themes/light_blue/index.css">
     <link rel="stylesheet" media="screen and (min-width: 2200px)" href="css/layouts/index/larger.css">
     <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="css/layouts/index/wide.css">
-    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal_ext.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style>
-		.mdc-textfield {
-			width: 90%;
-		}
-
-        #footer {
-            margin-right: 20px;
-        }
-	</style>
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="application/javascript" src="js/page.js"></script>
 </head>
 <body>
-<header>
-	<div class="wrap">
-		<div style="" id="_header">
-			<h1 class="mdc-typography--display1"><?php echo $_SESSION['__config__']['software_name']." ".$_SESSION['__config__']['software_version'] ?></h1>
-			<p id="sw_version" style="font-size: 0.7em; font-weight: normal; line-height: 20px; margin: 0; padding-top: 10px; text-transform: none">
-				Software di condivisione e archiviazione materiali didattici
-			</p>
-		</div>
-	</div>
-</header>
-<section class="wrap">
-	<div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center;">
-		<form id="myformreq" action="do_login.php" method="post" style="margin: auto">
-			<div class="rb-login-container">
-				<div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-					<input required type="email" id="my-username" name="my-username" class="mdc-textfield__input">
-					<label class="mdc-textfield__label" for="my-username">Email</label>
-				</div>
-			</div>
-			<div class="mdc-elevation--z5" id="pwdreq_info">
-				Inserisci l'indirizzo email con il quale ti sei registrato e riceverai a breve una mail contenente le istruzioni per la modifica della password.
-			</div>
-			<button type="submit" class="mdc-button mdc-button--raised" id="login_button">
-				Invia
-			</button>
-			<p style="margin-top: 20px" id="pwd_req">
-				<a href="index.php" class="normal">Torna indietro</a>
-			</p>
-		</form>
-		<?php include "share/footer.php"; ?>
-</section>
+<div id="page" class="hp" style="margin: 0">
+    <?php include "header.php" ?>
+    <section id="main">
+        <div id="content" style="order: 2">
+            <div id="login" class="mdc-elevation--z2">
+                <div id="login_form" style="align-items: center; width: 75%">
+                    <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
+                        <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Richiedi una nuova password</p>
+                    </div>
+                    <form id="myformreq" action="do_login.php" method="post" style="width: 100%; margin: 10px auto 0 auto">
+                        <div class="rb-login-container">
+                            <div style="width: 100%">
+                                <p style="margin-bottom: 10px">Email</p>
+                                <input required autocomplete="off" type="email" id="my-username" name="my-username" class="android" style="width: 100%">
+                            </div>
+                        </div>
+                        <div class="mdc-elevation--z1" id="pwdreq_info" style="margin-top: 30px; margin-bottom: 30px; font-size: 1.2em; background-color: #d9ead3">
+                            Inserisci l'indirizzo email con il quale ti sei registrato e riceverai a breve una mail contenente le istruzioni per la modifica della password.
+                        </div>
+                        <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 10px">
+                            Login
+                        </button>
+                        <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 30px" id="pwd_req">
+                            <a href="index.php" class="normal material_link" style="margin-right: 25px">Torna indietro</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php include "footer.php" ?>
+</div>
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 <script>
-    window.mdc.autoInit();
-    mdc.textfield.MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
-
     (function() {
         var btn = document.getElementById('login_button');
         btn.addEventListener('click', function (event) {

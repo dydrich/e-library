@@ -61,7 +61,7 @@ class AccountManager{
 		$smt->execute();
 	}
 
-	public static function generatePassword($length=9, $strength=0) {
+	public static function generatePassword($length=9, $strength=1) {
 		$vowels = 'aeuy';
 		$consonants = 'bcdghjmnpqrstvz';
 		if ($strength & 1) {

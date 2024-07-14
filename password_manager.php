@@ -26,7 +26,7 @@ if ($_POST['action'] == 'sendmail'){
 	 */
 	try{
 		$uid = $db->executeCount("SELECT uid FROM rb_users WHERE username = '".$_POST['email']."'");
-	} catch (\edocs\MySQLException $ex){
+	} catch (MySQLException $ex){
 		$response['status'] = "kosql";
 		$response['message'] = $ex->getMessage()." === ".$ex->getQuery();
 		echo json_encode($response);
@@ -42,10 +42,10 @@ if ($_POST['action'] == 'sendmail'){
 		try{
 			$rb = RBUtilities::getInstance($db);
 			$user = $rb->loadUserFromUid($uid);
-			$am = new \edocs\AccountManager($user, new MySQLDataLoader($db));
+			$am = new AccountManager($user, new MySQLDataLoader($db));
 			$am->recoveryPasswordViaEmail();
 			$response['message'] = "La tua richiesta è stata inviata. ";
-		} catch (\edocs\MySQLException $ex){
+		} catch (MySQLException $ex){
 			$response['status'] = "kosql";
 			$response['message'] = $ex->getMessage()." === ".$ex->getQuery();
 			echo json_encode($response);
@@ -59,9 +59,9 @@ else if ($_POST['action'] == "change"){
 	try{
 		$rb = RBUtilities::getInstance($db);
 		$user = $rb->loadUserFromUid($uid);
-		$am = new \edocs\AccountManager($user, new MySQLDataLoader($db));
+		$am = new AccountManager($user, new MySQLDataLoader($db));
 		$am->changePassword($new_pwd);
-	} catch (\edocs\MySQLException $ex){
+	} catch (MySQLException $ex){
 		$response['status'] = "kosql";
 		$response['message'] = $ex->getMessage()." === ".$ex->getQuery();
 		echo json_encode($response);

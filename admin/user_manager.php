@@ -12,7 +12,7 @@ if (!isset($_POST['action'])) {
 	echo "NOT ISSET";
 }
 
-if($_POST['action'] != ACTION_DELETE && $_POST['action'] != ACTION_RESTORE){
+if($_POST['action'] != ACTION_DELETE && $_POST['action'] != ACTION_RESTORE && $_POST['action'] != ACTION_DESTROY){
 	$uname = null;
 	if (isset($_POST['username'])) {
 		$uname = $db->real_escape_string(trim($_POST['username']));
@@ -74,9 +74,9 @@ switch($_POST['action']){
 	case ACTION_DESTROY:
 		try{
 			$begin = $db->executeUpdate("BEGIN");
-			$user = new User($_POST['uid'], "", "", "", null, null, new MySQLDataLoader($db));
+			$user = new User($_POST['uid'], "", "", "", "", null, new MySQLDataLoader($db));
 			$user->delete(true);
-			$begin = $db->executeUpdate("COMMIT");
+			$commit = $db->executeUpdate("COMMIT");
 		} catch (MySQLException $ex){
 			$db->executeUpdate("ROLLBACK");
 			$response['status'] = "kosql";
