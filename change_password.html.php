@@ -1,94 +1,81 @@
 <!DOCTYPE html>
 <html class="mdc-typography">
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Modifica password</title>
+    <title>E-Library</title>
     <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-    <link rel="stylesheet" href="css/site_themes/light_blue/reg.css">
-    <link rel="stylesheet" href="css/site_themes/light_blue/index.css">
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/site_themes/light_blue/index.css">
+    <link rel="stylesheet" media="screen and (min-width: 2200px)" href="css/layouts/index/larger.css">
+    <link rel="stylesheet" media="screen and (max-width: 2199px) and (min-width: 1600px)" href="css/layouts/index/wide.css">
+    <link rel="stylesheet" media="screen and (max-width: 1599px) and (min-width: 1024px)" href="css/layouts/index/normal.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="application/javascript" src="js/page.js"></script>
     <script type="application/javascript" src="js/md5-min.js"></script>
-    <style>
-        .mdc-textfield {
-            width: 90%;
-        }
-
-        #footer {
-            margin-right: 20px;
-        }
-
-        form {
-            border: 0;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <div class="wrap">
-            <div style="" id="_header">
-                <h1 class="mdc-typography--display1"><?php echo $_SESSION['__config__']['software_name']." ".$_SESSION['__config__']['software_version'] ?></h1>
-                <p id="sw_version" style="font-size: 0.7em; font-weight: normal; line-height: 20px; margin: 0; padding-top: 10px; text-transform: none">
-                    Software di condivisione e archiviazione materiali didattici
-                </p>
+<div id="page" class="hp" style="margin: 0">
+    <?php include "header.php" ?>
+    <section id="main">
+        <div id="content" style="order: 2">
+            <div id="login" class="mdc-elevation--z2">
+                <div id="login_form" style="align-items: center; width: 75%">
+                    <form id='myform' method='post' action='#' style="width: 100%; margin: 10px auto 0 auto">
+                    <?php
+                    if ($token != null):
+                    ?>
+                        <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
+                            <p class="material_label _bold" style="color: var(--mdc-theme-primary); font-size: 1.5em; width: 100%; text-align: center">Procedura di recupero password</p>
+                        </div>
+                        <div class="rb-login-container">
+                            <div style="width: 100%">
+                                <p>Inserisci la password</p>
+                                <input required autocomplete="off" type="password" id="pwd1" name="pwd1" class="android" style="width: 100%">
+                            </div>
+                        </div>
+                        <div class="rb-login-container" style="margin-top: 30px">
+                            <div style="width: 100%">
+                                <p>Ripeti la password</p>
+                                <input required type="password" class="android" id="pwd2" name="pwd2"
+                                       autocomplete="current-password" style="width: 100%">
+                            </div>
+                        </div>
+                        <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 20px">
+                            Invia
+                        </button>
+                    <?php
+                    else :
+                    ?>
+                        <div style="width: 100%; height: 70px; display: flex; align-items: center; align-content: center; border-radius: 3px 3px 0 0; margin-top: 15px">
+                            <i class="material-icons attention">warning</i>
+                            <p class="material_label _bold" style="margin-left: 15px; color: var(--mdc-theme-primary); font-size: 1.5em">Richiesta non valida</p>
+                        </div>
+                        <div class="mdc-elevation--z1" style="padding: 15px; font-size: 1.1em; min-height: 45%; margin-top: 20px">
+                            <p class="attention" style="font-weight: bold; font-size: 1.2em; padding: 0 0 10px 10px; border-bottom: 1px solid #1E4389;">Codice scaduto</p>
+                            <p class="w_text" style="margin-top: 10px">L'indirizzo inserito non &egrave; pi&ugrave; valido: devi effettuare una nuova richiesta.</p>
+                            <p class="w_text" style="margin-top: 10px">Ti ricordiamo che la password va cambiata entro 24 ore dalla richiesta stessa.</p>
+                        </div>
+                        <div style="width: 100%; margin-top: 20px; font-size: 1.1em">
+                            <a href="<?php echo ROOT_SITE ?>" class="material_link normal">Torna indietro</a>
+                        </div>
+                    <?php
+                    endif;
+                    ?>
+                        
+                    </form>
+                </div>
             </div>
         </div>
-    </header>
-    <section class="wrap">
-        <div id="login_form" style="display: flex; display: -webkit-flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center">
-            <form id='myform' method='post' action='#'>
-            <?php
-            if ($token != null):
-            ?>
-                <h3>Procedura di recupero password</h3>
-                <div style="display: block; width: 300px">
-                    <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                        <input required type="password" id="pwd1" name="pwd1" class="mdc-textfield__input">
-                        <label class="mdc-textfield__label" for="pwd1">Inserisci la password</label>
-                    </div>
-                </div>
-                <div style="display: block; width: 300px">
-                    <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                        <input required type="password" class="mdc-textfield__input" id="pwd2" name="pwd2">
-                        <label for="pwd2" class="mdc-textfield__label">Password</label>
-                        <div class="mdc-textfield__bottom-line"></div>
-                    </div>
-                </div>
-                <button type="button" class="mdc-button mdc-button--raised" id="mail_button">
-                    Invia
-                </button>
-            <?php
-            else :
-            ?>
-                <h3 style="min-width: 200px; margin: auto">
-                    <i class="material-icons attention">warning</i>
-                    <span style="position: relative; bottom: 5px">Richiesta non valida</span>
-                </h3>
-                <div class="mdc-elevation--z5" style="padding: 15px; font-size: 1em; min-height: 45%; margin-top: 20px">
-                    <p class="attention" style="font-weight: bold; font-size: 1.2em; padding: 0 0 10px 10px; border-bottom: 1px solid #1E4389;">Codice scaduto</p>
-                    <p class="w_text" style="margin-top: 10px">L'indirizzo inserito non &egrave; pi&ugrave; valido: devi effettuare una nuova richiesta.</p>
-                    <p class="w_text" style="margin-top: 10px">Ti ricordiamo che la password va cambiata entro 24 ore dalla richiesta stessa.</p>
-                    <div style="width: 100%; margin-top: 20px">
-                        <a href="<?php echo ROOT_SITE ?>" class="material_link normal">Home</a>
-                    </div>
-                </div>
-            <?php
-            endif;
-            ?>
-            </form>
-            <?php include 'share/footer.php' ?>
-        </div>
     </section>
+    <?php include "footer.php" ?>
+</div>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script type="text/javascript">
-        window.mdc.autoInit();
-        mdc.textfield.MDCTextfield.attachTo(document.querySelector('.mdc-textfield'));
-
+        
         (function() {
             load_jalert();
-            var btn = document.getElementById('mail_button');
+            var btn = document.getElementById('login_button');
             btn.addEventListener('click', function (event) {
                 event.preventDefault();
                 registra();

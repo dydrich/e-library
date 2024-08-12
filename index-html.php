@@ -40,7 +40,7 @@
                         <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 10px">
                             Login
                         </button>
-                        <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 10px" id="pwd_req">
+                        <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 30px" id="pwd_req">
                             <a href="pwd_request.php" class="normal material_link" style="margin-right: 25px">Password dimenticata?</a>|
                             <a href="request_login.php" id="request" class="normal material_link" style="margin-left: 25px">Vuoi registrarti al sito?</a>
                         </p>

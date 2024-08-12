@@ -30,11 +30,11 @@
                                 <input required autocomplete="off" type="email" id="my-username" name="my-username" class="android" style="width: 100%">
                             </div>
                         </div>
-                        <div class="mdc-elevation--z1" id="pwdreq_info" style="margin-top: 30px; margin-bottom: 30px; font-size: 1.2em; background-color: #d9ead3">
+                        <div class="mdc-elevation--z0" id="pwdreq_info" style="margin-top: 30px; margin-bottom: 30px; font-size: 1.2em; background-color: #d9ead3">
                             Inserisci l'indirizzo email con il quale ti sei registrato e riceverai a breve una mail contenente le istruzioni per la modifica della password.
                         </div>
                         <button type="button" class="mdc-button mdc-button--raised" id="login_button" style="margin-top: 10px">
-                            Login
+                            Invia
                         </button>
                         <p style="margin-top: 30px; width: 100%; text-align: center; margin-bottom: 30px" id="pwd_req">
                             <a href="index.php" class="normal material_link" style="margin-right: 25px">Torna indietro</a>
@@ -79,7 +79,7 @@
                     if (xhr.response.status === 'ok') {
                         j_alert('alert', xhr.response.message);
                     }
-                    else if (xhr.response.status === "nomail" || xhr.response.status === "olduser") {
+                    else if (xhr.response.status === "nomail" || xhr.response.status === "olduser" || xhr.response.status === "inactive") {
                         j_alert("error", xhr.response.message);
                     }
                     else if (xhr.response.status === "kosql") {

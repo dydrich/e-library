@@ -1,5 +1,4 @@
-window.mdc.autoInit();
-mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+
 
 var selected_doc = 0;
 var selected_list = 'highlight';
@@ -15,11 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
 
     document.getElementById('closereq').addEventListener('click', function (event) {
-        show_sign_menu(event, 'reqpwd', 320);
-    }, false);
-
-    document.getElementById('newpwd').addEventListener('click', function (event) {
-        fade('login', 'out', 200, 0);
         show_sign_menu(event, 'reqpwd', 320);
     }, false);
 });

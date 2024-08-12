@@ -34,6 +34,7 @@ if ($_POST['action'] == 'sendmail'){
 	}
 	if ($uid == null){
 		$response['status'] = "nomail";
+		$response['query'] = "SELECT uid FROM rb_users WHERE username = '".$_POST['email']."'";
 		$response['message'] = "L'email inserita non è presente in archivio: ricontrolla o rivolgiti all'amministratore";
 		echo json_encode($response);
 		exit;
@@ -42,6 +43,13 @@ if ($_POST['action'] == 'sendmail'){
 		try{
 			$rb = RBUtilities::getInstance($db);
 			$user = $rb->loadUserFromUid($uid);
+			if(!$user->isActive()) {
+				$response['status'] = "inactive";
+				$response['query'] = "SELECT uid FROM rb_users WHERE username = '".$_POST['email']."'";
+				$response['message'] = "Il tuo account risulta inattivo: richiedine l'attivazione prima di cambiare la password";
+				echo json_encode($response);
+				exit;
+			}
 			$am = new AccountManager($user, new MySQLDataLoader($db));
 			$am->recoveryPasswordViaEmail();
 			$response['message'] = "La tua richiesta è stata inviata. ";

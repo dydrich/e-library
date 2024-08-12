@@ -8,21 +8,23 @@
 	<div class="copyright" id="copyright">
 		<p>Copyright <?php echo date("Y") ?> Riccardo Bachis </p>
 	</div>
-	<div id="rightFspaceC"></div>
-</footer>
+	<div id="rightFspaceC">
+<!-- alert window -->
 <div id="alert" class="alert_msg" style="display: none">
-	<div class="alert_title">
-		<i class="material-icons">thumb_up</i>
-		<span>Successo</span>
-	</div>
-	<p id="alertmessage" class="alertmessage"></p>
+    <div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
+        <i class="material-icons primary_color">thumb_up</i>
+    </div>
+    <div id="alert_title" style="grid-row: 1; grid-column: 2/3">Successo</div>
+    <p id="alertmessage" class="alertmessage" style="grid-row: 2; grid-column: 1/3"></p>
 </div>
+
+<!-- error window -->
 <div id="error" class="error_msg" style="display: none">
-	<div class="error_title">
-		<i class="material-icons">warning</i>
-		<span>Errore</span>
-	</div>
-	<p class="errormessage" id="errormessage"></p>
+<div class="alert_icon" style="grid-row: 1; grid-column: 1/2">
+        <i class="material-icons accent_color">warning</i>
+    </div>
+    <div id="alert_title" style="grid-row: 1; grid-column: 2/3">Errore</div>
+    <p class="errormessage" id="errormessage" style="grid-row: 2; grid-column: 1/3"></p>
 </div>
 <div id="information" class="confirm_msg" style="display: none">
 	<div class="confirm_title">
@@ -199,3 +201,5 @@ else if (isset($user) && $user->getCurrentRole() == 2) {
         </a>
     </div>
 </div>
+	</div>
+</footer>

@@ -88,3 +88,44 @@
 .usercard-mini__text {
     font-size: 1.2em!important;
 }
+
+/**
+j_alert
+*/
+div#information {
+    width: 500px; 
+    min-height: 300px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 70px auto 70px;
+}
+
+.confirm_title i, .alert_icon i {
+    font-size: 3em;
+    align-self: center;
+}
+
+#message_title, #alert_title {
+    font-size: 1.6em;
+    align-self: center;
+}
+
+#infomessage {
+    font-size: 1.2em;
+}
+
+div#alert, div#error {
+    width: 400px; 
+    min-height: 200px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 55px auto;
+}
+
+#confirm {
+    width: 400px; 
+    min-height: 250px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 55px auto 70px;
+}

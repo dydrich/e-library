@@ -31,7 +31,7 @@ class AccountManager{
 		 */
 		$to = $this->user_->getUsername();
 		$subject = "Richiesta nuova password";
-		$from = "edocs@dydrich.net";
+		$from = "e-librarys@dydrich.net";
 		$headers = "From: {$from}\r\n"."Reply-To: {$from}\r\n" .'X-Mailer: PHP/' . phpversion();
 		$message = "Gentile utente,\nabbiamo ricevuto la sua richiesta di una nuova password di accesso alla piattaforma.\n ";
 		$message .= "Per modificare la password, clicchi sul link seguente entro 24 ore:\n\n";
@@ -134,7 +134,7 @@ class AccountManager{
 	}
 
 	public function createToken() {
-	    $token = hash("md5", $this->user_->getFullName().$this->user_->getUsername().$this->user_->getUniqID());
+	    $token = hash("md5", $this->user_->getFullName().$this->user_->getUsername().$this->user_->getUid());
         $this->user_->setToken($token);
 
         $smt = $this->datasource_->prepare("UPDATE rb_users SET token = ? WHERE uid = ?");
