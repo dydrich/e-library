@@ -145,7 +145,7 @@ class Venue
     }
 
      /**
-     * @param id $room
+     * @param int $room
      * @return string
      */
     public function getRoomCode($rid) {

@@ -116,7 +116,7 @@ class User {
 	}
 
 	/**
-	 * @param null $currentRole
+	 * @param string $currentRole
 	 */
 	public function setCurrentRole($currentRole) {
 		$this->currentRole = $currentRole;
@@ -322,7 +322,7 @@ class User {
 		/*
 		 * send email
 		 */
-		$to = $this->getUsername();
+		$to = $this->username;
 		$subject = "Attivazione nuovo account";
 		$from = "edocs@dydrich.net";
 		$headers = "From: {$from}\r\n"."Reply-To: {$from}\r\n" .'X-Mailer: PHP/' . phpversion();
