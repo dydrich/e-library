@@ -46,7 +46,11 @@ class RBTime{
 		$m -= $this->minutes;
 		$this->hours = $m / 60;
 	}
-	
+	/**
+	 * 
+	 * @param RBTime $rb
+	 * @return RBTime
+	 */
 	public function calculateDistance(RBTime $rb){
 		$a = null;
 		$b = null;
