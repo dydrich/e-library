@@ -265,7 +265,7 @@ a {
     margin-bottom: 20px;
 }
 
-#login_button, #signup_button, #req_button, #confirmreq_button {
+#login_button, #signup_button, #req_button, #confirmreq_button, #error_button {
     background-color: var(--mdc-theme-secondary);
 }
 

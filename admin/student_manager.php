@@ -7,6 +7,8 @@
  */
 require_once "../lib/start.php";
 require_once "../lib/SchoolClass.php";
+require_once "../lib/RBUtilities.php";
+require_once "../lib/AccountManager.php";
 
 //check_session(AJAX_CALL);
 
@@ -59,42 +61,48 @@ switch($_REQUEST['action']){
 	*	invia una mail all'indirizzo istituzionale dell'alunno per confermare l'identità	
 	**/	
 	case 'add_student':
-		/*
-	    * generate a random id
-		*/
-		$uniqid = md5(uniqid(rand(), true));
-		$tm = new DateTime();
-		$now = $tm->format("Y-m-d H:i:s");
-		$due = $tm->add(new DateInterval('P1D'));
+		$rb = RBUtilities::getInstance($db);
 		
-		$smt = $db->prepare("INSERT INTO rb_requests (uid, token, request_date, due_date) VALUES (?, ?, ?, ?)");
-		$dt = $due->format("Y-m-d H:i:s");
-		$smt->bind_param("isss", $student, $uniqid, $now, $dt);
-		$smt->execute();
-
-		/*
-		get user email
-		*/
-		$email = $db->executeCount("SELECT username FROM rb_users WHERE uid = {$student}");
-
-		/*
-		* send email
-		*/
-		//$mail = $_POST['uname'];
-		$to = $email;
-		$subject = "Richiesta di attivazione";
-		$from = "admin@icnivolaiglesias.edu.it";
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= "From: {$from}\r\n"."Reply-To: {$from}\r\n" .'X-Mailer: PHP/' . phpversion();
-		$message = "<p>Gentile utente,<br/>abbiamo ricevuto la sua richiesta di attivazione dell'account per l'accesso al servizio di Bibioteca.</p> ";
-		$message .= "<p>Se vuoi confermare la richiesta, clicca sul link seguente entro 24 ore:</p>";
-		$message .= "<a href='".$_SESSION['__config__']['root_site']."/admin/student_manager.php?action=confirm&token=".$uniqid."'>Conferma la richiesta</a>";
-		$message .= "<p>Non rispondere a questa mail, in quanto inviata da un programma automatico.</p>";
-		mail($to, $subject, $message, $headers);
+		try{
+			$user = $rb->loadUserFromUid($student);
+			$am = new AccountManager($user, new MySQLDataLoader($db));
+			$am->sendActivationCode();
+			$response['message'] = "La tua richiesta è stata ricevuta. Inserisci nello spazio sotto il codice che ti abbiamo inviato all'indirizzo email istituzionale entro 15 minuti";
+		} catch (MySQLException $ex){
+			$db->executeUpdate("ROLLBACK");
+			$response['status'] = "kosql";
+			$response['message'] = "Operazione non completata a causa di un errore SQL";
+			$response['dbg_message'] = $ex->getMessage();
+			$response['query'] = $ex->getQuery();
+			echo json_encode($response);
+			exit;
+		}
+		break;
+	/** attiva uno studente, che ne ha fatto richiesta
+	*		
+	**/	
+	case 'activate_student':
+		$rb = RBUtilities::getInstance($db);
+		$code = $_REQUEST['code'];
+		//echo "have a code ".$code;
+		try{
+			$user = $rb->loadUserFromUid($student);
+			$am = new AccountManager($user, new MySQLDataLoader($db));
+			$out = $am->checkActivationCode($code);
+			$response['out'] = $out;
+		} catch (MySQLException $ex){
+			$db->executeUpdate("ROLLBACK");
+			$response['status'] = "kosql";
+			$response['message'] = "Operazione non completata a causa di un errore SQL";
+			$response['dbg_message'] = $ex->getMessage();
+			$response['query'] = $ex->getQuery();
+			echo json_encode($response);
+			exit;
+		}
+		
 		break;
 }
 
-$response['message'] = "La tua richiesta è stata ricevuta. Ti abbiamo inviato una mail all'indirizzo istituzionale: clicca sul link contenuto nella mail entro 24 ore per attivare il tuo account";
+//$response['message'] = "La tua richiesta è stata ricevuta. Ti abbiamo inviato una mail all'indirizzo istituzionale: clicca sul link contenuto nella mail entro 24 ore per attivare il tuo account";
 echo json_encode($response);
 exit;

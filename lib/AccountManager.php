@@ -5,6 +5,11 @@ class AccountManager{
 	private $user_;
 	private $datasource_;
 
+	public static $INVALID_CODE = 1;
+	public static $EXPIRED_CODE = 2;
+	public static $VALID_CODE   = 4;
+
+
 	public function __construct(User $u, \MySQLDataLoader $dl){
 		$this->user_ = $u;
 		$this->datasource_ = $dl;
@@ -31,7 +36,7 @@ class AccountManager{
 		 */
 		$to = $this->user_->getUsername();
 		$subject = "Richiesta nuova password";
-		$from = "e-librarys@dydrich.net";
+		$from = "e-librarys@rbachis.net";
 		$headers = "From: {$from}\r\n"."Reply-To: {$from}\r\n" .'X-Mailer: PHP/' . phpversion();
 		$message = "Gentile utente,\nabbiamo ricevuto la sua richiesta di una nuova password di accesso alla piattaforma.\n ";
 		$message .= "Per modificare la password, clicchi sul link seguente entro 24 ore:\n\n";
@@ -92,6 +97,53 @@ class AccountManager{
 		$pwd['c'] = $password;
 		$pwd['e'] = md5($password);
 		return $pwd;
+	}
+
+	public static function generateCode() {
+		return rand(100000, 999999);
+	}
+
+	public function sendActivationCode() {
+		$code =  AccountManager::generateCode();
+		$tm = new \DateTime();
+		$now = $tm->format("Y-m-d H:i:s");
+		$due = $tm->modify('+15 minutes');
+		$smt = $this->datasource_->prepare("INSERT INTO rb_requests (uid, token, request_date, due_date) VALUES (?, ?, ?, ?)"); 
+		$id = $this->user_->getUid();
+		$dt = $due->format("Y-m-d H:i:s");
+		$smt->bind_param("isss", $id, $code, $now, $dt);
+		$smt->execute();
+
+		/*
+		 * send email
+		 */
+		$to = $this->user_->getUsername();
+		$subject = "Codice di attivazione";
+		$from = "e-librarys@rbachis.net";
+		$headers = "From: {$from}\r\n"."Reply-To: {$from}\r\n" .'X-Mailer: PHP/' . phpversion();
+		$message = "Gentile utente,\nabbiamo ricevuto la tua richiesta di attivazione.\n ";
+		$message .= "Il tuo codice di attivazione è:\n\n";
+		$message .= $code."\n";
+		$message .= "\nRicorda che il codice ha validità per 15 minuti.\n\n";
+		$message .= "Si prega di non rispondere a questa mail, in quanto inviata da un programma automatico.\n\n";
+		mail($to, $subject, $message, $headers);
+	}
+
+	public function checkActivationCode($code) {
+		$sql = "SELECT _id, case WHEN due_date < now() THEN 'scaduto' else 'valido' END as validity FROM `rb_requests` WHERE uid = {$this->user_->getUid()} AND token = {$code}";
+		$s = $this->datasource_->executeQuery($sql);
+		if(!$s) {
+			return AccountManager::$INVALID_CODE;
+		}
+		
+		if($s['validity'] == 'scaduto') {
+			$out = AccountManager::$EXPIRED_CODE;
+		}
+		else {
+			$this->user_->restore();
+			$out = AccountManager::$VALID_CODE;
+		}
+		return $out;
 	}
 
 	public static function generateLogin($names, $nome, $cognome) {

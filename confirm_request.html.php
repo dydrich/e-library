@@ -30,7 +30,7 @@
                     <p>
                         Classe: <span style="font-weight: bold"><?php echo $_class['year'].$_class['section'] ?></span>
                     </p>
-                    <p style="margin-top: 40px">
+                    <p id="message_space" style="margin-top: 40px">
                         Confermi la richiesta?
                     </p>
                 </div>
@@ -56,7 +56,8 @@
                     var usedHeight = heightMain > heightScreen ? heightScreen : heightMain;
 
                     document.getElementById("confirmreq_button").addEventListener("click", function(ev) {
-                        document.location.href = "admin/student_manager.php?action=add_student&student=<?php echo $student ?>";
+                        //document.location.href = "admin/student_manager.php?action=add_student&student=<?php echo $student ?>";
+                        add_student(ev);
                     });
                 });
 
@@ -76,11 +77,14 @@
                         var OK = 200; // status 200 is a successful return.
                         if (xhr.readyState === DONE) {
                             if (xhr.status === OK) {
-                                j_alert("alert", xhr.response.message);
+                                document.location.href = "insert_code.php?sid=<?php echo $student ?>";
+
+                            }
+                            else {
+                                j_alert("error", xhr.response.message);
                                 setTimeout(function () {
                                     //document.location.href = "index.php";
                                 }, 2000);
-
                             }
                         } else {
                             console.log('Error: ' + xhr.status);
